@@ -16,6 +16,6 @@ It avoids any adherence to fancy not-yet standard technology such as:
 
 * web components are not yet implemented by browsers,
 * angular introduces a non-standard html extension,
-* react has an a-priori for functional style, decided a fixed data-flow, and introduces a non-standard javascript extension (jsx),
+* react has a strong functional flavour (components do not provide methods to change its appearance, rather it is rebuilt with different values in `props`), and introduces a non-standard javascript extension (jsx),
 * ...
 
