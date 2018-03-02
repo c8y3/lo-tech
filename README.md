@@ -10,7 +10,7 @@ This project aims to be a proof of concept of that idea. It uses only:
 * standard javascript,
 * some es6 extensions (import, let, and const) and a bit of transpiling,
 * standard css,
-* sass (variables and mixins for DRYness, import, and nested rules for modularity)
+* sass (variables and inheritance for DRYness, import, and nested rules for modularity)
 
 It avoids any adherence to fancy not-yet standard technology such as:
 
