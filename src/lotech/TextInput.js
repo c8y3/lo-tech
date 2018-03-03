@@ -1,6 +1,5 @@
-import Element from '/lotech/Element';
+import ElementFromTagName from '/lotech/ElementFromTagName';
 
 export default function() {
-    const node = document.createElement('input');
-    return Element(node);
+    return ElementFromTagName('input');
 };
