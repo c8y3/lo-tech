@@ -1,4 +1,4 @@
-function ProductName() {
+export default function() {
     var root = document.createTextNode('Basketball');
 
     return {

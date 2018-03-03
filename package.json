@@ -4,6 +4,7 @@
   "description": "Low technology web components library",
   "main": "index.js",
   "scripts": {
+    "build": "rollup -c && cp src/index.html results",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
