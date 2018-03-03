@@ -1,4 +1,3 @@
-import path from 'path';
 import buble from 'rollup-plugin-buble';
 import rootImport from 'rollup-plugin-root-import';
 
@@ -7,7 +6,7 @@ export default {
     plugins: [
         buble(), 
         rootImport({
-            root: path.join(__dirname, '/src'),
+            root: 'src/',
             extensions: '.js'
         })
     ],

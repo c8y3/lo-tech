@@ -1,10 +1,9 @@
 // Karma configuration
 // Generated on Sat Mar 03 2018 15:48:18 GMT+0100 (CET)
 
-const path = require('path');
 const buble = require('rollup-plugin-buble')();
 const rootImport = require('rollup-plugin-root-import')({
-    root: path.join(__dirname, '/src'),
+    root: 'src/',
     extensions: '.js'
 });
 
