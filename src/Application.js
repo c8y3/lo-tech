@@ -1,5 +1,5 @@
-import ProductName from './ProductName';
-import SearchBar from './SearchBar';
+import ProductName from '/ProductName';
+import SearchBar from '/SearchBar';
 
 export default function() {
     return {
