@@ -1,7 +1,5 @@
-import Element from '/lotech/Element';
+import lotech from '/lotech/index';
 
 export default function() {
-    const root = document.createTextNode('Basketball');
-
-    return Element(root);
+    return String('Basketball');
 };

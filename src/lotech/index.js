@@ -1,7 +1,7 @@
-import Element from '/lotech/Element';
+import String from '/lotech/String';
 import Form from '/lotech/Form';
 
 export default {
-    Element: Element,
+    String: String,
     Form: Form
 };

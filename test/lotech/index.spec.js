@@ -6,4 +6,10 @@ describe('lotech', function() {
             lotech.Form();
         });
     });
+
+    describe('String', function() {
+        it('should not fail', function() {
+            lotech.String('Hello');
+        });
+    });
 });
