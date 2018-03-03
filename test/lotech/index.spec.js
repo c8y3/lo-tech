@@ -12,4 +12,10 @@ describe('lotech', function() {
             lotech.String('Hello');
         });
     });
+
+    describe('TextInput', function() {
+        it('should not fail', function() {
+            lotech.TextInput();
+        });
+    });
 });
