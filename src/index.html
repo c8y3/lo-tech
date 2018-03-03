@@ -1,18 +1,9 @@
 <html>
 <meta charset="UTF-8"> 
+<script src="ProductName.js"></script>
 <body>
 </body>
 <script>
-function ProductName() {
-    var root = document.createTextNode('Basketball');
-
-    return {
-        draw: function(node) {
-            node.appendChild(root);
-        }
-    };
-}
-
 ProductName().draw(document.body);
 </script>
 </html>
