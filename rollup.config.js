@@ -1,8 +1,8 @@
 export default {
-    input: 'src/ProductName.js',
+    input: 'src/Application.js',
     output: {
-        file: 'results/ProductName.js',
+        file: 'results/Application.js',
         format: 'iife',
-        name: 'ProductName'
+        name: 'Application'
     }
 };
