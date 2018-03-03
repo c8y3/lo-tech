@@ -1,7 +1,6 @@
 {
     "env": {
-        "browser": true,
-        "node": false
+        "browser": true
     },
     "extends": "eslint:all",
     "parserOptions": {
