@@ -1,9 +1,7 @@
+import Element from './lotech/Element';
+
 export default function() {
     const root = document.createElement('form');
 
-    return {
-        draw: function(node) {
-            node.appendChild(root);
-        }
-    };
+    return Element(root);
 };
