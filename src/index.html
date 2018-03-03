@@ -1,0 +1,19 @@
+<html>
+<meta charset="UTF-8"> 
+<body>
+</body>
+<script>
+function ProductName() {
+    var root = document.createElement('span');
+    root.textContent = 'Basketball';
+
+    return {
+        draw: function(node) {
+            node.appendChild(root);
+        }
+    };
+}
+
+ProductName().draw(document.body);
+</script>
+</html>
