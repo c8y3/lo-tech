@@ -1,5 +1,5 @@
 export default function() {
-    var root = document.createTextNode('Basketball');
+    const root = document.createTextNode('Basketball');
 
     return {
         draw: function(node) {

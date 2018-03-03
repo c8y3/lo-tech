@@ -1,0 +1,56 @@
+{
+    "env": {
+        "browser": true,
+        "node": false
+    },
+    "extends": "eslint:all",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-extra-semi": "off",
+        "no-console": "off",
+        "no-var": "error",
+        "sort-imports": "off",
+        "require-jsdoc": "off",
+        "prefer-arrow-callback": "off",
+        "init-declarations": "off",
+        "no-plusplus": "off",
+        "no-sync": "off",
+        "prefer-destructuring": "off",
+        "prefer-template": "off",
+        "no-undefined": "off",
+        "no-param-reassign": "off",
+        "sort-keys": "off",
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "space-before-function-paren": ["error", "never"],
+        "func-style": ["error", "declaration"],
+        "padded-blocks": ["error", "never"],
+        "func-names": ["error", "never"],
+        "new-cap": ["error", { "capIsNew": false }],
+        "one-var": ["error", "never"],
+        "no-magic-numbers": ["error", { "ignore": [0, 1], "enforceConst": true }],
+        "array-element-newline": ["error", { "multiline": true }],
+        "max-len": ["error", { "code": 140 }],
+        "quote-props": ["error", "consistent-as-needed"],
+        "object-property-newline": ["error", { "allowAllPropertiesOnSameLine": true }],
+        "object-shorthand": ["error", "never"],
+        "operator-linebreak": ["error", "before"],
+        "object-curly-spacing": ["error", "always"]
+    }
+}

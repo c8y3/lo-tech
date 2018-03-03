@@ -3,7 +3,7 @@ import ProductName from './ProductName';
 export default function() {
     return {
         start: function() {
-            var mainComponent = ProductName();
+            const mainComponent = ProductName();
             mainComponent.draw(document.body);
         }
     };
