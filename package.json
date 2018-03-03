@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/c8y3/lo-tech/issues"
   },
-  "homepage": "https://github.com/c8y3/lo-tech#readme"
+  "homepage": "https://github.com/c8y3/lo-tech#readme",
+  "devDependencies": {
+    "rollup": "^0.56.3"
+  }
 }
