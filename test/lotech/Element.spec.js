@@ -8,5 +8,13 @@ describe('lotech.Element', function() {
             const parentNode = document.createElement('span');
             subject.draw(parentNode);
         });
+
+        it('should append the element node to the parent node', function() {
+            const node = document.createElement('div');
+            const subject = Element(node);
+            const parentNode = document.createElement('span');
+            subject.draw(parentNode);
+            assert.equal(node, parentNode.firstChild);
+        });
     });
 });

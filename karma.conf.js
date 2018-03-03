@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Sat Mar 03 2018 15:48:18 GMT+0100 (CET)
 
-const buble = require('rollup-plugin-buble')();
+const buble = require('rollup-plugin-buble');
 const rootImport = require('rollup-plugin-root-import')({
     root: 'src/',
     extensions: '.js'
@@ -16,7 +16,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha'],
+    frameworks: ['mocha', 'chai'],
 
 
     // list of files / patterns to load in the browser
@@ -38,7 +38,10 @@ module.exports = function(config) {
     },
 
     rollupPreprocessor: {
-        plugins: [buble, rootImport],
+        plugins: [
+            buble(), 
+            rootImport
+        ],
         output: {
             format: 'iife',
             name: 'lotech',
