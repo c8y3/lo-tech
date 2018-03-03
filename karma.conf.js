@@ -1,6 +1,13 @@
 // Karma configuration
 // Generated on Sat Mar 03 2018 15:48:18 GMT+0100 (CET)
 
+const path = require('path');
+const buble = require('rollup-plugin-buble')();
+const rootImport = require('rollup-plugin-root-import')({
+    root: path.join(__dirname, '/src'),
+    extensions: '.js'
+});
+
 module.exports = function(config) {
   config.set({
 
@@ -32,7 +39,7 @@ module.exports = function(config) {
     },
 
     rollupPreprocessor: {
-        plugins: [require('rollup-plugin-buble')()],
+        plugins: [buble, rootImport],
         output: {
             format: 'iife',
             name: 'lotech',
