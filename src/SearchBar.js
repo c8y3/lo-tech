@@ -1,5 +1,5 @@
 export default function() {
-    const root = document.createTextNode('Basketball');
+    const root = document.createElement('form');
 
     return {
         draw: function(node) {
