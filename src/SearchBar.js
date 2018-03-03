@@ -1,5 +1,6 @@
 import lotech from '/lotech/index';
 
 export default function() {
-    return lotech.Form();
+    const search = lotech.TextInput();
+    return lotech.Form(search);
 };
