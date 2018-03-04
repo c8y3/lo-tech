@@ -1,11 +1,9 @@
-import ProductName from '/ProductName';
-import SearchBar from '/SearchBar';
+import FilterableProductTable from '/FilterableProductTable';
 
 export default function() {
     return {
         start: function() {
-            const mainComponent = ProductName();
-            SearchBar().draw(document.body);
+            const mainComponent = FilterableProductTable();
             mainComponent.draw(document.body);
         }
     };
