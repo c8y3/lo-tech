@@ -1,14 +1,8 @@
 import Element from '/lotech/Element';
 
-export default function() {
+export default function(placeholder) {
     const node = document.createElement('input');
     node.type = 'text';
-    const element = Element(node);
-
-    return {
-        draw: element.draw,
-        setPlaceholder: function(message) {
-            node.placeholder = message;
-        }
-    };
+    node.placeholder = placeholder;
+    return Element(node);
 };
