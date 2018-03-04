@@ -1,11 +1,11 @@
 import String from './String';
-import Input from './Input';
+import input from './input/index';
 import Form from './Form';
 import P from './P';
 
 export default {
     String: String,
     Form: Form,
-    Input: Input,
+    input: input,
     P: P
 };

@@ -1,8 +1,8 @@
-import Element from './Element';
+import Element from '/lotech/Element';
 
-export default function(type) {
+export default function() {
     const node = document.createElement('input');
-    node.type = type;
+    node.type = 'text';
     const element = Element(node);
 
     return {

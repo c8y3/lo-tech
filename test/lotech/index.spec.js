@@ -13,15 +13,23 @@ describe('lotech', function() {
         });
     });
 
-    describe('Input', function() {
-        it('should not fail', function() {
-            lotech.Input('text');
-        });
-    });
-
     describe('P', function() {
         it('should not fail', function() {
             lotech.P();
+        });
+    });
+
+    describe('input', function() {
+        describe('Text', function() {
+            it('should not fail', function() {
+                lotech.input.Text();
+            });
+        });
+
+        describe('Checkbox', function() {
+            it('should not fail', function() {
+                lotech.input.Checkbox();
+            });
         });
     });
 });

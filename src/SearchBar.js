@@ -1,12 +1,12 @@
 import lotech from '/lotech/index';
 
 export default function() {
-    const searchInput = lotech.Input('text');
+    const searchInput = lotech.input.Text();
     searchInput.setPlaceholder('Search...');
     return lotech.Form([
         searchInput,
         lotech.P([
-            lotech.Input('checkbox'),
+            lotech.input.Checkbox(),
             lotech.String(' Only show products in stock')
         ])
     ]);
