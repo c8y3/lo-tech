@@ -1,4 +1,4 @@
-import ElementFromTagName from '/lotech/ElementFromTagName';
+import ElementFromTagName from './ElementFromTagName';
 
 // TODO should rather be Input('text')
 export default function() {

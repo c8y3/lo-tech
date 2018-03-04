@@ -1,4 +1,4 @@
-import Element from '/lotech/Element';
+import Element from './Element';
 
 export default function(child) {
     const node = document.createElement('form');
