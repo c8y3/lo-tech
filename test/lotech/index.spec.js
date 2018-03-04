@@ -18,4 +18,10 @@ describe('lotech', function() {
             lotech.TextInput();
         });
     });
+
+    describe('P', function() {
+        it('should not fail', function() {
+            lotech.P();
+        });
+    });
 });

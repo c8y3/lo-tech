@@ -1,9 +1,11 @@
-import String from '/lotech/String';
-import TextInput from '/lotech/TextInput';
-import Form from '/lotech/Form';
+import String from './String';
+import TextInput from './TextInput';
+import Form from './Form';
+import P from './P';
 
 export default {
     String: String,
     Form: Form,
-    TextInput: TextInput
+    TextInput: TextInput,
+    P: P
 };
