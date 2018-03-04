@@ -11,9 +11,9 @@ describe('lotech.Form', function() {
         node = parentNode.firstChild;
     }
 
-    describe('with 1 child', function() {
+    describe('with no children', function() {
         beforeEach(function() {
-            draw([P()]);
+            draw([]);
         });
 
         describe('draw', function() {
@@ -21,7 +21,15 @@ describe('lotech.Form', function() {
             it('should draw an element with tagname form', function() {
                 assert.equal('FORM', node.tagName);
             });
+        });
+    });
 
+    describe('with 1 child', function() {
+        beforeEach(function() {
+            draw([P([])]);
+        });
+
+        describe('draw', function() {
             it('should draw form child', function() {
                 assert.isNotNull(node.firstChild);
             });
@@ -30,7 +38,7 @@ describe('lotech.Form', function() {
 
     describe('with 2 children', function() {
         beforeEach(function() {
-            draw([P(), P()]);
+            draw([P([]), P([])]);
         });
 
         describe('draw', function() {
