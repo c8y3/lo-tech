@@ -3,7 +3,7 @@ import lotech from '/lotech/index';
 describe('lotech', function() {
     describe('Form', function() {
         it('should not fail', function() {
-            lotech.Form();
+            lotech.Form([]);
         });
     });
 
@@ -15,7 +15,13 @@ describe('lotech', function() {
 
     describe('P', function() {
         it('should not fail', function() {
-            lotech.P();
+            lotech.P([]);
+        });
+    });
+
+    describe('Div', function() {
+        it('should not fail', function() {
+            lotech.Div([]);
         });
     });
 
