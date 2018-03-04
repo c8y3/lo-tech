@@ -17,7 +17,6 @@ describe('lotech.Form', function() {
         });
 
         describe('draw', function() {
-
             it('should draw an element with tagname form', function() {
                 assert.equal('FORM', node.tagName);
             });
