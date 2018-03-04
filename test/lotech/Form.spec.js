@@ -1,5 +1,5 @@
 import Form from '/lotech/Form';
-import TextInput from '/lotech/TextInput';
+import P from '/lotech/P';
 
 describe('lotech.Form', function() {
     let node;
@@ -13,7 +13,7 @@ describe('lotech.Form', function() {
 
     describe('with 1 child', function() {
         beforeEach(function() {
-            draw([TextInput()]);
+            draw([P()]);
         });
 
         describe('draw', function() {
@@ -30,7 +30,7 @@ describe('lotech.Form', function() {
 
     describe('with 2 children', function() {
         beforeEach(function() {
-            draw([TextInput(), TextInput()]);
+            draw([P(), P()]);
         });
 
         describe('draw', function() {

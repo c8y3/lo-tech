@@ -13,9 +13,9 @@ describe('lotech', function() {
         });
     });
 
-    describe('TextInput', function() {
+    describe('Input', function() {
         it('should not fail', function() {
-            lotech.TextInput();
+            lotech.Input('text');
         });
     });
 
