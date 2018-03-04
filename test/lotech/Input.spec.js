@@ -2,35 +2,48 @@ import Input from '/lotech/Input';
 
 describe('lotech.Input', function() {
     let subject;
-    let node;
 
-    describe('draw', function() {
+    function draw() {
+        const parentNode = document.createElement('div');
+        subject.draw(parentNode);
+        return parentNode.firstChild;
+    }
+
+    // TODO split into lotech.input.Text and lotech.input.Checkbox
+    describe('with type text', function() {
         beforeEach(function() {
-            const parentNode = document.createElement('div');
             subject = Input('text');
-            subject.draw(parentNode);
-            node = parentNode.firstChild;
         });
 
-        it('should draw an element with tagname input', function() {
-            assert.equal('INPUT', node.tagName);
+        describe('draw', function() {
+            it('should draw an element with tagname input', function() {
+                const node = draw();
+                assert.equal('INPUT', node.tagName);
+            });
+
+            it('should draw an element with type text', function() {
+                const node = draw();
+                assert.equal('text', node.type);
+            });
         });
 
-        it('should draw an element with type text', function() {
-            assert.equal('text', node.type);
+        describe('setPlaceholder', function() {
+            it('should set the placeholder of the input', function() {
+                subject.setPlaceholder('Search...');
+                const node = draw();
+                assert.equal('Search...', node.placeholder);
+            });
         });
     });
 
     describe('with type checkbox', function() {
         beforeEach(function() {
-            const parentNode = document.createElement('div');
             subject = Input('checkbox');
-            subject.draw(parentNode);
-            node = parentNode.firstChild;
         });
 
         describe('draw', function() {
             it('should draw an element with type checkbox', function() {
+                const node = draw();
                 assert.equal('checkbox', node.type);
             });
         });

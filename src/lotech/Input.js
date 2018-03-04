@@ -3,5 +3,12 @@ import Element from './Element';
 export default function(type) {
     const node = document.createElement('input');
     node.type = type;
-    return Element(node);
+    const element = Element(node);
+
+    return {
+        draw: element.draw,
+        setPlaceholder: function(message) {
+            node.placeholder = message;
+        }
+    };
 };
