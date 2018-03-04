@@ -1,13 +1,15 @@
 import Element from './Element';
 
-export default function(child) {
+export default function(children) {
     const node = document.createElement('form');
     const element = Element(node);
 
     return {
         draw: function(parentNode) {
             element.draw(parentNode);
-            child.draw(node);
+            children.forEach(function(child) {
+                child.draw(node);
+            });
         }
     };
 };
