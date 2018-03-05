@@ -2,9 +2,9 @@ import lotech from '/lotech/index';
 import ProductTable from '/ProductTable';
 import SearchBar from '/SearchBar';
 
-export default function() {
+export default function(products) {
     return lotech.Div([
         SearchBar(),
-        ProductTable()
+        ProductTable(products)
     ]);
 };
