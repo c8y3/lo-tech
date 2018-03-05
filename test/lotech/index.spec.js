@@ -13,6 +13,12 @@ describe('lotech', function() {
         });
     });
 
+    describe('Span', function() {
+        it('should not fail', function() {
+            lotech.Span('Hello');
+        });
+    });
+
     describe('P', function() {
         it('should not fail', function() {
             lotech.P([]);
