@@ -1,5 +1,6 @@
 import lotech from '/lotech/index';
 
 export default function(product) {
-    return lotech.Div([lotech.Span(product.name), lotech.Span(product.price)]);
+    const name = lotech.Span(product.name);
+    return lotech.Div([name, lotech.Span(product.price)]);
 };
