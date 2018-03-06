@@ -5,16 +5,15 @@ import Element from './Element';
  */
 export default function(tagName, children) {
     const node = document.createElement(tagName);
-    // TODO introduce Mixin or use Object.assign
     const element = Element(node);
 
-    return {
+    // TODO introduce method Mixin
+    return Object.assign({}, element, {
         draw: function(parentNode) {
             element.draw(parentNode);
             children.forEach(function(child) {
                 child.draw(node);
             });
-        },
-        addStyle: element.addStyle
-    };
+        }
+    });
 };
