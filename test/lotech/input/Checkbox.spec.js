@@ -19,4 +19,30 @@ describe('lotech.input.Checkbox', function() {
             assert.equal('checkbox', node.type);
         });
     });
+
+    describe('addListenerOnChanged', function() {
+        it('should fire when the checkbox is changed', function() {
+            let called = undefined;
+            // TODO do this with sinon
+            const listener = function() {
+                called = true;
+            };
+            subject.addListenerOnChanged(listener);
+            const node = draw();
+            node.dispatchEvent(new Event('change'));
+            assert.isTrue(called);
+        });
+
+        it('should fire with the checked status', function() {
+            let value = undefined;
+            // TODO do this with sinon
+            const listener = function(checked) {
+                value = checked;
+            };
+            subject.addListenerOnChanged(listener);
+            const node = draw();
+            node.dispatchEvent(new Event('change'));
+            assert.isFalse(value);
+        });
+    });
 });

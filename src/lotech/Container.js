@@ -1,3 +1,4 @@
+// TODO always use absolute imports (eslint rule?)
 import Element from './Element';
 import Mixin from './Mixin';
 
