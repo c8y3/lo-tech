@@ -11,7 +11,7 @@ export default function(tagName, children) {
 
     function removeChildren() {
         while (node.firstChild) {
-            node.removeChild(root.firstChild);
+            node.removeChild(node.firstChild);
         }
     }
 
