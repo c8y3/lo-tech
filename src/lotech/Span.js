@@ -1,4 +1,4 @@
-import Element from './Element';
+import Element from '/lotech/Element';
 
 export default function(text) {
     const node = document.createElement('span');
