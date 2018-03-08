@@ -1,5 +1,3 @@
-// TODO move Mixin out in its own namespace: utilities/tools/module
-import Mixin from '/lotech/Mixin';
 import lotech from '/lotech/index';
 import ProductCategoryRow from '/ProductCategoryRow';
 import ProductRow from '/ProductRow';
@@ -26,10 +24,11 @@ export default function() {
     }
 
     const root = lotech.Div(buildRows([]));
-    return Mixin(root, {
+    return {
+        ...root,
         setProducts: function(products) {
             let rows = buildRows(products);
             root.setChildren(rows);
         }
-    });
+    };
 };

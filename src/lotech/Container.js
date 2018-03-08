@@ -1,6 +1,4 @@
-// TODO always use absolute imports (eslint rule?)
 import Element from '/lotech/Element';
-import Mixin from '/lotech/Mixin';
 
 /*
  * A container is an Element with children
@@ -21,7 +19,8 @@ export default function(tagName, children) {
         });
     }
 
-    return Mixin(element, {
+    return {
+        ...element,
         draw: function(parentNode) {
             element.draw(parentNode);
             drawChildren();
@@ -32,6 +31,6 @@ export default function(tagName, children) {
             removeChildren();
             children = newChildren;
             drawChildren();
-        },
-    });
+        }
+    };
 };
