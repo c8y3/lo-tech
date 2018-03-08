@@ -1,4 +1,4 @@
-import Element from './Element';
+import Element from '/lotech/Element';
 
 export default function(data) {
     const node = document.createTextNode(data);
