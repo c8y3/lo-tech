@@ -1,9 +1,9 @@
-import String from './String';
-import input from './input/index';
-import Form from './Form';
-import P from './P';
-import Div from './Div';
-import Span from './Span';
+import String from '/lotech/String';
+import input from '/lotech/input/index';
+import Form from '/lotech/Form';
+import P from '/lotech/P';
+import Div from '/lotech/Div';
+import Span from '/lotech/Span';
 
 export default {
     String: String,
