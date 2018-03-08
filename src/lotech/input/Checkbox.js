@@ -10,6 +10,6 @@ export default function() {
             node.addEventListener('change', function() {
                 listener(node.checked);
             });
-        }        
+        }
     };
 };

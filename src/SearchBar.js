@@ -12,7 +12,7 @@ export default function() {
 
     // TODO rather than a Mixin here (which risks propagating methods such as setChildren, should provide a Component)
     return {
-        ...root, 
+        ...root,
         addListenerOnStockFilterChanged: inStockFilter.addListenerOnChanged
-    }
+    };
 };

@@ -10,7 +10,7 @@ export default function() {
     headers.addStyle(scope, 'headers');
 
     function buildRows(products) {
-        let rows = [headers];
+        const rows = [headers];
         let lastCategory;
 
         products.forEach(function(product) {
@@ -27,7 +27,7 @@ export default function() {
     return {
         ...root,
         setProducts: function(products) {
-            let rows = buildRows(products);
+            const rows = buildRows(products);
             root.setChildren(rows);
         }
     };
