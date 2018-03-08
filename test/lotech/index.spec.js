@@ -34,7 +34,7 @@ describe('lotech', function() {
     describe('input', function() {
         describe('Text', function() {
             it('should not fail', function() {
-                lotech.input.Text();
+                lotech.input.Text('Search...');
             });
         });
 
@@ -42,6 +42,12 @@ describe('lotech', function() {
             it('should not fail', function() {
                 lotech.input.Checkbox();
             });
+        });
+    });
+
+    describe('Component', function() {
+        it('should not fail', function() {
+            lotech.Component(lotech.input.Checkbox());
         });
     });
 });

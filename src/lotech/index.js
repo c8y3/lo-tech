@@ -4,6 +4,7 @@ import Form from '/lotech/Form';
 import P from '/lotech/P';
 import Div from '/lotech/Div';
 import Span from '/lotech/Span';
+import Component from '/lotech/Component';
 
 export default {
     String: String,
@@ -11,5 +12,6 @@ export default {
     input: input,
     P: P,
     Div: Div,
-    Span: Span
+    Span: Span,
+    Component: Component
 };
