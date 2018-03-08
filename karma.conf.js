@@ -1,7 +1,9 @@
 // Karma configuration
 // Generated on Sat Mar 03 2018 15:48:18 GMT+0100 (CET)
 
-const buble = require('rollup-plugin-buble');
+const buble = require('rollup-plugin-buble')({
+    objectAssign: 'Object.assign'
+});
 const rootImport = require('rollup-plugin-root-import')({
     root: 'src/',
     extensions: '.js'
@@ -39,7 +41,7 @@ module.exports = function(config) {
 
     rollupPreprocessor: {
         plugins: [
-            buble(), 
+            buble, 
             rootImport
         ],
         output: {

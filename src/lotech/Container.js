@@ -1,6 +1,6 @@
 // TODO always use absolute imports (eslint rule?)
-import Element from './Element';
-import Mixin from './Mixin';
+import Element from '/lotech/Element';
+import Mixin from '/lotech/Mixin';
 
 /*
  * A container is an Element with children

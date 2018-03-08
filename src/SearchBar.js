@@ -1,5 +1,3 @@
-// TODO rather than a Mixin here (which risks propagating methods such as setChildren, should provide a Component)
-import Mixin from '/lotech/Mixin';
 import lotech from '/lotech/index';
 
 export default function() {
@@ -12,7 +10,9 @@ export default function() {
         ])
     ]);
 
-    return Mixin(root, {
+    // TODO rather than a Mixin here (which risks propagating methods such as setChildren, should provide a Component)
+    return {
+        ...root, 
         addListenerOnStockFilterChanged: inStockFilter.addListenerOnChanged
-    });
+    }
 };

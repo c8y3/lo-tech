@@ -4,7 +4,9 @@ import rootImport from 'rollup-plugin-root-import';
 export default {
     input: 'src/Application.js',
     plugins: [
-        buble(), 
+        buble({
+            objectAssign: 'Object.assign'
+        }), 
         rootImport({
             root: 'src/',
             extensions: '.js'

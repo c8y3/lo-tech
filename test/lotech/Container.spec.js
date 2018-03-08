@@ -17,7 +17,7 @@ describe('lotech.Container', function() {
 
         describe('setChildren', function() {
             it('should not fail', function() {
-                const node = draw();
+                draw();
                 subject.setChildren([]);
             });
         });

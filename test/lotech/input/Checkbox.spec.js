@@ -22,7 +22,7 @@ describe('lotech.input.Checkbox', function() {
 
     describe('addListenerOnChanged', function() {
         it('should fire when the checkbox is changed', function() {
-            let called = undefined;
+            let called;
             // TODO do this with sinon
             const listener = function() {
                 called = true;
@@ -34,7 +34,7 @@ describe('lotech.input.Checkbox', function() {
         });
 
         it('should fire with the checked status', function() {
-            let value = undefined;
+            let value;
             // TODO do this with sinon
             const listener = function(checked) {
                 value = checked;
