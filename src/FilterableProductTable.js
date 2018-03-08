@@ -18,7 +18,7 @@ export default function(products) {
 
     searchBar.addListenerOnStockFilterChanged(function(inStockOnly) {
         const filteredProducts = filterProducts(inStockOnly);
-        productTable.setProducts(products);
+        productTable.setProducts(filteredProducts);
     });
 
     return lotech.Div([
