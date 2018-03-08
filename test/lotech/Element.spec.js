@@ -6,9 +6,9 @@ describe('lotech.Element', function() {
     let node;
 
     beforeEach(function() {
-        node = document.createElement('div');
+        node = document.createElement('span');
         subject = Element(node);
-        parentNode = document.createElement('span');
+        parentNode = document.createElement('div');
     });
 
     describe('draw', function() {
