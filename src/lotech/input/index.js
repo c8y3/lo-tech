@@ -1,5 +1,5 @@
-import Text from './Text';
-import Checkbox from './Checkbox';
+import Text from '/lotech/input/Text';
+import Checkbox from '/lotech/input/Checkbox';
 
 export default {
     Text: Text,
