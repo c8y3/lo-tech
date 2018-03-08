@@ -25,6 +25,8 @@ export default function(tagName, children) {
             element.draw(parentNode);
             drawChildren();
         },
+        // TODO think about this, but maybe should find a way not to redraw all children 
+        // => may be not efficient in the case of a Div which contains several Divs, and only one changed at the top level...
         setChildren: function(newChildren) {
             removeChildren();
             children = newChildren;
