@@ -1,9 +1,13 @@
 import lotech from '/lotech/index';
 
 export default function(product) {
+    const scope = 'ProductRow';
     const name = lotech.Span(product.name);
+    name.addStyle(scope, 'name');
     if (!product.stocked) {
-        name.addStyle('ProductRow', 'isMissing');
+        name.addStyle(scope, 'isMissing');
     }
-    return lotech.Div([name, lotech.Span(product.price)]);
+    const row = lotech.Div([name, lotech.Span(product.price)]);
+    row.addStyle(scope, 'root');
+    return row;
 };

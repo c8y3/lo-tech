@@ -3,10 +3,10 @@ import ProductCategoryRow from '/ProductCategoryRow';
 import ProductRow from '/ProductRow';
 
 export default function(products) {
-    let scope = 'ProductTable';
-    let name = lotech.Span('Name');
+    const scope = 'ProductTable';
+    const name = lotech.Span('Name');
     name.addStyle(scope, 'name');
-    let headers = lotech.Div([name, lotech.Span('Price')]);
+    const headers = lotech.Div([name, lotech.Span('Price')]);
     headers.addStyle(scope, 'headers');
     let rows = [headers];
     let lastCategory;
