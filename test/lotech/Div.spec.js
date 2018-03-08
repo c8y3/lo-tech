@@ -28,6 +28,14 @@ describe('lotech.Div', function() {
                 assert.equal('scope__name', node.className);
             });
         });
+
+        describe('setChildren', function() {
+            it('should redraw the children', function() {
+                const node = draw();
+                subject.setChildren([Div([])]);
+                assert.equal(1, node.childElementCount);
+            });
+        });
     });
 
     describe('with 2 children', function() {

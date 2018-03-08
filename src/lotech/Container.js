@@ -8,12 +8,27 @@ export default function(tagName, children) {
     const node = document.createElement(tagName);
     const element = Element(node);
 
+    function removeChildren() {
+        while (node.firstChild) {
+            node.removeChild(root.firstChild);
+        }
+    }
+
+    function drawChildren() {
+        children.forEach(function(child) {
+            child.draw(node);
+        });
+    }
+
     return Mixin(element, {
         draw: function(parentNode) {
             element.draw(parentNode);
-            children.forEach(function(child) {
-                child.draw(node);
-            });
-        }
+            drawChildren();
+        },
+        setChildren: function(newChildren) {
+            removeChildren();
+            children = newChildren;
+            drawChildren();
+        },
     });
 };
