@@ -29,4 +29,18 @@ describe('lotech.input.Text', function() {
             assert.equal('Search...', node.placeholder);
         });
     });
+
+    describe('addListenerOnInput', function() {
+        it('should text inputs', function() {
+            let input;
+            // TODO do this with sinon
+            subject.addListenerOnInput(function(value) {
+                input = value;
+            });
+            const node = draw();
+            node.value = 'hello';
+            node.dispatchEvent(new Event('input'));
+            assert.equal('hello', input);
+        });
+    });
 });

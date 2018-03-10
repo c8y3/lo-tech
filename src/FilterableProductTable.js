@@ -7,18 +7,31 @@ export default function(products) {
     const productTable = ProductTable();
     productTable.setProducts(products);
 
-    function filterProducts(inStockOnly) {
-        if (!inStockOnly) {
-            return products;
-        }
+    let productNameFilter = '';
+    let inStockOnly = false;
+
+    function filterProducts() {
         return products.filter(function(product) {
-            return product.stocked;
+            if (inStockOnly && !product.stocked) {
+                return false;
+            }
+            return product.name.includes(productNameFilter);
         });
     }
 
-    searchBar.addListenerOnStockFilterChanged(function(inStockOnly) {
-        const filteredProducts = filterProducts(inStockOnly);
+    function updateTable() {
+        const filteredProducts = filterProducts();
         productTable.setProducts(filteredProducts);
+    }
+
+    searchBar.addListenerOnStockFilterChanged(function(value) {
+        inStockOnly = value;
+        updateTable();
+    });
+
+    searchBar.addListenerOnNameFilterChanged(function(value) {
+        productNameFilter = value;
+        updateTable();
     });
 
     return lotech.Div([
