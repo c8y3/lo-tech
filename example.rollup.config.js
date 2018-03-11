@@ -1,8 +1,9 @@
 import buble from 'rollup-plugin-buble';
 import rootImport from 'rollup-plugin-root-import';
+import includePaths from 'rollup-plugin-includepaths';
 
 export default {
-    input: 'src/lotech/index.js',
+    input: 'src/example/Application.js',
     plugins: [
         buble({
             objectAssign: 'Object.assign'
@@ -10,10 +11,15 @@ export default {
         rootImport({
             root: 'src/',
             extensions: '.js'
+        }),
+        includePaths({
+            paths: ['bin/'],
+            extensions: ['.js']
         })
     ],
     output: {
-        file: 'bin/lotech.js',
-        format: 'es'
+        file: 'results/example/Application.js',
+        format: 'iife',
+        name: 'Application'
     }
 };
