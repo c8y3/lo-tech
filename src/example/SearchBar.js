@@ -11,9 +11,8 @@ export default function() {
         ])
     ]);
 
-    // TODO rather than a Mixin here (which risks propagating methods such as setChildren, should use a Component, and also everywhere else a component is built)
     return {
-        ...root,
+        ...lotech.Component(root),
         addListenerOnStockFilterChanged: inStockFilter.addListenerOnChanged,
         addListenerOnNameFilterChanged: nameFilter.addListenerOnInput
     };
