@@ -1,5 +1,5 @@
 import buble from 'rollup-plugin-buble';
-import includePaths from 'rollup-plugin-includepaths';
+import rootImport from 'rollup-plugin-root-import';
 
 export default {
     input: 'src/example/Application.js',
@@ -7,9 +7,9 @@ export default {
         buble({
             objectAssign: 'Object.assign'
         }), 
-        includePaths({
-            paths: ['bin/'],
-            extensions: ['.js']
+        rootImport({
+            root: ['src/example', 'bin/'],
+            extensions: '.js'
         })
     ],
     output: {

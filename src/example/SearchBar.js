@@ -1,4 +1,4 @@
-import lotech from 'lotech';
+import lotech from '/lotech';
 
 export default function() {
     const inStockFilter = lotech.input.Checkbox();
