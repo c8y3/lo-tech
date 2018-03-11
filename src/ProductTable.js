@@ -1,13 +1,22 @@
 import lotech from '/lotech/index';
-import ProductCategoryRow from '/ProductCategoryRow';
 import ProductRow from '/ProductRow';
+import HeaderRow from '/HeaderRow';
 
-export default function() {
+function headersRow() {
     const scope = 'ProductTable';
     const name = lotech.Span('Name');
     name.addStyle(scope, 'name');
-    const headers = lotech.Div([name, lotech.Span('Price')]);
+    const headers = HeaderRow([name, lotech.Span('Price')]);
     headers.addStyle(scope, 'headers');
+    return headers;
+}
+
+function productCategoryRow(category) {
+    return HeaderRow([lotech.String(category)]);
+}
+
+export default function() {
+    const headers = headersRow();
 
     function buildRows(products) {
         const rows = [headers];
@@ -15,7 +24,7 @@ export default function() {
 
         products.forEach(function(product) {
             if (product.category !== lastCategory) {
-                rows.push(ProductCategoryRow(product.category));
+                rows.push(productCategoryRow(product.category));
                 lastCategory = product.category;
             }
             rows.push(ProductRow(product));
