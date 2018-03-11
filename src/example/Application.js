@@ -1,4 +1,4 @@
-import FilterableProductTable from '/example/FilterableProductTable';
+import FilterableProductTable from 'FilterableProductTable';
 
 const PRODUCTS = [
     { category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football' },

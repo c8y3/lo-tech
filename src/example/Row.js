@@ -1,4 +1,4 @@
-import lotech from '/lotech/index';
+import lotech from 'lotech';
 
 export default function(content) {
     const row = lotech.Div(content);
