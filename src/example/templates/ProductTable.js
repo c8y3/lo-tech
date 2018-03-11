@@ -4,9 +4,9 @@ import Row from '/Row';
 const SCOPE = 'ProductTable';
 
 function headerRow(content) {
-    const row = Row(content);
-    row.addStyle(SCOPE, 'headers');
-    return row;
+    const root = Row(content);
+    root.addStyle(SCOPE, 'headers');
+    return root;
 };
 
 function cell(content) {

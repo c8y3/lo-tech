@@ -14,4 +14,10 @@ describe('lotech.Component', function() {
             subject.draw(parentNode);
         });
     });
+
+    describe('addStyle', function() {
+        it('should not fail', function() {
+            subject.addStyle('context', 'name');
+        });
+    });
 });
