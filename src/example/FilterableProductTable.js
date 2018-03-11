@@ -44,8 +44,9 @@ export default function(products) {
         updateTable();
     });
 
-    return lotech.Div([
+    const root = lotech.Div([
         searchBar,
         productTable
     ]);
+    return lotech.Component(root);
 };
