@@ -39,18 +39,31 @@ function productRow(product) {
 export default function() {
     const headers = mainHeadersRow();
 
-    function buildRows(products) {
+    function buildRows(productsByCategory) {
         const rows = [headers];
-        let lastCategory;
-
-        products.forEach(function(product) {
-// TODO not nice should receive an [{category: '', content: [{name:, price:}, ...]}, ...]
-            if (product.category !== lastCategory) {
-                rows.push(productCategoryRow(product.category));
-                lastCategory = product.category;
-            }
-            rows.push(productRow(product));
+        Object.keys(productsByCategory).forEach(function(category) {
+            rows.push(productCategoryRow(category));
+            const products = productsByCategory[category];
+            products.forEach(function(product) {
+                rows.push(productRow(product));
+            });
         });
+/* Might be easier to read?
+        Object.entries(productsByCategory).forEach(function([category, products]) {
+            rows.push(productCategoryRow(category));
+            products.forEach(function(product) {
+                rows.push(productRow(product));
+            });
+        });
+*/
+/* Might be easier to read? (needs additional buble option)
+        for (const [category, products] of Object.entries(productsByCategory)) {
+            rows.push(productCategoryRow(category));
+            products.forEach(function(product) {
+                rows.push(productRow(product));
+            });
+        }
+*/
         return rows;
     }
 
