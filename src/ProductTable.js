@@ -1,39 +1,50 @@
 import lotech from '/lotech/index';
-import HeaderRow from '/HeaderRow';
 import Row from '/Row';
 
 const SCOPE = 'ProductTable';
 
-function headersRow() {
-    const name = lotech.Span('Name');
-    name.addStyle(SCOPE, 'name');
-    const headers = HeaderRow([name, lotech.Span('Price')]);
-    headers.addStyle(SCOPE, 'headers');
-    return headers;
+function headerRow(content) {
+    const root = Row(content);
+    root.addStyle(SCOPE, 'headers');
+    return root;
+};
+
+function cell(content) {
+    return lotech.Span(content);
+}
+
+function nameCell(name) {
+    const result = cell(name);
+    result.addStyle(SCOPE, 'name');
+    return result;
+};
+
+function mainHeadersRow() {
+    return headerRow([nameCell('Name'), cell('Price')]);
 }
 
 function productCategoryRow(category) {
-    return HeaderRow([lotech.String(category)]);
+    return headerRow([lotech.String(category)]);
 }
 
 function productRow(product) {
-    const name = lotech.Span(product.name);
-    name.addStyle(SCOPE, 'name');
+    const name = nameCell(product.name);
     if (!product.stocked) {
         name.addStyle(SCOPE, 'isMissing');
     }
-    const price = lotech.Span(product.price);
+    const price = cell(product.price);
     return Row([name, price]);
 }
 
 export default function() {
-    const headers = headersRow();
+    const headers = mainHeadersRow();
 
     function buildRows(products) {
         const rows = [headers];
         let lastCategory;
 
         products.forEach(function(product) {
+// TODO not nice should receive an [{category: '', content: [{name:, price:}, ...]}, ...]
             if (product.category !== lastCategory) {
                 rows.push(productCategoryRow(product.category));
                 lastCategory = product.category;
