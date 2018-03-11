@@ -2,7 +2,7 @@ import buble from 'rollup-plugin-buble';
 import rootImport from 'rollup-plugin-root-import';
 
 export default {
-    input: 'src/Application.js',
+    input: 'src/example/Application.js',
     plugins: [
         buble({
             objectAssign: 'Object.assign'

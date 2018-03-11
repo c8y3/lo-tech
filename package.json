@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepublish": "npm run clean && npm run check && npm run build",
-    "build": "rollup -c && lessc src/index.less results/style.css && cp src/index.html results/",
+    "build": "rollup -c && lessc src/example/index.less results/style.css && cp src/example/index.html results/",
     "lint": "eslint src test",
     "test": "karma start",
     "check": "npm run lint && npm test",

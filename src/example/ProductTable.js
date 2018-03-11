@@ -1,5 +1,5 @@
 import lotech from '/lotech/index';
-import Row from '/Row';
+import Row from '/example/Row';
 
 const SCOPE = 'ProductTable';
 
