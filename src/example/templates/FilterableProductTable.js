@@ -3,8 +3,7 @@ import ProductTable from '/ProductTable';
 import SearchBar from '/SearchBar';
 
 export default function(products) {
-    const searchBar = SearchBar();
-    const productTable = ProductTable();
+    const { root, searchBar, productTable } = Template();
 
     let productNameFilter = '';
     let inStockOnly = false;

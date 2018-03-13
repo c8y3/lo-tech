@@ -29,6 +29,7 @@ function productCategoryRow(category) {
 
 function productRow(product) {
     const name = nameCell(product.name);
+// this one would be done after in code (not in the templates)
     if (!product.stocked) {
         name.addStyle(SCOPE, 'isMissing');
     }
