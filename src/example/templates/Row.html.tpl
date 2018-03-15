@@ -1,3 +1,3 @@
-import lotech from '/lotech';
-
-<lotech.Div class="root" />
+<div class="root">
+    {children}
+</div>

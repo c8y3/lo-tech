@@ -11,8 +11,8 @@ import Row from '/Row';
 
 const SCOPE = 'ProductTable';
 
-function headerRow(content) {
-    const root = Row(content);
+function headerRow(children) {
+    const root = Row(children);
     root.addStyle(SCOPE, 'headers');
     return root;
 };
