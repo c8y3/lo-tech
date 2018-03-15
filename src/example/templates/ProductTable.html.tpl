@@ -3,12 +3,10 @@
 import lotech from '/lotech';
 import Row from '/Row';
 
-<lotech.Div>
-    <ProductRow class="headers">
-        <Name>Name</Name>
-        <Price>Price</Price>
+<div>
+    <ProductRow class="headers" name="Name" price="Price">
     </ProductRow>
-</lotech.Div>
+</div>
 
 ProductCategoryRow =
 <Row class="headers">
@@ -17,7 +15,7 @@ ProductCategoryRow =
 
 ProductRow =
 <Row>
-    <lotech.Span key="productName" class="name">{Name}</lotech.Span>
+    <lotech.Span class="name {isMissing}">{Name}</lotech.Span>
     <lotech.Span>{Price}</lotech.Span>
 </Row>
 

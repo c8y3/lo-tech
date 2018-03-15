@@ -1,6 +1,14 @@
 import lotech from '/lotech';
 import Row from '/Row';
 
+// templates should be simple and follow html
+// accept attributes
+// and a list of children
+
+// can do injection of attributes (because attributes are either a template or a string with some templates) and of children
+// getElementByKey does not work in sub-trees (just one level)
+// start with some simple examples and increase complexity progressively
+
 const SCOPE = 'ProductTable';
 
 function headerRow(content) {
@@ -29,7 +37,7 @@ function productCategoryRow(category) {
 
 function productRow(product) {
     const name = nameCell(product.name);
-// this one would be done after in code (not in the templates)
+// this one would be done after in code (not in the templates) => no do the injection in the template {isMissing}
     if (!product.stocked) {
         name.addStyle(SCOPE, 'isMissing');
     }
@@ -68,12 +76,12 @@ export default function() {
         return rows;
     }
 
-    const root = lotech.Div(buildRows([]));
+    const root = lotech.Div([headers]);
     return {
         ...lotech.Component(root),
         setProducts: function(products) {
             const rows = buildRows(products);
-            root.setChildren(rows);
+            root.replaceChildren(1, rows);
         }
     };
 };

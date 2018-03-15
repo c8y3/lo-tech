@@ -40,7 +40,7 @@ export default function() {
     const headers = mainHeadersRow();
 
     function buildRows(productsByCategory) {
-        const rows = [headers];
+        const rows = [];
         Object.keys(productsByCategory).forEach(function(category) {
             rows.push(productCategoryRow(category));
             const products = productsByCategory[category];
@@ -67,12 +67,12 @@ export default function() {
         return rows;
     }
 
-    const root = lotech.Div(buildRows([]));
+    const root = lotech.Div([headers]);
     return {
         ...lotech.Component(root),
         setProducts: function(products) {
             const rows = buildRows(products);
-            root.setChildren(rows);
+            root.replaceChildren(1, rows);
         }
     };
 };

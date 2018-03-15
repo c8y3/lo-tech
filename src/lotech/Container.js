@@ -3,13 +3,14 @@ import Element from '/lotech/Element';
 /*
  * A container is an Element with children
  */
-export default function(tagName, children) {
+export default function(tagName, initialChildren) {
+    const children = initialChildren.slice();
     const node = document.createElement(tagName);
     const element = Element(node);
 
-    function removeChildren() {
-        while (node.firstChild) {
-            node.removeChild(node.firstChild);
+    function removeChildren(start) {
+        while (node.children[start]) {
+            node.removeChild(node.children[start]);
         }
     }
 
@@ -29,7 +30,13 @@ export default function(tagName, children) {
         // => may be not efficient in the case of a Div which contains several Divs, and only one changed at the top level...
         setChildren: function(newChildren) {
             removeChildren();
-            children = newChildren;
+            children.splice(0, children.length, ...newChildren);
+            drawChildren();
+        },
+
+        replaceChildren: function(start, newChildren, end) {
+            removeChildren(start);
+            children.splice(start, children.length, ...newChildren);
             drawChildren();
         }
     };
