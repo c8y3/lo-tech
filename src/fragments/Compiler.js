@@ -1,5 +1,6 @@
 import Parser from '/fragments/Parser';
 import CodeGenerator from '/fragments/CodeGenerator';
+import astring from 'astring';
 
 const parser = Parser();
 const generator = CodeGenerator();
@@ -13,7 +14,7 @@ export default function() {
             const template = generator.generate(tree);
             // TODO the generator should most probably do the generate too...
             return 'import lotech from \'/lotech\';\n'
-                 + template;
+                 + astring.generate(template);
         }
     };
 };

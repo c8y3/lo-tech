@@ -1,5 +1,3 @@
-import astring from 'astring';
-
 export default function() {
     return {
         generate() {
@@ -37,7 +35,7 @@ export default function() {
                     }
                 }]
             };
-            return astring.generate(program);
+            return program;
         }
     };
 }
