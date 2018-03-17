@@ -15,16 +15,23 @@ describe('fragments.RollupPlugin', function() {
 
     describe('transform', function() {
         it('should not fail', function() {
-            subject.transform();
+            subject.transform('', '.htpl');
         });
 
         it('should compile the input code', function() {
-            const result = subject.transform('<div/>');
+            const result = subject.transform('<div/>', '.htpl');
             const expectedResult = 'import lotech from \'/lotech\';\n'
                                  + 'export default function() {\n'
                                  + '    return lotech.Div([]);\n'
                                  + '};';
             assert.equal(result, expectedResult);
         });
+
+        it('should compile only files with .htpl suffix', function() {
+            const result = subject.transform('', '.js');
+            assert.isUndefined(result);
+        });
+
+// TODO it should accept include and exclude options
     });
 });

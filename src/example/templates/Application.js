@@ -1,4 +1,4 @@
-import Row from '/Row.html.tpl';
+import Row from '/Row.htpl';
 
 export default function() {
     return {
