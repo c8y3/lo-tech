@@ -1,8 +1,9 @@
 import buble from 'rollup-plugin-buble';
 import rootImport from 'rollup-plugin-root-import';
 
-export default {
-    input: 'src/lotech/index.js',
+
+export default  {
+    input: 'src/fragments/RollupPlugin.js',
     plugins: [
         buble({
             objectAssign: 'Object.assign'
@@ -12,8 +13,9 @@ export default {
             extensions: '.js'
         })
     ],
+    external: ['parse5'],
     output: {
-        file: 'bin/lotech.js',
+        file: 'bin/fragments-rollup-plugin',
         format: 'es'
     }
 };
