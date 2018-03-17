@@ -1,21 +1,30 @@
+const LOTECH_ELEMENTS = {
+    DIV: 'Div',
+    P: 'P'
+};
+
+function generateConstructor(tagName) {
+    return {
+        type: 'MemberExpression',
+        object: {
+            type: 'Identifier',
+            name: 'lotech'
+        },
+        property: {
+            type: 'Identifier',
+            name: LOTECH_ELEMENTS[tagName.toUpperCase()]
+        }
+    };
+}
+
 export default function() {
     return {
-        generate() {
+        generate(htpl) {
             const body = [{
                 type: 'ReturnStatement',
                 argument: {
                     type: 'CallExpression',
-                    callee: {
-                        type: 'MemberExpression',
-                        object: {
-                            type: 'Identifier',
-                            name: 'lotech'
-                        },
-                        property: {
-                            type: 'Identifier',
-                            name: 'Div'
-                        }
-                    },
+                    callee: generateConstructor(htpl.tagName),
                     arguments: [{
                         type: 'ArrayExpression',
                         elements: []
