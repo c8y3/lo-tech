@@ -14,7 +14,7 @@ export default [{
         }),
         multiEntry()
     ],
-    external: ['parse5'],
+    external: ['parse5', 'astring'],
     output: {
         file: 'results/fragments.test.js',
         format: 'cjs'

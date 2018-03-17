@@ -11,8 +11,9 @@ export default function() {
         compile: function(code) {
             const tree = parser.parse(code);
             const template = generator.generate(tree);
+            // TODO the generator should most probably do the generate too...
             return 'import lotech from \'/lotech\';\n'
-                 + 'export default ' + template + ';';
+                 + template;
         }
     };
 };

@@ -13,7 +13,7 @@ export default  {
             extensions: '.js'
         })
     ],
-    external: ['parse5'],
+    external: ['parse5', 'astring'],
     output: {
         file: 'bin/rollup-plugin-fragments',
         format: 'es'

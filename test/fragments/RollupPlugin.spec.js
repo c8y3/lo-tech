@@ -21,9 +21,9 @@ describe('fragments.RollupPlugin', function() {
         it('should compile the input code', function() {
             const result = subject.transform('<div/>', '.htpl');
             const expectedResult = 'import lotech from \'/lotech\';\n'
-                                 + 'export default function() {\n'
-                                 + '    return lotech.Div([]);\n'
-                                 + '};';
+                                 + 'export default function () {\n'
+                                 + '  return lotech.Div([]);\n'
+                                 + '}\n';
             assert.equal(result, expectedResult);
         });
 
