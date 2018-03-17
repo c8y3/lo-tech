@@ -3,18 +3,18 @@ import rootImport from 'rollup-plugin-root-import';
 import fragments from './bin/rollup-plugin-fragments';
 
 export default [{
-    input: 'src/example/Application.js',
+    input: 'src/example/raw/Application.js',
     plugins: [
         buble({
             objectAssign: 'Object.assign'
         }), 
         rootImport({
-            root: ['src/example', 'bin/'],
+            root: ['src/example/raw', 'bin/'],
             extensions: '.js'
         })
     ],
     output: {
-        file: 'results/example/Application.js',
+        file: 'results/example/raw/Application.js',
         format: 'iife',
         name: 'Application'
     }
@@ -31,7 +31,7 @@ export default [{
         fragments()
     ],
     output: {
-        file: 'results/example/TemplatesApplication.js',
+        file: 'results/example/templates/Application.js',
         format: 'iife',
         name: 'Application'
     }

@@ -1,3 +1,5 @@
+// note, a node will have a constructor with its children
+// and a method setAttributes and also setAttribute
 export default function() {
     return {
         compile: function() {

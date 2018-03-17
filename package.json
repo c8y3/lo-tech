@@ -8,7 +8,7 @@
     "build": "npm run build:lotech && npm run build:fragments && npm run build:example",
     "build:lotech": "rollup -c rollup.config.js",
     "build:fragments": "rollup -c fragments.rollup.config.js",
-    "build:example": "rollup -c example.rollup.config.js && lessc src/example/index.less results/example/style.css && cp src/example/index.html results/example",
+    "build:example": "rollup -c example.rollup.config.js && lessc src/example/raw/index.less results/example/raw/style.css && cp src/example/raw/index.html results/example/raw",
     "lint": "eslint src test",
     "test": "karma start",
     "test:fragments": "rollup -c fragments.test.rollup.config.js && mocha --require chai/register-assert results/fragments.test.js",
