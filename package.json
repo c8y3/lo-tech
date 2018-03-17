@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepublish": "npm run clean && npm run check & npm run build",
-    "build": "npm run build:lotech && npm run build:example",
+    "build": "npm run build:lotech && npm run build:fragments && npm run build:example",
     "build:lotech": "rollup -c rollup.config.js",
     "build:fragments": "rollup -c fragments.rollup.config.js",
     "build:example": "rollup -c example.rollup.config.js && lessc src/example/index.less results/example/style.css && cp src/example/index.html results/example",
