@@ -13,6 +13,11 @@ describe('fragments.Parser', function() {
             assert.equal(result.tagName, 'div');
         });
 
+        it('should return nodes with type element', function() {
+            const result = subject.parse('<div/>');
+            assert.equal(result.type, 'element');
+        });
+
         it('should return tagName', function() {
             const result = subject.parse('<p/>');
             assert.equal(result.tagName, 'p');

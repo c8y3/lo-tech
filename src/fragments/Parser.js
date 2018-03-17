@@ -27,6 +27,7 @@ function simplifyNode(node) {
         return simplifyTextNode(node);
     }
     return {
+        type: 'element',
         tagName: node.tagName,
         attributes: simplifyAttributes(node.attrs),
         children: simplifyChildren(node.childNodes)
