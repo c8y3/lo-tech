@@ -1,9 +1,9 @@
-import Parser from '/fragments/Compiler';
+import Compiler from '/fragments/Compiler';
 
 describe('fragments.Compiler', function() {
     describe('compile', function() {
         it('should not fail', function() {
-            const subject = Parser();
+            const subject = Compiler();
             const result = subject.compile('<div/>');
             const expectedResult = 'import lotech from \'/lotech\';\n'
                                  + 'export default function() {\n'
