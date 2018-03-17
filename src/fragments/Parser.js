@@ -19,6 +19,12 @@ function simplifyChildren(children) {
 }
 
 function simplifyTextNode(node) {
+    const content = node.value;
+    if (content === '{children}') {
+        return {
+            type: 'variable'
+        };
+    }
     return node.value;
 }
 
