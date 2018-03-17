@@ -26,7 +26,6 @@ function simplifyNode(tree) {
     if (tree.nodeName === '#text') {
         return simplifyTextNode(tree);
     }
-    console.log(tree);
     return {
         tagName: tree.tagName,
         attributes: simplifyAttributes(tree.attrs),

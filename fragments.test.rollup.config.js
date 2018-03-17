@@ -1,8 +1,9 @@
 import buble from 'rollup-plugin-buble';
 import rootImport from 'rollup-plugin-root-import';
+import multiEntry from 'rollup-plugin-multi-entry';
 
 export default [{
-    input: 'test/fragments/Parser.spec.js',
+    input: 'test/fragments/**/*.spec.js',
     plugins: [
         buble({
             objectAssign: 'Object.assign'
@@ -10,7 +11,8 @@ export default [{
         rootImport({
             root: 'src/',
             extensions: '.js'
-        })
+        }),
+        multiEntry()
     ],
     external: ['parse5'],
     output: {
