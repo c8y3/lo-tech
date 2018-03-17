@@ -1,9 +1,6 @@
 import parse5 from 'parse5';
 
 function simplifyAttributes(attributes) {
-    if (attributes === undefined) {
-        return {};
-    }
     const result = {};
     attributes.forEach(function(attribute) {
         result[attribute.name] = attribute.value;
@@ -19,23 +16,20 @@ function simplifyChildren(children) {
 }
 
 function simplifyTextNode(node) {
-    const content = node.value;
-    if (content === '{children}') {
-        return {
-            type: 'variable'
-        };
-    }
-    return node.value;
+    return {
+        type: 'variable',
+        name: 'children'
+    };
 }
 
-function simplifyNode(tree) {
-    if (tree.nodeName === '#text') {
-        return simplifyTextNode(tree);
+function simplifyNode(node) {
+    if (node.nodeName === '#text') {
+        return simplifyTextNode(node);
     }
     return {
-        tagName: tree.tagName,
-        attributes: simplifyAttributes(tree.attrs),
-        children: simplifyChildren(tree.childNodes)
+        tagName: node.tagName,
+        attributes: simplifyAttributes(node.attrs),
+        children: simplifyChildren(node.childNodes)
     };
 }
 
