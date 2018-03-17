@@ -15,7 +15,7 @@ describe('fragments.RollupPlugin', function() {
 
     describe('transform', function() {
         it('should not fail', function() {
-            subject.transform('', '.htpl');
+            subject.transform('<div/>', '.htpl');
         });
 
         it('should compile the input code', function() {
