@@ -15,7 +15,7 @@ export default  {
     ],
     external: ['parse5'],
     output: {
-        file: 'bin/fragments-rollup-plugin',
+        file: 'bin/rollup-plugin-fragments',
         format: 'es'
     }
 };
