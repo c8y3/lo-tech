@@ -10,6 +10,7 @@
     "build:example": "rollup -c example.rollup.config.js && lessc src/example/index.less results/example/style.css && cp src/example/index.html results/example",
     "lint": "eslint src test",
     "test": "karma start",
+    "test:fragments": "rollup -c fragments.test.rollup.config.js && mocha --require chai/register-assert results/fragments.test.js",
     "check": "npm run lint && npm test",
     "clean": "rm -rf results/ && rm -rf bin/"
   },
