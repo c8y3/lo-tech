@@ -22,7 +22,8 @@ export default [{
     input: 'src/example/templates/Application.js',
     plugins: [
         buble({
-            objectAssign: 'Object.assign'
+            objectAssign: 'Object.assign',
+            include: '**.js'
         }), 
         rootImport({
             root: ['src/example/templates', 'bin/'],
