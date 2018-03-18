@@ -22,4 +22,10 @@ describe('lotech.createElement', function() {
         const node = draw(element);
         assert.equal(1, node.childElementCount);
     });
+
+    it('should set class name', function() {
+        const element = createElement('div', {scope: 'scope', style: 'style'}, []);
+        const node = draw(element);
+        assert.equal('scope__style', node.className);
+    });
 });

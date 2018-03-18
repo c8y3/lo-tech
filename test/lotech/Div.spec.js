@@ -36,6 +36,14 @@ describe('lotech.Div', function() {
                 assert.equal(1, node.childElementCount);
             });
         });
+
+        describe('setAttribute', function() {
+            it('should set class name', function() {
+                subject.setAttributes({scope: 'scope', style: 'style'});
+                const node = draw(subject);
+                assert.equal('scope__style', node.className);
+            });
+        });
     });
 
     describe('with 2 children', function() {
