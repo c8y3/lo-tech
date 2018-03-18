@@ -21,15 +21,12 @@ export default function() {
     return {
         generate(htpl) {
             const body = {
-                type: 'ReturnStatement',
-                argument: {
-                    type: 'CallExpression',
-                    callee: generateConstructor(htpl.tagName),
-                    arguments: [{
-                        type: 'ArrayExpression',
-                        elements: []
-                    }]
-                }
+                type: 'CallExpression',
+                callee: generateConstructor(htpl.tagName),
+                arguments: [{
+                    type: 'ArrayExpression',
+                    elements: []
+                }]
             };
             return body;
         }
