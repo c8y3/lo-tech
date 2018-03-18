@@ -8,7 +8,7 @@ describe('fragments.Compiler', function() {
             const expectedResult = 'import lotech from \'/lotech\';\n'
                                  + 'export default function () {\n'
                                  + '  return lotech.Div([]);\n'
-                                 + '}\n';
+                                 + '}';
             assert.equal(result, expectedResult);
         });
     });

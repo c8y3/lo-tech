@@ -32,17 +32,14 @@ export default function() {
                 }
             }];
             const program = {
-                type: 'Program',
-                body: [{
-                    type: 'ExportDefaultDeclaration',
-                    declaration: {
-                        type: 'FunctionDeclaration',
-                        body: {
-                            type: 'BlockStatement',
-                            body: body
-                        }
+                type: 'ExportDefaultDeclaration',
+                declaration: {
+                    type: 'FunctionDeclaration',
+                    body: {
+                        type: 'BlockStatement',
+                        body: body
                     }
-                }]
+                }
             };
             return program;
         }
