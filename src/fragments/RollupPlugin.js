@@ -9,8 +9,6 @@ export default function() {
             if (id.slice(-5) !== '.htpl') {
                 return;
             }
-            console.log('File: ' + id);
-            console.log('Content: ' + code);
             return compiler.compile(code);            
         }
     };
