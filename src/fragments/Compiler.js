@@ -13,7 +13,7 @@ export default function() {
             const template = generator.generate(tree);
             // TODO the generator should most probably do the generate too...
             return 'import lotech from \'/lotech\';\n'
-                 + 'export default function () {\n'
+                 + 'export default function(children) {\n'
                  + '  return ' + template + ';\n'
                  + '}';
         }

@@ -6,7 +6,7 @@ describe('fragments.Compiler', function() {
             const subject = Compiler();
             const result = subject.compile('<div/>');
             const expectedResult = 'import lotech from \'/lotech\';\n'
-                                 + 'export default function () {\n'
+                                 + 'export default function(children) {\n'
                                  + '  return lotech.createElement(\'div\', {}, []);\n'
                                  + '}';
             assert.equal(result, expectedResult);
