@@ -14,6 +14,7 @@ export default function() {
             // TODO the generator should most probably do the generate too...
             return 'import lotech from \'/lotech\';\n'
                  + 'export default function(children) {\n'
+// TODO check it, but most probably it is not necessary to wrap here with a lotech.Component (all components should have the same API?)
                  + '  return lotech.Component(' + template + ');\n'
                  + '}';
         }
