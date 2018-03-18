@@ -7,6 +7,6 @@ import Row from '/Row.htpl';
 export default function(content) {
     const root = Row(content);
 //    const root = lotech.Div(content);
-    root.addStyle('Row', 'root');
+//    root.addStyle('Row', 'root');
     return lotech.Component(root);
 };
