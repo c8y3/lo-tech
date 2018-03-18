@@ -20,7 +20,7 @@ describe('fragments.CodeGenerator', function() {
 
         it('should append children', function() {
             const result = subject.generate({type: 'element', tagName: 'div', children: [{type: 'variable'}]});
-            assert.equal(result, 'lotech.createElement(\'div\', {}, [children])');
+            assert.equal(result, 'lotech.createElement(\'div\', {}, children)');
         });
 //{"tagName":"div","attributes":{"class":"root"},"children":[{"type":"variable","name":"children"}]}
 

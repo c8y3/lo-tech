@@ -6,6 +6,7 @@ import Row from '/Row.htpl';
 // TODO need to automatically prefix with Row__ the name
 export default function(content) {
     const root = Row(content);
+//    const root = lotech.Div(content);
     root.addStyle('Row', 'root');
     return lotech.Component(root);
 };
