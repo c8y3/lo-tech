@@ -5,4 +5,4 @@ export default function(type, attributes, children = []) {
     const element = Div(children);
     element.setAttributes(attributes);
     return element;
-}
+};
