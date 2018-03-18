@@ -20,7 +20,7 @@ function generateConstructor(tagName) {
 export default function() {
     return {
         generate(htpl) {
-            const body = [{
+            const body = {
                 type: 'ReturnStatement',
                 argument: {
                     type: 'CallExpression',
@@ -30,15 +30,8 @@ export default function() {
                         elements: []
                     }]
                 }
-            }];
-            const program = {
-                type: 'FunctionDeclaration',
-                body: {
-                    type: 'BlockStatement',
-                    body: body
-                }
             };
-            return program;
+            return body;
         }
     };
 }
