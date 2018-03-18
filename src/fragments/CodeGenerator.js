@@ -1,6 +1,7 @@
 function generateElement(htpl) {
-    let children = generateChildren(htpl.children);
-    return 'lotech.createElement(\'' + htpl.tagName + '\', {}, [' + children + '])';
+    const attributes = JSON.stringify(htpl.attributes);
+    const children = generateChildren(htpl.children);
+    return 'lotech.createElement(\'' + htpl.tagName + '\', ' + attributes + ', [' + children + '])';
 }
 
 function generateVariable() {
