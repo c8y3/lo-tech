@@ -14,7 +14,7 @@ export default function() {
             const template = generator.generate(tree);
             // TODO the generator should most probably do the generate too...
             return 'import lotech from \'/lotech\';\n'
-                 + astring.generate(template);
+                 + 'export default ' + astring.generate(template);
         }
     };
 };
