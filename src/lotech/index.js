@@ -5,6 +5,7 @@ import P from '/lotech/P';
 import Div from '/lotech/Div';
 import Span from '/lotech/Span';
 import Component from '/lotech/Component';
+import createElement from '/lotech/createElement';
 
 export default {
     String: String,
@@ -13,5 +14,6 @@ export default {
     P: P,
     Div: Div,
     Span: Span,
-    Component: Component
+    Component: Component,
+    createElement: createElement
 };

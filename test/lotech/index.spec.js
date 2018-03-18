@@ -50,4 +50,10 @@ describe('lotech', function() {
             lotech.Component(lotech.input.Checkbox());
         });
     });
+
+    describe('createElement', function() {
+        it('should not fail', function() {
+            lotech.createElement('div', {}, []);
+        });
+    });
 });
