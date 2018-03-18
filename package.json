@@ -10,7 +10,8 @@
     "build:fragments": "rollup -c fragments.rollup.config.js",
     "build:example": "rollup -c example.rollup.config.js && lessc src/example/raw/index.less results/example/raw/style.css && cp src/example/index.html results/example/raw && lessc src/example/templates/index.less results/example/templates/style.css && cp src/example/index.html results/example/templates",
     "lint": "eslint src test",
-    "test": "karma start",
+    "test": "npm run test:lotech && npm run test:fragments",
+    "test:lotech": "karma start",
     "test:fragments": "rollup -c fragments.test.rollup.config.js && mocha --require chai/register-assert results/fragments.test.js",
     "check": "npm run lint && npm test",
     "clean": "rm -rf results/ && rm -rf bin/"
