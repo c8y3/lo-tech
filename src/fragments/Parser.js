@@ -8,10 +8,7 @@ function simplifyAttributes(attributes) {
     return result;
 }
 
-function simplifyChildren(children) {
-    if (children === undefined) {
-        return [];
-    }
+function simplifyChildren(children = []) {
     return children.map(simplifyNode);
 }
 
