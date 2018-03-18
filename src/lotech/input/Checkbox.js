@@ -6,7 +6,7 @@ export default function() {
 
     return {
         ...Element(node),
-        addListenerOnChanged: function(listener) {
+        addListenerOnChanged(listener) {
             node.addEventListener('change', function() {
                 listener(node.checked);
             });

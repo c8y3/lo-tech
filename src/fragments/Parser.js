@@ -37,7 +37,7 @@ function simplifyDocumentFragment(tree) {
 
 export default function() {
     return {
-        parse: function(input) {
+        parse(input) {
             const tree = parse5.parseFragment(input);
             return simplifyDocumentFragment(tree);
         }

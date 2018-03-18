@@ -22,19 +22,19 @@ export default function(tagName, initialChildren) {
 
     return {
         ...element,
-        draw: function(parentNode) {
+        draw(parentNode) {
             element.draw(parentNode);
             drawChildren();
         },
         // TODO think about this, but maybe should find a way not to redraw all children
         // => may be not efficient in the case of a Div which contains several Divs, and only one changed at the top level...
-        setChildren: function(newChildren) {
+        setChildren(newChildren) {
             removeChildren();
             children.splice(0, children.length, ...newChildren);
             drawChildren();
         },
 
-        replaceChildren: function(start, newChildren, end) {
+        replaceChildren(start, newChildren, end) {
             removeChildren(start);
             children.splice(start, children.length, ...newChildren);
             drawChildren();

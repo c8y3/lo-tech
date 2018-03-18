@@ -79,7 +79,7 @@ export default function() {
     const root = lotech.Div([headers]);
     return {
         ...lotech.Component(root),
-        setProducts: function(products) {
+        setProducts(products) {
             const rows = buildRows(products);
             root.replaceChildren(1, rows);
         }

@@ -6,7 +6,7 @@ export default function(placeholder) {
     node.placeholder = placeholder;
     return {
         ...Element(node),
-        addListenerOnInput: function(listener) {
+        addListenerOnInput(listener) {
             node.addEventListener('input', function() {
                 listener(node.value);
             });

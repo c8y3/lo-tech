@@ -1,9 +1,9 @@
 export default function(node) {
     return {
-        draw: function(parentNode) {
+        draw(parentNode) {
             parentNode.appendChild(node);
         },
-        addStyle: function(scope, name) {
+        addStyle(scope, name) {
             node.classList.add(scope + '__' + name);
         }
     };

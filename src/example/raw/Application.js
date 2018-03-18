@@ -11,7 +11,7 @@ const PRODUCTS = [
 
 export default function() {
     return {
-        start: function() {
+        start() {
             const mainComponent = FilterableProductTable(PRODUCTS);
             mainComponent.draw(document.body);
         }

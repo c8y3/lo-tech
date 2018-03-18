@@ -8,7 +8,7 @@ const generator = CodeGenerator();
 // and a method setAttributes and also setAttribute
 export default function() {
     return {
-        compile: function(code) {
+        compile(code) {
             const tree = parser.parse(code);
             const template = generator.generate(tree);
             // TODO the generator should most probably do the generate too...
