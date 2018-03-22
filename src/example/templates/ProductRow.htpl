@@ -1,0 +1,10 @@
+import Row from '/Row.htpl';
+
+<Row>
+    <span scope="ProductRow" style="name {isMissing}">
+        {name}
+    </span>
+    <span>
+        {price}
+    </span>
+</Row>

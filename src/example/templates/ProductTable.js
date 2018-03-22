@@ -1,5 +1,6 @@
 import lotech from '/lotech';
 import Row from '/Row.htpl';
+import ProductRow from '/ProductRow.htpl'
 
 // templates should be simple and follow html
 // accept attributes
