@@ -1,7 +1,19 @@
+function isUpperCase(letter) {
+    return letter.toUpperCase() === letter;
+}
+
+function generateType(tagName) {
+    if (isUpperCase(tagName[0])) {
+        return tagName;
+    }
+    return '\'' + tagName + '\'';
+}
+
 function generateElement(htpl) {
+    const type = generateType(htpl.tagName);
     const attributes = JSON.stringify(htpl.attributes);
     const children = generateChildren(htpl.children);
-    return 'lotech.createElement(\'' + htpl.tagName + '\', ' + attributes + ', [' + children + '])';
+    return 'lotech.createElement(' + type + ', ' + attributes + ', [' + children + '])';
 }
 
 function generateVariable() {

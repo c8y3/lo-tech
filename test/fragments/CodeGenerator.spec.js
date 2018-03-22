@@ -27,5 +27,10 @@ describe('fragments.CodeGenerator', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {class: 'root'}, children: []});
             assert.equal(result, 'lotech.createElement(\'div\', {"class":"root"}, [])');
         });
+
+        it('should pass the constructor when the tag name is upper case', function() {
+            const result = subject.generate({type: 'element', tagName: 'Row', attributes: {}, children: []});
+            assert.equal(result, 'lotech.createElement(Row, {}, [])');
+        });
     });
 });
