@@ -38,6 +38,7 @@ function generateVariable() {
 }
 
 function generateText(content) {
+    content = content.replace('\n', ' ');
     return 'lotech.String(\'' + content + '\')';
 };
 

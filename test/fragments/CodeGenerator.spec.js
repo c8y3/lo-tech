@@ -1,5 +1,6 @@
 import CodeGenerator from '/fragments/CodeGenerator';
 
+// TODO should split the CodeGenerator class => the tests are becoming too cumbersome
 describe('fragments.CodeGenerator', function() {
     let subject;
 
@@ -52,6 +53,12 @@ describe('fragments.CodeGenerator', function() {
             const child = {type: 'text', content: 'Hello'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
             assert.equal(result, 'lotech.createElement(\'div\', {}, [lotech.String(\'Hello\')])');
+        });
+
+        it('should convert new lines into spaces in text contents', function() {
+            const child = {type: 'text', content: 'Hello\nWorld'};
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
+            assert.equal(result, 'lotech.createElement(\'div\', {}, [lotech.String(\'Hello World\')])');
         });
     });
 });
