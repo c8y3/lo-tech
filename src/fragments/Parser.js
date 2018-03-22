@@ -17,6 +17,18 @@ function appendChild(node) {
     father.children.push(node);
 }
 
+function parseText(text) {
+    if (text === '{children}') {
+        return {
+            type: 'variable',
+            name: 'children'
+        };
+    }
+    return {
+        type: 'text'
+    }
+}
+
 const parser = new htmlparser.Parser({
     onopentag(name, attributes) {
         nodes.push({
@@ -27,10 +39,8 @@ const parser = new htmlparser.Parser({
         });
     },
     ontext(text) {
-        appendChild({
-            type: 'variable',
-            name: 'children'
-        });
+        const node = parseText(text);
+        appendChild(node);
     },
     onclosetag(tagName) {
         const node = nodes.pop();

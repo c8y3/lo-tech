@@ -58,5 +58,10 @@ describe('fragments.Parser', function() {
             const result = subject.parse('<Row/>');
             assert.equal(result.tagName, 'Row');
         });
+
+        it('should generate text nodes for text contents', function() {
+            const result = subject.parse('<div>some text</div>');
+            assert.equal(result.children[0].type, 'text');
+        });
     });
 });
