@@ -39,9 +39,15 @@ describe('lotech.Div', function() {
 
         describe('setAttribute', function() {
             it('should set class name', function() {
-                subject.setAttributes({scope: 'scope', style: 'style'});
+                subject.setAttributes({scope: 'scope', style: ['style']});
                 const node = draw(subject);
                 assert.equal('scope__style', node.className);
+            });
+
+            it('should set the several styles', function() {
+                subject.setAttributes({scope: 'scope', style: ['style1', 'style2']});
+                const node = draw(subject);
+                assert.equal('scope__style1 scope__style2', node.className);
             });
         });
     });

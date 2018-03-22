@@ -24,7 +24,7 @@ describe('lotech.createElement', function() {
     });
 
     it('should set class name', function() {
-        const element = createElement('div', {scope: 'scope', style: 'style'}, []);
+        const element = createElement('div', {scope: 'scope', style: ['style']}, []);
         const node = draw(element);
         assert.equal('scope__style', node.className);
     });
