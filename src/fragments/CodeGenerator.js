@@ -11,7 +11,7 @@ function generateType(tagName) {
 
 function generateValue(key, value) {
     if (key === 'style') {
-        value = [value]; //value.split(' ');
+        value = value.split(' ');
     }
     return JSON.stringify(value);
 }

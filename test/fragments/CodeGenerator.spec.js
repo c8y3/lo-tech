@@ -38,5 +38,10 @@ describe('fragments.CodeGenerator', function() {
             assert.equal(result, 'lotech.createElement(\'div\', {\'style\': ["root"]}, [])');
         });
 
+        it('should set style as an array of several elements when there is a spec', function() {
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {style: 'root selected'}, children: []});
+            assert.equal(result, 'lotech.createElement(\'div\', {\'style\': ["root","selected"]}, [])');
+        });
+
     });
 });
