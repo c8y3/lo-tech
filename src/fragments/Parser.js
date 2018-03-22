@@ -1,45 +1,49 @@
-import parse5 from 'parse5';
+import htmlparser from 'htmlparser2';
 
-function simplifyAttributes(attributes) {
-    const result = {};
-    attributes.forEach(function(attribute) {
-        result[attribute.name] = attribute.value;
-    });
-    return result;
+let nodes;
+
+function reset() {
+    nodes = [{
+        children: []
+    }];
 }
 
-function simplifyChildren(children = []) {
-    return children.map(simplifyNode);
+function getResult() {
+    return nodes[0].children[0];
 }
 
-function simplifyTextNode(node) {
-    return {
-        type: 'variable',
-        name: 'children'
-    };
+function appendChild(node) {
+    const father = nodes[nodes.length-1];
+    father.children.push(node);
 }
 
-function simplifyNode(node) {
-    if (node.nodeName === '#text') {
-        return simplifyTextNode(node);
+const parser = new htmlparser.Parser({
+    onopentag(name, attributes) {
+        nodes.push({
+            type: 'element',
+            tagName: name,
+            attributes: attributes,
+            children: []
+        });
+    },
+    ontext(text) {
+        appendChild({
+            type: 'variable',
+            name: 'children'
+        });
+    },
+    onclosetag(tagName) {
+        const node = nodes.pop();
+        appendChild(node);
     }
-    return {
-        type: 'element',
-        tagName: node.tagName,
-        attributes: simplifyAttributes(node.attrs),
-        children: simplifyChildren(node.childNodes)
-    };
-}
-
-function simplifyDocumentFragment(tree) {
-    return simplifyNode(tree.childNodes[0]);
-}
+})
 
 export default function() {
     return {
         parse(input) {
-            const tree = parse5.parseFragment(input);
-            return simplifyDocumentFragment(tree);
+            reset();
+            parser.parseComplete(input);
+            return getResult();
         }
     };
 };
