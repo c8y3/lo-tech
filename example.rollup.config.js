@@ -21,15 +21,14 @@ export default [{
 }, {
     input: 'src/example/templates/Application.js',
     plugins: [
+        fragments(),
         buble({
-            objectAssign: 'Object.assign',
-            include: '**.js'
+            objectAssign: 'Object.assign'
         }), 
         rootImport({
             root: ['src/example/templates', 'bin/'],
             extensions: '.js'
-        }),
-        fragments()
+        })
     ],
     output: {
         file: 'results/example/templates/Application.js',
