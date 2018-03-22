@@ -63,5 +63,10 @@ describe('fragments.Parser', function() {
             const result = subject.parse('<div>some text</div>');
             assert.equal(result.children[0].type, 'text');
         });
+
+        it('should set content property in node generated from text contents', function() {
+            const result = subject.parse('<div>some text</div>');
+            assert.equal(result.children[0].content, 'some text');
+        });
     });
 });

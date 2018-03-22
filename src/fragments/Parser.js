@@ -25,7 +25,8 @@ function parseText(text) {
         };
     }
     return {
-        type: 'text'
+        type: 'text',
+        content: text
     }
 }
 
