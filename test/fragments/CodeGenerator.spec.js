@@ -60,5 +60,11 @@ describe('fragments.CodeGenerator', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
             assert.equal(result, 'lotech.createElement(\'div\', {}, [lotech.String(\'Hello World\')])');
         });
+
+        it('should convert all new lines into spaces in text contents', function() {
+            const child = {type: 'text', content: 'Hello\nWorld\nBye'};
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
+            assert.equal(result, 'lotech.createElement(\'div\', {}, [lotech.String(\'Hello World Bye\')])');
+        });
     });
 });
