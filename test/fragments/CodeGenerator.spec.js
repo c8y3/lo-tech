@@ -43,5 +43,9 @@ describe('fragments.CodeGenerator', function() {
             assert.equal(result, 'lotech.createElement(\'div\', {\'style\': ["root","selected"]}, [])');
         });
 
+        it('should separate attributes with semicolon', function() {
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {scope: 'Row', style: 'root'}, children: []});
+            assert.equal(result, 'lotech.createElement(\'div\', {\'scope\': "Row", \'style\': ["root"]}, [])');            
+        });
     });
 });

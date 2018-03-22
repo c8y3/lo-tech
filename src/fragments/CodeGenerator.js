@@ -17,12 +17,11 @@ function generateValue(key, value) {
 }
 
 function generateAttributes(attributes) {
-    let result = '';
-    Object.keys(attributes).forEach(function(key) {
+    const result = Object.keys(attributes).map(function(key) {
         const value = attributes[key];
-        result += '\'' + key + '\': ' + generateValue(key, value);
+        return '\'' + key + '\': ' + generateValue(key, value);
     });
-    return '{' + result + '}';
+    return '{' + result.join(', ') + '}';
 }
 
 function generateElement(htpl) {
