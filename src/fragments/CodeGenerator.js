@@ -37,12 +37,19 @@ function generateVariable() {
     return '...children';
 }
 
+function generateText(content) {
+    return 'lotech.String(\'' + content + '\')';
+};
+
 function generate(htpl) {
     if (htpl.type === 'element') {
         return generateElement(htpl);
     }
     if (htpl.type === 'variable') {
         return generateVariable(htpl);
+    }
+    if (htpl.type === 'text') {
+        return generateText(htpl.content);
     }
 }
 

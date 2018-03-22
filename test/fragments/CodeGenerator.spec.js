@@ -47,5 +47,11 @@ describe('fragments.CodeGenerator', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {scope: 'Row', style: 'root'}, children: []});
             assert.equal(result, 'lotech.createElement(\'div\', {\'scope\': "Row", \'style\': ["root"]}, [])');            
         });
+
+        it('should return the text as a lotech.String node', function() {
+            const child = {type: 'text', content: 'Hello'};
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
+            assert.equal(result, 'lotech.createElement(\'div\', {}, [lotech.String(\'Hello\')])');
+        });
     });
 });
