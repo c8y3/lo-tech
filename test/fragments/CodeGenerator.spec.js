@@ -25,12 +25,18 @@ describe('fragments.CodeGenerator', function() {
 
         it('should set attributes', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {class: 'root'}, children: []});
-            assert.equal(result, 'lotech.createElement(\'div\', {"class":"root"}, [])');
+            assert.equal(result, 'lotech.createElement(\'div\', {\'class\': "root"}, [])');
         });
 
         it('should pass the constructor when the tag name is upper case', function() {
             const result = subject.generate({type: 'element', tagName: 'Row', attributes: {}, children: []});
             assert.equal(result, 'lotech.createElement(Row, {}, [])');
         });
+
+        it('should set style as an array', function() {
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {style: 'root'}, children: []});
+            assert.equal(result, 'lotech.createElement(\'div\', {\'style\': ["root"]}, [])');
+        });
+
     });
 });

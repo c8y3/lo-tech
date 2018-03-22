@@ -9,9 +9,25 @@ function generateType(tagName) {
     return '\'' + tagName + '\'';
 }
 
+function generateValue(key, value) {
+    if (key === 'style') {
+        value = [value]; //value.split(' ');
+    }
+    return JSON.stringify(value);
+}
+
+function generateAttributes(attributes) {
+    let result = '';
+    Object.keys(attributes).forEach(function(key) {
+        const value = attributes[key];
+        result += '\'' + key + '\': ' + generateValue(key, value);
+    });
+    return '{' + result + '}';
+}
+
 function generateElement(htpl) {
     const type = generateType(htpl.tagName);
-    const attributes = JSON.stringify(htpl.attributes);
+    const attributes = generateAttributes(htpl.attributes);
     const children = generateChildren(htpl.children);
     return 'lotech.createElement(' + type + ', ' + attributes + ', [' + children + '])';
 }
