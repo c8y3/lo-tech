@@ -58,22 +58,6 @@ export default function() {
                 rows.push(productRow(product));
             });
         });
-/* Might be easier to read?
-        Object.entries(productsByCategory).forEach(function([category, products]) {
-            rows.push(productCategoryRow(category));
-            products.forEach(function(product) {
-                rows.push(productRow(product));
-            });
-        });
-*/
-/* Might be easier to read? (needs additional buble option)
-        for (const [category, products] of Object.entries(productsByCategory)) {
-            rows.push(productCategoryRow(category));
-            products.forEach(function(product) {
-                rows.push(productRow(product));
-            });
-        }
-*/
         return rows;
     }
 
