@@ -36,7 +36,9 @@ const parser = new htmlparser.Parser({
         const node = nodes.pop();
         appendChild(node);
     }
-})
+}, {
+    lowerCaseTags: false
+});
 
 export default function() {
     return {

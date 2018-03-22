@@ -53,5 +53,10 @@ describe('fragments.Parser', function() {
             const result = subject.parse('<div>{children}</div>');
             assert.equal(result.children[0].name, 'children');
         });
+
+        it('should preserve tag names upper case', function() {
+            const result = subject.parse('<Row/>');
+            assert.equal(result.tagName, 'Row');
+        });
     });
 });
