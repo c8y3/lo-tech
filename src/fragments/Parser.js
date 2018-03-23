@@ -18,6 +18,7 @@ function appendChild(node) {
 }
 
 function parseText(text) {
+    text = text.replace(/\n/g, ' ');
     if (text === '{children}') {
         return {
             type: 'variable',

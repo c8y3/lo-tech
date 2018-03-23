@@ -55,7 +55,8 @@ export default function() {
             rows.push(productCategoryRow(category));
             const products = productsByCategory[category];
             products.forEach(function(product) {
-                rows.push(productRow(product));
+                const row = ProductRow([]);
+                rows.push(row);
             });
         });
         return rows;

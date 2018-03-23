@@ -68,5 +68,15 @@ describe('fragments.Parser', function() {
             const result = subject.parse('<div>some text</div>');
             assert.equal(result.children[0].content, 'some text');
         });
+
+        it('should convert new lines into spaces in text contents', function() {
+            const result = subject.parse('<div>Hello\nWorld</div>');
+            assert.equal(result.children[0].content, 'Hello World');
+        });
+
+        it('should convert all new lines into spaces in text contents', function() {
+            const result = subject.parse('<div>Hello\nWorld\nBye</div>');
+            assert.equal(result.children[0].content, 'Hello World Bye');
+        });
     });
 });
