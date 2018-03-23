@@ -26,7 +26,7 @@ function parseText(text) {
     if (text[0] === '{' && text[text.length-1] === '}') {
         return {
             type: 'variable',
-            name: 'children'
+            name: text.substring(1, text.length-1)
         };
     }
     return {

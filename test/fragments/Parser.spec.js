@@ -93,5 +93,10 @@ describe('fragments.Parser', function() {
             const result = subject.parse('<div>{x}</div>');
             assert.equal(result.children[0].type, 'variable');
         });
+
+        it('should generate a variable node with correct name', function() {
+            const result = subject.parse('<div>{x}</div>');
+            assert.equal(result.children[0].name, 'x');
+        });
     });
 });
