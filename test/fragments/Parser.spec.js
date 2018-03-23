@@ -78,5 +78,10 @@ describe('fragments.Parser', function() {
             const result = subject.parse('<div>Hello\nWorld\nBye</div>');
             assert.equal(result.children[0].content, 'Hello World Bye');
         });
+
+        it('should remove spaces around the text content', function() {
+            const result = subject.parse('<div> Hello</div>');
+            assert.equal(result.children[0].content, 'Hello');
+        });
     });
 });
