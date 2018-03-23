@@ -20,6 +20,9 @@ function appendChild(node) {
 function parseText(text) {
     text = text.replace(/\n/g, ' ');
     text = text.trim();
+    if (text === '') {
+        return undefined;
+    }
     if (text === '{children}') {
         return {
             type: 'variable',
@@ -43,6 +46,9 @@ const parser = new htmlparser.Parser({
     },
     ontext(text) {
         const node = parseText(text);
+        if (node === undefined) {
+            return;
+        }
         appendChild(node);
     },
     onclosetag(tagName) {

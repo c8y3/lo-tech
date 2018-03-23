@@ -83,5 +83,10 @@ describe('fragments.Parser', function() {
             const result = subject.parse('<div> Hello</div>');
             assert.equal(result.children[0].content, 'Hello');
         });
+
+        it('should not create any nodes for text content which contains only spaces', function() {
+            const result = subject.parse('<div> </div>');
+            assert.equal(result.children.length, 0);
+        });
     });
 });
