@@ -88,5 +88,10 @@ describe('fragments.Parser', function() {
             const result = subject.parse('<div> </div>');
             assert.equal(result.children.length, 0);
         });
+
+        it('should generate a variable node when there are braces in text content', function() {
+            const result = subject.parse('<div>{x}</div>');
+            assert.equal(result.children[0].type, 'variable');
+        });
     });
 });

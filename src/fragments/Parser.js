@@ -23,7 +23,7 @@ function parseText(text) {
     if (text === '') {
         return undefined;
     }
-    if (text === '{children}') {
+    if (text[0] === '{' && text[text.length-1] === '}') {
         return {
             type: 'variable',
             name: 'children'
