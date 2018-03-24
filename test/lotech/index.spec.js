@@ -56,4 +56,10 @@ describe('lotech', function() {
             lotech.createElement('div', {}, []);
         });
     });
+
+    describe('ScopedStyle', function() {
+        it('should not fail', function() {
+            lotech.ScopedStyle('Prefix');
+        });
+    });
 });
