@@ -26,7 +26,7 @@ export default function() {
 };
 
 /* TODO
-Also remove addStyle/removeStyle => addClass/RemoveClass and LocalStyle('ProductRow') => a function style which prefixes with 'ProductRow__'
+'ProductRow__'
 <Row>
     <span className="ProductRow__name {isMissing:ProductRow__isMissing}">
         {name}

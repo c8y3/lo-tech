@@ -10,11 +10,11 @@ import ProductRow from '/ProductRow.htpl'
 // getElementByKey does not work in sub-trees (just one level)
 // start with some simple examples and increase complexity progressively
 
-const SCOPE = 'ProductTable';
+const style = lotech.ScopedStyle('ProductTable');
 
 function headerRow(children) {
     const root = Row(children);
-    root.addStyle(SCOPE, 'headers');
+    root.addClass(style('headers'));
     return root;
 };
 
@@ -24,7 +24,7 @@ function cell(content) {
 
 function nameCell(name) {
     const result = cell(name);
-    result.addStyle(SCOPE, 'name');
+    result.addClass(style('name'));
     return result;
 };
 
@@ -40,7 +40,7 @@ function productRow(product) {
     const name = nameCell(product.name);
 // this one would be done after in code (not in the templates) => no do the injection in the template {isMissing}
     if (!product.stocked) {
-        name.addStyle(SCOPE, 'isMissing');
+        name.addClass(style('isMissing'));
     }
     const price = cell(product.price);
     return Row([name, price]);
