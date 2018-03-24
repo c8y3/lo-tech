@@ -5,6 +5,7 @@ export default function(children) {
 
     return {
         ...container,
+// TODO remove setAttributes completely
         setAttributes(attributes) {
             // TODO should be attributes.styles?
             const styles = attributes.style;

@@ -1,6 +1,9 @@
 export default function(element) {
     return {
         draw: element.draw,
-        addStyle: element.addStyle
+// TODO remove
+        addStyle: element.addStyle,
+        addClass: element.addClass,
+        removeClass: element.removeClass
     };
 };

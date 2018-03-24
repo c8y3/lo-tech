@@ -15,9 +15,15 @@ describe('lotech.Component', function() {
         });
     });
 
-    describe('addStyle', function() {
+    describe('addClass', function() {
         it('should not fail', function() {
-            subject.addStyle('context', 'name');
+            subject.addClass('context__name');
+        });
+    });
+
+    describe('removeClass', function() {
+        it('should not fail', function() {
+            subject.removeClass('context__name');
         });
     });
 });

@@ -1,11 +1,11 @@
 import lotech from '/lotech';
 import Row from '/Row';
 
-const SCOPE = 'ProductTable';
+const style = lotech.ScopedStyle('ProductTable');
 
 function headerRow(content) {
     const row = Row(content);
-    row.addStyle(SCOPE, 'headers');
+    row.addClass(style('headers'));
     return row;
 };
 
@@ -15,7 +15,7 @@ function cell(content) {
 
 function nameCell(name) {
     const result = cell(name);
-    result.addStyle(SCOPE, 'name');
+    result.addClass(style('name'));
     return result;
 };
 
@@ -30,7 +30,7 @@ function productCategoryRow(category) {
 function productRow(product) {
     const name = nameCell(product.name);
     if (!product.stocked) {
-        name.addStyle(SCOPE, 'isMissing');
+        name.addClass(style('isMissing'));
     }
     const price = cell(product.price);
     return Row([name, price]);
@@ -48,22 +48,6 @@ export default function() {
                 rows.push(productRow(product));
             });
         });
-/* Might be easier to read?
-        Object.entries(productsByCategory).forEach(function([category, products]) {
-            rows.push(productCategoryRow(category));
-            products.forEach(function(product) {
-                rows.push(productRow(product));
-            });
-        });
-*/
-/* Might be easier to read? (needs additional buble option)
-        for (const [category, products] of Object.entries(productsByCategory)) {
-            rows.push(productCategoryRow(category));
-            products.forEach(function(product) {
-                rows.push(productRow(product));
-            });
-        }
-*/
         return rows;
     }
 
