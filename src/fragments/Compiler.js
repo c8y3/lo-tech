@@ -24,3 +24,38 @@ export default function() {
         }
     };
 };
+
+/* TODO
+Also remove addStyle/removeStyle => addClass/RemoveClass and LocalStyle('ProductRow') => a function style which prefixes with 'ProductRow__'
+<Row>
+    <span className="ProductRow__name {isMissing:ProductRow__isMissing}">
+        {name}
+    </span>
+    <span>
+        {price}
+    </span>
+</Row>
+
+=>
+
+function ProductRow(children) {
+  var n1 = index.String('');
+  var price = index.String('');
+  var x = index.createElement('span', {'scope': "ProductRow", 'style': ["name"]}, [n1]);
+  var result = index.Component(index.createElement(Row, {}, [x,index.createElement('span', {}, [price])]));
+  result.setName = function(name) {
+      n1.setData(name);
+  }
+  result.setPrice = function(price) {
+      n1.setData(price);
+  }
+  reset.setIsMissing = function(isMissing) {
+      if (isMissing) {
+        x.addClass('ProductRow__isMissing');
+      } else {
+        x.removeClass('ProductRow__isMissing');
+      }
+  }
+    return result;
+}
+*/
