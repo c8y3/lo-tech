@@ -21,9 +21,9 @@ describe('lotech.Div', function() {
             });
         });
 
-        describe('addStyle', function() {
+        describe('addClass', function() {
             it('should add class name to the node', function() {
-                subject.addStyle('scope', 'name');
+                subject.addClass('scope__name');
                 const node = draw();
                 assert.equal('scope__name', node.className);
             });
@@ -34,20 +34,6 @@ describe('lotech.Div', function() {
                 const node = draw();
                 subject.setChildren([Div([])]);
                 assert.equal(1, node.childElementCount);
-            });
-        });
-
-        describe('setAttribute', function() {
-            it('should set class name', function() {
-                subject.setAttributes({scope: 'scope', style: ['style']});
-                const node = draw(subject);
-                assert.equal('scope__style', node.className);
-            });
-
-            it('should set the several styles', function() {
-                subject.setAttributes({scope: 'scope', style: ['style1', 'style2']});
-                const node = draw(subject);
-                assert.equal('scope__style1 scope__style2', node.className);
             });
         });
     });
