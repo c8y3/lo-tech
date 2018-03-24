@@ -32,4 +32,13 @@ describe('lotech.Element', function() {
             assert.equal('some__class', node.className);
         });
     });
+
+    describe('removeClass', function() {
+        it('should remove class to the className of the drawn node', function() {
+            const node = draw();
+            subject.addClass('some__class');
+            subject.removeClass('some__class');
+            assert.equal('', node.className);
+        });
+    });
 });

@@ -9,6 +9,9 @@ export default function(node) {
         },
         addClass(name) {
             node.classList.add(name);
+        },
+        removeClass(name) {
+            node.classList.remove(name);
         }
     };
 };
