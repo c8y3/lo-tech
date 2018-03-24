@@ -1,7 +1,9 @@
 import lotech from '/lotech';
 
+const style = lotech.ScopedStyle('Row');
+
 export default function(content) {
     const root = lotech.Div(content);
-    root.addStyle('Row', 'root');
+    root.addClass(style('root'));
     return lotech.Component(root);
 };
