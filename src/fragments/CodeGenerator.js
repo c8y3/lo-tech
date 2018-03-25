@@ -33,7 +33,7 @@ export default function() {
         instructions.push('const ' + nodeName + ' = ' + node + ';');
         instructions.push('function ' + setterName + '(' + name + ') { ' + nodeName + '.setData(' + name + '); }');
         methods.push(setterName);
-        return 'node1';
+        return nodeName;
     }
 
     function generateChildren(children) {
