@@ -20,7 +20,8 @@ describe('fragments.CodeGenerator', function() {
         });
 
         it('should append children', function() {
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [{type: 'variable'}]});
+            const child = {type: 'variable', name: 'children'};
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
             assert.equal(result, 'lotech.createElement(\'div\', {}, [...children])');
         });
 
@@ -53,6 +54,12 @@ describe('fragments.CodeGenerator', function() {
             const child = {type: 'text', content: 'Hello'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
             assert.equal(result, 'lotech.createElement(\'div\', {}, [lotech.String(\'Hello\')])');
+        });
+
+        it('should create a String node for variables which are not children', function() {
+            const child = {type: 'variable', name: 'price'};
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
+            assert.equal(result, 'lotech.createElement(\'div\', {}, [lotech.String(\'\')])');            
         });
     });
 });

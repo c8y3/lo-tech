@@ -28,13 +28,18 @@ function generateElement(htpl) {
     const type = generateType(htpl.tagName);
     const attributes = generateAttributes(htpl.attributes);
     const children = generateChildren(htpl.children);
+// TODO remove lotech.createElement, should not be nessary
+// TODO most probably go back to addStyle, think about it
     return 'lotech.createElement(' + type + ', ' + attributes + ', [' + children + '])';
 }
 
-function generateVariable() {
-    // Template parameter {children} is necessarily an array.
-    // It is flattened to be inserted amoung the list of element children.
-    return '...children';
+function generateVariable(name) {
+    if (name === 'children') {
+        // Template parameter {children} is necessarily an array.
+        // It is flattened to be inserted amoung the list of element children.
+        return '...children';
+    }
+    return 'lotech.String(\'\')';
 }
 
 function generateText(content) {
@@ -46,7 +51,7 @@ function generate(htpl) {
         return generateElement(htpl);
     }
     if (htpl.type === 'variable') {
-        return generateVariable(htpl);
+        return generateVariable(htpl.name);
     }
     if (htpl.type === 'text') {
         return generateText(htpl.content);
