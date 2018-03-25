@@ -2,12 +2,8 @@ import LetterCase from '/fragments/LetterCase';
 
 const letterCase = LetterCase();
 
-function isUpperCase(letter) {
-    return letter.toUpperCase() === letter;
-}
-
 function generateType(tagName) {
-    if (isUpperCase(tagName[0])) {
+    if (letterCase.startsWithCapitalLetter(tagName[0])) {
         return tagName;
     }
     return 'lotech.' + letterCase.capitalize(tagName);
