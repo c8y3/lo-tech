@@ -91,5 +91,12 @@ describe('fragments.CodeGenerator', function() {
 // TODO rename into component
             assert.equal(result[3], 'return {...result, setPrice};');
         });
+
+// TODO when children in unused, do not make it appear in the signature of the component
+        it('should use a different variable name when there are several variables', function() {
+            const children = [{type: 'variable', name: 'name'}, {type: 'variable', name: 'price'}];
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: children});
+            assert.equal(result[2], 'const node2 = lotech.String(\'\');');
+        });
     });
 });

@@ -8,15 +8,22 @@ function capitalize(string) {
 
 export default function() {
 
+    let variableCount = 0;
     const instructions = [];
     const methods = [];
+
+    function generateNodeName() {
+        variableCount++;
+        return 'node' + variableCount;
+    }
 
     function generateVariable(name) {
         if (name === 'children') {
             return generator.generateVariableChildren();
         }
+        const nodeName = generateNodeName();
         const node = generator.generateVariable(name);
-        instructions.push('const node1 = ' + node + ';');
+        instructions.push('const ' + nodeName + ' = ' + node + ';');
         instructions.push('function setPrice(price) { node1.setData(price); }');
         methods.push('set' + capitalize(name));
         return 'node1';
