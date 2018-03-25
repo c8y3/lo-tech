@@ -56,12 +56,6 @@ describe('fragments.CodeGenerator', function() {
             assert.equal(result[0], 'const result = lotech.Component(lotech.createElement(\'div\', {}, [lotech.String(\'Hello\')]));');
         });
 
-        it('should create a String node for variables which are not children', function() {
-            const child = {type: 'variable', name: 'price'};
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
-            assert.equal(result[0], 'const result = lotech.Component(lotech.createElement(\'div\', {}, [lotech.String(\'\')]));');
-        });
-
         it('should create a variable for the component', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: []});
             assert.equal(result[0], 'const result = lotech.Component(lotech.createElement(\'div\', {}, []));');
@@ -77,11 +71,24 @@ describe('fragments.CodeGenerator', function() {
 // TODO should return objects with type: instruction of function
 // function setPrice(price) { node1.setData(price); }
 // first allow only one use of each variable
+        it('should return a setter for variables which are not children', function() {
+            const child = {type: 'variable', name: 'price'};
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
+// TODO rename into component
+            assert.equal(result[2], 'return {...result, setPrice};');
+        });
+
         it('should create a String node for variables which are not children', function() {
             const child = {type: 'variable', name: 'price'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
 // TODO rename into component
-            assert.equal(result[1], 'return {...result, setPrice};');
+            assert.equal(result[0], 'const node1 = lotech.String(\'\');');
+        });
+
+        it('should use the variable name for variables which are not children', function() {
+            const child = {type: 'variable', name: 'price'};
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
+            assert.equal(result[1], 'const result = lotech.Component(lotech.createElement(\'div\', {}, [node1]));');
         });
     });
 });

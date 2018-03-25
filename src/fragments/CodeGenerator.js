@@ -8,14 +8,17 @@ function capitalize(string) {
 
 export default function() {
 
+    const instructions = [];
     const methods = [];
 
     function generateVariable(name) {
         if (name === 'children') {
             return generator.generateVariableChildren();
         }
+        const node = generator.generateVariable(name);
+        instructions.push(['const node1 = ' + node + ';']);
         methods.push('set' + capitalize(name));
-        return generator.generateVariable(name);
+        return 'node1';
     }
 
     function generateChildren(children) {
@@ -42,9 +45,9 @@ export default function() {
             resultObject = '{...' + resultObject + ', ' + methods.join(' ') + '}';
         }
         return [
+            ...instructions,
             'const result = lotech.Component(' + root + ');',
             'return ' + resultObject + ';'
-//            'return {...result' + methods.join(' ') + '};'
         ];
     }
     return {generate};
