@@ -29,7 +29,7 @@ function generateElement(tagName, attributesDefinition, children) {
     const attributes = generateAttributes(attributesDefinition);
 // TODO remove lotech.createElement, should not be nessary
 // TODO most probably go back to addStyle, think about it
-    return 'lotech.createElement(' + type + ', ' + attributes + ', [' + children + '])';
+    return 'lotech.createElement(' + type + ', ' + attributes + ', [' + children.join(', ') + '])';
 }
 
 function generateVariable(name) {

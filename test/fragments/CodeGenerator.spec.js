@@ -118,7 +118,7 @@ describe('fragments.CodeGenerator', function() {
         it('should insert the correct node when there are several variables', function() {
             const children = [{type: 'variable', name: 'name'}, {type: 'variable', name: 'price'}];
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: children});
-            assert.equal(result[4], 'const component = lotech.Component(lotech.createElement(\'div\', {}, [node1,node2]));');
+            assert.equal(result[4], 'const component = lotech.Component(lotech.createElement(\'div\', {}, [node1, node2]));');
         });
     });
 });
