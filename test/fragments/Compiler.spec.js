@@ -12,7 +12,8 @@ describe('fragments.Compiler', function() {
             const result = subject.compile('<div/>');
             const expectedResult = 'import lotech from \'/lotech\';\n'
                                  + 'export default function(children) {\n'
-                                 + '  return lotech.Component(lotech.createElement(\'div\', {}, []));\n'
+                                 + '  const result = lotech.Component(lotech.createElement(\'div\', {}, []));\n'
+                                 + '  return result;\n'
                                  + '}';
             assert.equal(result, expectedResult);
         });
@@ -24,7 +25,8 @@ describe('fragments.Compiler', function() {
             const expectedResult = 'import lotech from \'/lotech\';\n'
                                  + 'import Row from \'Row\';\n'
                                  + 'export default function(children) {\n'
-                                 + '  return lotech.Component(lotech.createElement(Row, {}, []));\n'
+                                 + '  const result = lotech.Component(lotech.createElement(Row, {}, []));\n'
+                                 + '  return result;\n'
                                  + '}';
             assert.equal(result, expectedResult);
         });
