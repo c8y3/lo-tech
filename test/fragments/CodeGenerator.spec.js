@@ -11,55 +11,55 @@ describe('fragments.CodeGenerator', function() {
     describe('generate', function() {
         it('should not fail', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: []});
-            assert.equal(result, 'return lotech.Component(lotech.createElement(\'div\', {}, []));');
+            assert.equal(result[0], 'return lotech.Component(lotech.createElement(\'div\', {}, []));');
         });
 
         it('should return a constructor of the node', function() {
             const result = subject.generate({type: 'element', tagName: 'p', attributes: {}, children: []});
-            assert.equal(result, 'return lotech.Component(lotech.createElement(\'p\', {}, []));');
+            assert.equal(result[0], 'return lotech.Component(lotech.createElement(\'p\', {}, []));');
         });
 
         it('should append children', function() {
             const child = {type: 'variable', name: 'children'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
-            assert.equal(result, 'return lotech.Component(lotech.createElement(\'div\', {}, [...children]));');
+            assert.equal(result[0], 'return lotech.Component(lotech.createElement(\'div\', {}, [...children]));');
         });
 
         it('should set attributes', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {class: 'root'}, children: []});
-            assert.equal(result, 'return lotech.Component(lotech.createElement(\'div\', {\'class\': "root"}, []));');
+            assert.equal(result[0], 'return lotech.Component(lotech.createElement(\'div\', {\'class\': "root"}, []));');
         });
 
         it('should pass the constructor when the tag name is upper case', function() {
             const result = subject.generate({type: 'element', tagName: 'Row', attributes: {}, children: []});
-            assert.equal(result, 'return lotech.Component(lotech.createElement(Row, {}, []));');
+            assert.equal(result[0], 'return lotech.Component(lotech.createElement(Row, {}, []));');
         });
 
         it('should set style as an array', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {style: 'root'}, children: []});
-            assert.equal(result, 'return lotech.Component(lotech.createElement(\'div\', {\'style\': ["root"]}, []));');
+            assert.equal(result[0], 'return lotech.Component(lotech.createElement(\'div\', {\'style\': ["root"]}, []));');
         });
 
         it('should set style as an array of several elements when there is a spec', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {style: 'root selected'}, children: []});
-            assert.equal(result, 'return lotech.Component(lotech.createElement(\'div\', {\'style\': ["root","selected"]}, []));');
+            assert.equal(result[0], 'return lotech.Component(lotech.createElement(\'div\', {\'style\': ["root","selected"]}, []));');
         });
 
         it('should separate attributes with semicolon', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {scope: 'Row', style: 'root'}, children: []});
-            assert.equal(result, 'return lotech.Component(lotech.createElement(\'div\', {\'scope\': "Row", \'style\': ["root"]}, []));');            
+            assert.equal(result[0], 'return lotech.Component(lotech.createElement(\'div\', {\'scope\': "Row", \'style\': ["root"]}, []));');            
         });
 
         it('should return the text as a lotech.String node', function() {
             const child = {type: 'text', content: 'Hello'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
-            assert.equal(result, 'return lotech.Component(lotech.createElement(\'div\', {}, [lotech.String(\'Hello\')]));');
+            assert.equal(result[0], 'return lotech.Component(lotech.createElement(\'div\', {}, [lotech.String(\'Hello\')]));');
         });
 
         it('should create a String node for variables which are not children', function() {
             const child = {type: 'variable', name: 'price'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
-            assert.equal(result, 'return lotech.Component(lotech.createElement(\'div\', {}, [lotech.String(\'\')]));');
+            assert.equal(result[0], 'return lotech.Component(lotech.createElement(\'div\', {}, [lotech.String(\'\')]));');
         });
     });
 });

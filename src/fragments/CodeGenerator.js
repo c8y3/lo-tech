@@ -23,7 +23,7 @@ export default function() {
     return {
         generate(htpl) {
             const root = generateNode(htpl);
-            return 'return lotech.Component(' + root + ');'
+            return ['return lotech.Component(' + root + ');'];
         }
     };
 }

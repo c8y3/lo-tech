@@ -19,7 +19,7 @@ export default function() {
                  + headers
                  + 'export default function(children) {\n'
 // TODO check it, but most probably it is not necessary to wrap here with a lotech.Component (all components should have the same API?)
-                 + '  ' + instructions + '\n'
+                 + '  ' + instructions.join('\n  ') + '\n'
                  + '}';
         }
     };
