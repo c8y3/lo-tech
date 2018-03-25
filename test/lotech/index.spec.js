@@ -51,12 +51,6 @@ describe('lotech', function() {
         });
     });
 
-    describe('createElement', function() {
-        it('should not fail', function() {
-            lotech.createElement('div', {}, []);
-        });
-    });
-
     describe('ScopedStyle', function() {
         it('should not fail', function() {
             lotech.ScopedStyle('Prefix');

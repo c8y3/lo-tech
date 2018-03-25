@@ -5,7 +5,6 @@ import P from '/lotech/P';
 import Div from '/lotech/Div';
 import Span from '/lotech/Span';
 import Component from '/lotech/Component';
-import createElement from '/lotech/createElement';
 import ScopedStyle from '/lotech/ScopedStyle'
 
 export default {
@@ -16,6 +15,5 @@ export default {
     Div: Div,
     Span: Span,
     Component: Component,
-    createElement: createElement,
     ScopedStyle: ScopedStyle
 };

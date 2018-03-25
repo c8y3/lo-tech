@@ -27,7 +27,6 @@ function generateAttributes(attributes) {
 function generateElement(tagName, attributesDefinition, children) {
     const type = generateType(tagName);
     const attributes = generateAttributes(attributesDefinition);
-// TODO remove lotech.createElement, should not be nessary
 // TODO most probably go back to addStyle, think about it
     return type + '([' + children.join(', ') + '])';
 }
