@@ -2,11 +2,16 @@ function isUpperCase(letter) {
     return letter.toUpperCase() === letter;
 }
 
+// TODO factor this method with Code generator (and also insert isCapitalized, startsWithCapital)
+function capitalize(string) {
+    return string[0].toUpperCase() + string.slice(1);
+}
+
 function generateType(tagName) {
     if (isUpperCase(tagName[0])) {
         return tagName;
     }
-    return '\'' + tagName + '\'';
+    return 'lotech.' + capitalize(tagName);
 }
 
 function generateValue(key, value) {
@@ -29,7 +34,7 @@ function generateElement(tagName, attributesDefinition, children) {
     const attributes = generateAttributes(attributesDefinition);
 // TODO remove lotech.createElement, should not be nessary
 // TODO most probably go back to addStyle, think about it
-    return 'lotech.createElement(' + type + ', ' + attributes + ', [' + children.join(', ') + '])';
+    return type + '([' + children.join(', ') + '])';
 }
 
 function generateVariable(name) {
