@@ -108,5 +108,11 @@ describe('fragments.CodeGenerator', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: children});
             assert.equal(result[5], 'return {...component, setName, setPrice};');
         });
+
+        it('should set value to the correct node when there are several variables', function() {
+            const children = [{type: 'variable', name: 'name'}, {type: 'variable', name: 'price'}];
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: children});
+            assert.equal(result[3], 'function setPrice(price) { node2.setData(price); }');
+        });
     });
 });

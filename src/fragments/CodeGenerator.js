@@ -31,7 +31,7 @@ export default function() {
         const node = generator.generateVariable(name);
         const setterName = generateSetterName(name);
         instructions.push('const ' + nodeName + ' = ' + node + ';');
-        instructions.push('function ' + setterName + '(' + name + ') { node1.setData(' + name + '); }');
+        instructions.push('function ' + setterName + '(' + name + ') { ' + nodeName + '.setData(' + name + '); }');
         methods.push(setterName);
         return 'node1';
     }
