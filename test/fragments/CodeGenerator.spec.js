@@ -96,5 +96,11 @@ describe('fragments.CodeGenerator', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: children});
             assert.equal(result[2], 'const node2 = lotech.String(\'\');');
         });
+
+        it('should separate setters with commas when there are several variables', function() {
+            const children = [{type: 'variable', name: 'name'}, {type: 'variable', name: 'price'}];
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: children});
+            assert.equal(result[5], 'return {...component, setName, setPrice};');
+        });
     });
 });

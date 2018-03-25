@@ -52,7 +52,7 @@ export default function() {
         if (methods.length === 0) {
             return COMPONENT_NAME;
         }
-        return '{...' + COMPONENT_NAME + ', ' + methods.join(' ') + '}';
+        return '{...' + COMPONENT_NAME + ', ' + methods.join(', ') + '}';
     }
     
     function generate(htpl) {
