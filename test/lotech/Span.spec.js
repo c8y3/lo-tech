@@ -1,10 +1,11 @@
 import Span from '/lotech/Span';
+import String from '/lotech/String';
 
 describe('lotech.Span', function() {
     let subject;
 
     beforeEach(function() {
-        subject = Span('hello');
+        subject = Span([String('hello')]);
     });
 
     function draw() {

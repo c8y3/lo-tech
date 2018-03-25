@@ -19,7 +19,7 @@ function headerRow(children) {
 };
 
 function cell(content) {
-    return lotech.Span(content);
+    return lotech.Span([lotech.String(content)]);
 }
 
 function nameCell(name) {

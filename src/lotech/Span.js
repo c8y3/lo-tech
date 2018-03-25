@@ -1,7 +1,6 @@
-import Element from '/lotech/Element';
+import Container from '/lotech/Container';
+import Component from '/lotech/Component';
 
-export default function(text) {
-    const node = document.createElement('span');
-    node.textContent = text;
-    return Element(node);
+export default function(children) {
+    return Component(Container('span', children));
 };
