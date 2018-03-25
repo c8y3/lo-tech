@@ -16,7 +16,8 @@ export default function() {
             return generator.generateVariableChildren();
         }
         const node = generator.generateVariable(name);
-        instructions.push(['const node1 = ' + node + ';']);
+        instructions.push('const node1 = ' + node + ';');
+        instructions.push('function setPrice(price) { node1.setData(price); }');
         methods.push('set' + capitalize(name));
         return 'node1';
     }

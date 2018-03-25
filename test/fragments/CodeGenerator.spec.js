@@ -65,18 +65,6 @@ describe('fragments.CodeGenerator', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: []});
             assert.equal(result[1], 'return result;');
         });
-// TODO should return some kind of a tree and do the pretty print later (at least for tabulations!)
-// TODO build the tree, if it is a variable, create an intermediate node and maintain a map from variables names to node names
-//      then for each variable create a setVariable method which will call setData on all the associated nodes
-// TODO should return objects with type: instruction of function
-// function setPrice(price) { node1.setData(price); }
-// first allow only one use of each variable
-        it('should return a setter for variables which are not children', function() {
-            const child = {type: 'variable', name: 'price'};
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
-// TODO rename into component
-            assert.equal(result[2], 'return {...result, setPrice};');
-        });
 
         it('should create a String node for variables which are not children', function() {
             const child = {type: 'variable', name: 'price'};
@@ -85,10 +73,23 @@ describe('fragments.CodeGenerator', function() {
             assert.equal(result[0], 'const node1 = lotech.String(\'\');');
         });
 
+        it('should define a setter for variables which are not children', function() {
+            const child = {type: 'variable', name: 'price'};
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
+            assert.equal(result[1], 'function setPrice(price) { node1.setData(price); }');
+        });
+
         it('should use the variable name for variables which are not children', function() {
             const child = {type: 'variable', name: 'price'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
-            assert.equal(result[1], 'const result = lotech.Component(lotech.createElement(\'div\', {}, [node1]));');
+            assert.equal(result[2], 'const result = lotech.Component(lotech.createElement(\'div\', {}, [node1]));');
+        });
+
+        it('should return a setter for variables which are not children', function() {
+            const child = {type: 'variable', name: 'price'};
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
+// TODO rename into component
+            assert.equal(result[3], 'return {...result, setPrice};');
         });
     });
 });
