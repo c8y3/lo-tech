@@ -22,8 +22,8 @@ describe('fragments.RollupPlugin', function() {
             const result = subject.transform('<div/>', '.htpl');
             const expectedResult = 'import lotech from \'/lotech\';\n'
                                  + 'export default function(children) {\n'
-                                 + '  const result = lotech.Component(lotech.createElement(\'div\', {}, []));\n'
-                                 + '  return result;\n'
+                                 + '  const component = lotech.Component(lotech.createElement(\'div\', {}, []));\n'
+                                 + '  return component;\n'
                                  + '}';
             assert.equal(result, expectedResult);
         });

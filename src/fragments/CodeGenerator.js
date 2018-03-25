@@ -6,6 +6,8 @@ function capitalize(string) {
     return string[0].toUpperCase() + string.slice(1);
 }
 
+const COMPONENT_NAME = 'component';
+
 export default function() {
 
     let variableCount = 0;
@@ -45,16 +47,20 @@ export default function() {
             return generator.generateText(htpl.content);
         }
     }
+
+    function generateResultObject() {
+        if (methods.length === 0) {
+            return COMPONENT_NAME;
+        }
+        return '{...' + COMPONENT_NAME + ', ' + methods.join(' ') + '}';
+    }
     
     function generate(htpl) {
         const root = generateNode(htpl);
-        let resultObject = 'result';
-        if (methods.length !== 0) {
-            resultObject = '{...' + resultObject + ', ' + methods.join(' ') + '}';
-        }
+        let resultObject = generateResultObject();
         return [
             ...instructions,
-            'const result = lotech.Component(' + root + ');',
+            'const ' + COMPONENT_NAME + ' = lotech.Component(' + root + ');',
             'return ' + resultObject + ';'
         ];
     }
