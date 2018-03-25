@@ -1,65 +1,22 @@
-function isUpperCase(letter) {
-    return letter.toUpperCase() === letter;
-}
+import NodeGenerator from '/fragments/NodeGenerator';
 
-function generateType(tagName) {
-    if (isUpperCase(tagName[0])) {
-        return tagName;
-    }
-    return '\'' + tagName + '\'';
-}
-
-function generateValue(key, value) {
-    if (key === 'style') {
-        value = value.split(' ');
-    }
-    return JSON.stringify(value);
-}
-
-function generateAttributes(attributes) {
-    const result = Object.keys(attributes).map(function(key) {
-        const value = attributes[key];
-        return '\'' + key + '\': ' + generateValue(key, value);
-    });
-    return '{' + result.join(', ') + '}';
-}
-
-function generateElement(htpl) {
-    const type = generateType(htpl.tagName);
-    const attributes = generateAttributes(htpl.attributes);
-    const children = generateChildren(htpl.children);
-// TODO remove lotech.createElement, should not be nessary
-// TODO most probably go back to addStyle, think about it
-    return 'lotech.createElement(' + type + ', ' + attributes + ', [' + children + '])';
-}
-
-function generateVariable(name) {
-    if (name === 'children') {
-        // Template parameter {children} is necessarily an array.
-        // It is flattened to be inserted amoung the list of element children.
-        return '...children';
-    }
-    return 'lotech.String(\'\')';
-}
-
-function generateText(content) {
-    return 'lotech.String(\'' + content + '\')';
-};
-
-function generate(htpl) {
-    if (htpl.type === 'element') {
-        return generateElement(htpl);
-    }
-    if (htpl.type === 'variable') {
-        return generateVariable(htpl.name);
-    }
-    if (htpl.type === 'text') {
-        return generateText(htpl.content);
-    }
-}
+const generator = NodeGenerator();
 
 function generateChildren(children) {
     return children.map(generate);
+}
+
+function generate(htpl) {
+    if (htpl.type === 'element') {
+        const children = generateChildren(htpl.children);
+        return generator.generateElement(htpl.tagName, htpl.attributes, children);
+    }
+    if (htpl.type === 'variable') {
+        return generator.generateVariable(htpl.name);
+    }
+    if (htpl.type === 'text') {
+        return generator.generateText(htpl.content);
+    }
 }
 
 export default function() {
