@@ -3,10 +3,10 @@ import NodeGenerator from '/fragments/NodeGenerator';
 const generator = NodeGenerator();
 
 function generateChildren(children) {
-    return children.map(generate);
+    return children.map(generateNode);
 }
 
-function generate(htpl) {
+function generateNode(htpl) {
     if (htpl.type === 'element') {
         const children = generateChildren(htpl.children);
         return generator.generateElement(htpl.tagName, htpl.attributes, children);
@@ -21,7 +21,10 @@ function generate(htpl) {
 
 export default function() {
     return {
-        generate
+        generate(htpl) {
+            const root = generateNode(htpl);
+            return 'return lotech.Component(' + root + ');'
+        }
     };
 }
 

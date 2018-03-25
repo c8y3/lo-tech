@@ -13,13 +13,13 @@ export default function() {
             const headers = code.substring(0, bodyStart);
             const body = code.substring(bodyStart);
             const tree = parser.parse(body);
-            const template = generator.generate(tree);
+            const instructions = generator.generate(tree);
             // TODO the generator should most probably do the generate too...
             return 'import lotech from \'/lotech\';\n'
                  + headers
                  + 'export default function(children) {\n'
 // TODO check it, but most probably it is not necessary to wrap here with a lotech.Component (all components should have the same API?)
-                 + '  return lotech.Component(' + template + ');\n'
+                 + '  ' + instructions + '\n'
                  + '}';
         }
     };
