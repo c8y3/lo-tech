@@ -19,15 +19,20 @@ export default function() {
         return 'node' + variableCount;
     }
 
+    function generateSetterName(variableName) {
+        return 'set' + capitalize(variableName);
+    }
+
     function generateVariable(name) {
         if (name === 'children') {
             return generator.generateVariableChildren();
         }
         const nodeName = generateNodeName();
         const node = generator.generateVariable(name);
+        const setterName = generateSetterName(name);
         instructions.push('const ' + nodeName + ' = ' + node + ';');
-        instructions.push('function setPrice(price) { node1.setData(price); }');
-        methods.push('set' + capitalize(name));
+        instructions.push('function ' + setterName + '(' + name + ') { node1.setData(' + name + '); }');
+        methods.push(setterName);
         return 'node1';
     }
 

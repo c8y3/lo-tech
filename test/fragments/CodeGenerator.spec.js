@@ -78,6 +78,12 @@ describe('fragments.CodeGenerator', function() {
             assert.equal(result[1], 'function setPrice(price) { node1.setData(price); }');
         });
 
+        it('should define a setter with corresponding name for variables which are not children', function() {
+            const child = {type: 'variable', name: 'name'};
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
+            assert.equal(result[1], 'function setName(name) { node1.setData(name); }');
+        });
+
         it('should use the variable name for variables which are not children', function() {
             const child = {type: 'variable', name: 'price'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
