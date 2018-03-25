@@ -16,6 +16,7 @@ function generateValue(key, value) {
     return JSON.stringify(value);
 }
 
+// TODO most probably go back to addStyle, think about it
 function generateAttributes(attributes) {
     const result = Object.keys(attributes).map(function(key) {
         const value = attributes[key];
@@ -26,8 +27,6 @@ function generateAttributes(attributes) {
 
 function generateElement(tagName, attributesDefinition, children) {
     const type = generateType(tagName);
-    const attributes = generateAttributes(attributesDefinition);
-// TODO most probably go back to addStyle, think about it
     return type + '([' + children.join(', ') + '])';
 }
 

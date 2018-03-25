@@ -1,3 +1,3 @@
-<div scope="Row" style="root">
+<div style="root">
     {children}
 </div>

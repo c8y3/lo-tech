@@ -9,31 +9,30 @@ describe('fragments.CodeGenerator', function() {
     });
 
     describe('generate', function() {
-        it('should not fail', function() {
+        it('should create a variable for each node', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: []});
-            assert.equal(result[0], 'const component = lotech.Component(lotech.Div([]));');
+            assert.equal(result[0], 'const node1 = lotech.Div([]);');
+        });
+
+        it('should use the node variable', function() {
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: []});
+            assert.equal(result[1], 'const component = lotech.Component(node1);');
         });
 
         it('should return a constructor of the node', function() {
             const result = subject.generate({type: 'element', tagName: 'p', attributes: {}, children: []});
-            assert.equal(result[0], 'const component = lotech.Component(lotech.P([]));');
+            assert.equal(result[0], 'const node1 = lotech.P([]);');
         });
 
         it('should append children', function() {
             const child = {type: 'variable', name: 'children'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
-            assert.equal(result[0], 'const component = lotech.Component(lotech.Div([...children]));');
-        });
-
-// TODO rethink and do (with several instructions)
-        it.skip('should set attributes', function() {
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {class: 'root'}, children: []});
-            assert.equal(result[0], 'const component = lotech.Component(lotech.Div({\'class\': "root"}, []));');
+            assert.equal(result[0], 'const node1 = lotech.Div([...children]);');
         });
 
         it('should pass the constructor when the tag name is upper case', function() {
             const result = subject.generate({type: 'element', tagName: 'Row', attributes: {}, children: []});
-            assert.equal(result[0], 'const component = lotech.Component(Row([]));');
+            assert.equal(result[0], 'const node1 = Row([]);');
         });
 
 // TODO rethink and do (with several instructions)
@@ -57,17 +56,17 @@ describe('fragments.CodeGenerator', function() {
         it('should return the text as a lotech.String node', function() {
             const child = {type: 'text', content: 'Hello'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
-            assert.equal(result[0], 'const component = lotech.Component(lotech.Div([lotech.String(\'Hello\')]));');
+            assert.equal(result[0], 'const node1 = lotech.Div([lotech.String(\'Hello\')]);');
         });
 
         it('should create a variable for the component', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: []});
-            assert.equal(result[0], 'const component = lotech.Component(lotech.Div([]));');
+            assert.equal(result[1], 'const component = lotech.Component(node1);');
         });
 
         it('should return the component', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: []});
-            assert.equal(result[1], 'return component;');
+            assert.equal(result[2], 'return component;');
         });
 
         it('should create a String node for variables which are not children', function() {
@@ -91,13 +90,13 @@ describe('fragments.CodeGenerator', function() {
         it('should use the variable name for variables which are not children', function() {
             const child = {type: 'variable', name: 'price'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
-            assert.equal(result[2], 'const component = lotech.Component(lotech.Div([node1]));');
+            assert.equal(result[2], 'const node2 = lotech.Div([node1]);');
         });
 
         it('should return a setter for variables which are not children', function() {
             const child = {type: 'variable', name: 'price'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
-            assert.equal(result[3], 'return {...component, setPrice};');
+            assert.equal(result[4], 'return {...component, setPrice};');
         });
 
 // TODO when children in unused, do not make it appear in the signature of the component
@@ -110,7 +109,7 @@ describe('fragments.CodeGenerator', function() {
         it('should separate setters with commas when there are several variables', function() {
             const children = [{type: 'variable', name: 'name'}, {type: 'variable', name: 'price'}];
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: children});
-            assert.equal(result[5], 'return {...component, setName, setPrice};');
+            assert.equal(result[6], 'return {...component, setName, setPrice};');
         });
 
         it('should set value to the correct node when there are several variables', function() {
@@ -122,7 +121,7 @@ describe('fragments.CodeGenerator', function() {
         it('should insert the correct node when there are several variables', function() {
             const children = [{type: 'variable', name: 'name'}, {type: 'variable', name: 'price'}];
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: children});
-            assert.equal(result[4], 'const component = lotech.Component(lotech.Div([node1, node2]));');
+            assert.equal(result[4], 'const node3 = lotech.Div([node1, node2]);');
         });
     });
 });

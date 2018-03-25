@@ -9,7 +9,6 @@ export default function() {
             if (id.slice(-5) !== '.htpl') {
                 return;
             }
-console.log(id);
             return compiler.compile(code);            
         }
     };

@@ -8,9 +8,15 @@ const COMPONENT_NAME = 'component';
 
 export default function() {
 
-    let variableCount = 0;
-    const instructions = [];
-    const methods = [];
+    let variableCount;
+    let instructions;
+    let methods;
+
+    function initializeState() {
+        variableCount = 0;
+        instructions = [];
+        methods = [];
+    }
 
     function generateNodeName() {
         variableCount++;
@@ -25,10 +31,11 @@ export default function() {
         if (name === 'children') {
             return generator.generateVariableChildren();
         }
-        const nodeName = generateNodeName();
         const node = generator.generateVariable(name);
-        const setterName = generateSetterName(name);
+        const nodeName = generateNodeName();
         instructions.push('const ' + nodeName + ' = ' + node + ';');
+
+        const setterName = generateSetterName(name);
         instructions.push('function ' + setterName + '(' + name + ') { ' + nodeName + '.setData(' + name + '); }');
         methods.push(setterName);
         return nodeName;
@@ -41,7 +48,10 @@ export default function() {
     function generateNode(htpl) {
         if (htpl.type === 'element') {
             const children = generateChildren(htpl.children);
-            return generator.generateElement(htpl.tagName, htpl.attributes, children);
+            const node = generator.generateElement(htpl.tagName, htpl.attributes, children);
+            const nodeName = generateNodeName();
+            instructions.push('const ' + nodeName + ' = ' + node + ';');
+            return nodeName;
         }
         if (htpl.type === 'variable') {
             return generateVariable(htpl.name);
@@ -59,6 +69,7 @@ export default function() {
     }
     
     function generate(htpl) {
+        initializeState();
         const root = generateNode(htpl);
         let resultObject = generateResultObject();
         return [
