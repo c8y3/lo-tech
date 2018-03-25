@@ -69,7 +69,6 @@ describe('fragments.CodeGenerator', function() {
         it('should create a String node for variables which are not children', function() {
             const child = {type: 'variable', name: 'price'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
-// TODO rename into component
             assert.equal(result[0], 'const node1 = lotech.String(\'\');');
         });
 
@@ -88,7 +87,6 @@ describe('fragments.CodeGenerator', function() {
         it('should return a setter for variables which are not children', function() {
             const child = {type: 'variable', name: 'price'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
-// TODO rename into component
             assert.equal(result[3], 'return {...component, setPrice};');
         });
 
