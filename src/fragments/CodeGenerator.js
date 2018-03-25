@@ -1,10 +1,8 @@
 import NodeGenerator from '/fragments/NodeGenerator';
+import LetterCase from '/fragments/LetterCase';
 
+const letterCase = LetterCase();
 const generator = NodeGenerator();
-
-function capitalize(string) {
-    return string[0].toUpperCase() + string.slice(1);
-}
 
 const COMPONENT_NAME = 'component';
 
@@ -20,7 +18,7 @@ export default function() {
     }
 
     function generateSetterName(variableName) {
-        return 'set' + capitalize(variableName);
+        return 'set' + letterCase.capitalize(variableName);
     }
 
     function generateVariable(name) {

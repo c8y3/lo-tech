@@ -1,17 +1,16 @@
+import LetterCase from '/fragments/LetterCase';
+
+const letterCase = LetterCase();
+
 function isUpperCase(letter) {
     return letter.toUpperCase() === letter;
-}
-
-// TODO factor this method with Code generator (and also insert isCapitalized, startsWithCapital)
-function capitalize(string) {
-    return string[0].toUpperCase() + string.slice(1);
 }
 
 function generateType(tagName) {
     if (isUpperCase(tagName[0])) {
         return tagName;
     }
-    return 'lotech.' + capitalize(tagName);
+    return 'lotech.' + letterCase.capitalize(tagName);
 }
 
 function generateValue(key, value) {
