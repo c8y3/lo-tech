@@ -93,6 +93,12 @@ describe('fragments.CodeGenerator', function() {
             assert.equal(result[2], 'const node2 = lotech.Div([node1]);');
         });
 
+        it('should use the correct variable name to set the class name', function() {
+            const child = {type: 'variable', name: 'price'};
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {'className': 'root'}, children: [child]});
+            assert.equal(result[3], 'node2.addClass(\'Scope__root\');');
+        });
+
         it('should return a setter for variables which are not children', function() {
             const child = {type: 'variable', name: 'price'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});

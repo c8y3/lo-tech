@@ -43,9 +43,9 @@ export default function(scope) {
         return nodeName;
     }
 
-    function generateClassName(attributes) {
+    function generateClassName(nodeName, attributes) {
         if (attributes.className !== undefined) {
-            instructions.push('node1.addClass(\'Scope__root\');');
+            instructions.push(nodeName + '.addClass(\'Scope__root\');');
         }
     }
 
@@ -58,7 +58,7 @@ export default function(scope) {
             const children = generateChildren(htpl.children);
             const node = generator.generateElement(htpl.tagName, children);
             const nodeName = declareNode(node);
-            generateClassName(htpl.attributes);
+            generateClassName(nodeName, htpl.attributes);
             return nodeName;
         }
         if (htpl.type === 'variable') {
