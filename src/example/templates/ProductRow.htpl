@@ -1,7 +1,7 @@
 import Row from '/Row.htpl';
 
 <Row>
-    <span scope="ProductRow" style="name {isMissing}">
+    <span className="name {isMissing}">
         {name}
     </span>
     <span>
