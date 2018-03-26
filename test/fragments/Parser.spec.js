@@ -98,5 +98,10 @@ describe('fragments.Parser', function() {
             const result = subject.parse('<div>{x}</div>');
             assert.equal(result.children[0].name, 'x');
         });
+
+        it('should preserve attributes upper case', function() {
+            const result = subject.parse('<div className="style"/>');
+            assert.equal(result.attributes['className'], 'style');
+        });
     });
 });

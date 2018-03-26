@@ -56,7 +56,8 @@ const parser = new htmlparser.Parser({
         appendChild(node);
     }
 }, {
-    lowerCaseTags: false
+    lowerCaseTags: false,
+    lowerCaseAttributeNames: false
 });
 
 export default function() {
