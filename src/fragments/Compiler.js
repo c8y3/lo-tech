@@ -8,12 +8,12 @@ const generator = CodeGenerator();
 // and a method setAttributes and also setAttribute
 export default function() {
     return {
-        compile(code) {
+        compile(code, scope) {
             const bodyStart = code.indexOf('<');
             const headers = code.substring(0, bodyStart);
             const body = code.substring(bodyStart);
             const tree = parser.parse(body);
-            const instructions = generator.generate(tree);
+            const instructions = generator.generate(tree, scope);
             // TODO the generator should most probably do the generate too...
             return 'import lotech from \'/lotech\';\n'
                  + headers

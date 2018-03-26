@@ -38,7 +38,7 @@ describe('fragments.CodeGenerator', function() {
 // TODO rethink and do (with several instructions)
         it.skip('should set style as an array', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {style: 'root'}, children: []});
-            assert.equal(result[0], 'const component = lotech.Component(lotech.Div({\'style\': ["root"]}, []));');
+            assert.equal(result[0], 'const component = lotech.Component(lotech.Div([]));');
         });
 
 // TODO rethink and do (with several instructions)

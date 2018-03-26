@@ -13,7 +13,7 @@ export default  {
             extensions: '.js'
         })
     ],
-    external: ['htmlparser2'],
+    external: ['path', 'htmlparser2'],
     output: {
         file: 'bin/rollup-plugin-fragments',
         format: 'es'

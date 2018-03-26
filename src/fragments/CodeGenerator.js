@@ -74,7 +74,7 @@ export default function() {
         return '{...' + COMPONENT_NAME + ', ' + methods.join(', ') + '}';
     }
     
-    function generate(htpl) {
+    function generate(htpl, scope) {
         initializeState();
         const root = generateNode(htpl);
         let resultObject = generateResultObject();
@@ -84,6 +84,7 @@ export default function() {
             'return ' + resultObject + ';'
         ];
     }
+
     return {generate};
 }
 

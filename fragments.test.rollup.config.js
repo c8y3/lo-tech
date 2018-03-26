@@ -14,7 +14,7 @@ export default [{
         }),
         multiEntry()
     ],
-    external: ['htmlparser2'],
+    external: ['path', 'htmlparser2'],
     output: {
         file: 'results/fragments.test.js',
         format: 'cjs'
