@@ -5,7 +5,10 @@ const letterCase = LetterCase();
 const generator = NodeGenerator();
 
 const COMPONENT_NAME = 'component';
-
+// TODO should group
+//      node creation
+//      node attributes initialization
+//      setter definitions
 export default function() {
 
     let variableCount;
@@ -23,6 +26,12 @@ export default function() {
         return 'node' + variableCount;
     }
 
+    function declareNode(node) {
+        const nodeName = generateNodeName();
+        instructions.push('const ' + nodeName + ' = ' + node + ';');
+        return nodeName;
+    }
+
     function generateSetterName(variableName) {
         return 'set' + letterCase.capitalize(variableName);
     }
@@ -32,8 +41,7 @@ export default function() {
             return generator.generateVariableChildren();
         }
         const node = generator.generateVariable(name);
-        const nodeName = generateNodeName();
-        instructions.push('const ' + nodeName + ' = ' + node + ';');
+        const nodeName = declareNode(node);
 
         const setterName = generateSetterName(name);
         instructions.push('function ' + setterName + '(' + name + ') { ' + nodeName + '.setData(' + name + '); }');
@@ -49,9 +57,7 @@ export default function() {
         if (htpl.type === 'element') {
             const children = generateChildren(htpl.children);
             const node = generator.generateElement(htpl.tagName, htpl.attributes, children);
-            const nodeName = generateNodeName();
-            instructions.push('const ' + nodeName + ' = ' + node + ';');
-            return nodeName;
+            return declareNode(node);
         }
         if (htpl.type === 'variable') {
             return generateVariable(htpl.name);
