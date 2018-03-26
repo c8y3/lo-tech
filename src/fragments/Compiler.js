@@ -2,13 +2,15 @@ import Parser from '/fragments/Parser';
 import CodeGenerator from '/fragments/CodeGenerator';
 
 const parser = Parser();
-const generator = CodeGenerator();
 
 // note, a node will have a constructor with its children
 // and a method setAttributes and also setAttribute
 export default function() {
     return {
         compile(code, scope) {
+// TODO I am not a big fan of calling the constructor object here (rather than up there). Think about it...
+            const generator = CodeGenerator(scope);
+
             const bodyStart = code.indexOf('<');
             const headers = code.substring(0, bodyStart);
             const body = code.substring(bodyStart);

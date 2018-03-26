@@ -11,12 +11,12 @@ describe('fragments.NodeGenerator', function() {
 
     describe('generateElement', function() {
         it('should build the lotech element', function() {
-            var result = subject.generateElement('div', {}, []);
+            var result = subject.generateElement('div', []);
             assert.equal(result, 'lotech.Div([])');
         });
 
         it('should build the custom element', function() {
-            var result = subject.generateElement('Row', {}, []);
+            var result = subject.generateElement('Row', []);
             assert.equal(result, 'Row([])');
         });
     });

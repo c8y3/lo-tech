@@ -5,7 +5,7 @@ describe('fragments.CodeGenerator', function() {
     let subject;
 
     beforeEach(function() {
-        subject = CodeGenerator();
+        subject = CodeGenerator('Scope');
     });
 
     describe('generate', function() {
@@ -35,10 +35,10 @@ describe('fragments.CodeGenerator', function() {
             assert.equal(result[0], 'const node1 = Row([]);');
         });
 
-// TODO rethink and do (with several instructions)
-        it.skip('should set style as an array', function() {
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {style: 'root'}, children: []});
-            assert.equal(result[0], 'const component = lotech.Component(lotech.Div([]));');
+        it('should set style as an array', function() {
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: 'root'}, children: []});
+// TODO use addStyle rather than addClass
+            assert.equal(result[1], 'node1.addClass(\'Scope__root\');');
         });
 
 // TODO rethink and do (with several instructions)
