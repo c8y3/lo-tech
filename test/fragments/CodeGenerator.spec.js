@@ -41,6 +41,13 @@ describe('fragments.CodeGenerator', function() {
             assert.equal(result[1], 'node1.addClass(\'Scope__root\');');
         });
 
+        it('should set the scope part of the style correctly', function() {
+            subject = CodeGenerator('AnotherScope');
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: 'root'}, children: []});
+// TODO use addStyle rather than addClass
+            assert.equal(result[1], 'node1.addClass(\'AnotherScope__root\');');
+        });
+
 // TODO rethink and do (with several instructions)
         it.skip('should set style as an array of several elements when there is a spec', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {style: 'root selected'}, children: []});
