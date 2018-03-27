@@ -13,6 +13,7 @@ export default function(scope) {
 
     let variableCount = 0;
     const nodeDeclarations = [];
+    const functionDefinitions = [];
     const instructions = [];
     const methods = [];
 
@@ -39,7 +40,7 @@ export default function(scope) {
         const nodeName = declareNode(node);
 
         const setterName = generateSetterName(name);
-        instructions.push('function ' + setterName + '(' + name + ') { ' + nodeName + '.setData(' + name + '); }');
+        functionDefinitions.push('function ' + setterName + '(' + name + ') { ' + nodeName + '.setData(' + name + '); }');
         methods.push(setterName);
         return nodeName;
     }
@@ -83,6 +84,7 @@ export default function(scope) {
         return [
             ...nodeDeclarations,
             ...instructions,
+            ...functionDefinitions,
             'const ' + componentName + ' = lotech.Component(' + root + ');',
             'return ' + resultObject + ';'
         ];
