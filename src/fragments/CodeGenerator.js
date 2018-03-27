@@ -12,8 +12,9 @@ const componentName = 'component';
 export default function(scope) {
 
     let variableCount = 0;
-    let instructions = [];
-    let methods = [];
+    const nodeDeclarations = [];
+    const instructions = [];
+    const methods = [];
 
     function generateNodeName() {
         variableCount++;
@@ -22,7 +23,7 @@ export default function(scope) {
 
     function declareNode(node) {
         const nodeName = generateNodeName();
-        instructions.push('const ' + nodeName + ' = ' + node + ';');
+        nodeDeclarations.push('const ' + nodeName + ' = ' + node + ';');
         return nodeName;
     }
 
@@ -80,6 +81,7 @@ export default function(scope) {
         const root = generateNode(htpl);
         let resultObject = generateResultObject();
         return [
+            ...nodeDeclarations,
             ...instructions,
             'const ' + componentName + ' = lotech.Component(' + root + ');',
             'return ' + resultObject + ';'
