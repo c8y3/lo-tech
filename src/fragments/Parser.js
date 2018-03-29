@@ -1,5 +1,12 @@
 import htmlparser from 'htmlparser2';
 
+function TextNode(content) {
+    return {
+        type: 'text',
+        content: content
+    }
+}
+
 let nodes;
 
 function reset() {
@@ -29,15 +36,15 @@ function parseText(text) {
             name: text.substring(1, text.length-1)
         };
     }
-    return {
-        type: 'text',
-        content: text
-    }
+    return TextNode(text);
 }
 
 function parseAttribute(key, value) {
     if (key === 'className') {
-        return value.split(' ');
+        const classNames = value.split(' ');
+        return classNames.map(function(className) {
+            return TextNode(className);
+        });
     }
     return value;
 }

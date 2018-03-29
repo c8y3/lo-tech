@@ -36,26 +36,30 @@ describe('fragments.CodeGenerator', function() {
         });
 
         it('should set style when the className attributes is present', function() {
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: ['root']}, children: []});
+            const className = [{type: 'text', content: 'root'}];
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: className}, children: []});
 // TODO use addStyle rather than addClass
             assert.equal(result[1], 'node1.addClass(\'Scope__root\');');
         });
 
         it('should set the scope part of the style correctly', function() {
             subject = CodeGenerator('AnotherScope');
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: ['root']}, children: []});
+            const className = [{type: 'text', content: 'root'}];
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: className}, children: []});
 // TODO use addStyle rather than addClass
             assert.equal(result[1], 'node1.addClass(\'AnotherScope__root\');');
         });
 
         it('should set class name correctly', function() {
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: ['selected']}, children: []});
+            const className = [{type: 'text', content: 'selected'}];
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: className}, children: []});
 // TODO use addStyle rather than addClass
             assert.equal(result[1], 'node1.addClass(\'Scope__selected\');');
         });
 
         it('should set style the several styles alternatively when there are several classes', function() {
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: ['root',  'selected']}, children: []});
+            const className = [{type: 'text', content: 'root'}, {type: 'text', content: 'selected'}];
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: className}, children: []});
             assert.equal(result[2], 'node1.addClass(\'Scope__selected\');');
         });
 
@@ -101,7 +105,8 @@ describe('fragments.CodeGenerator', function() {
 
         it('should use the correct variable name to set the class name', function() {
             const child = {type: 'variable', name: 'price'};
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {'className': ['root']}, children: [child]});
+            const className = [{type: 'text', content: 'root'}];
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: className}, children: [child]});
             assert.equal(result[2], 'node2.addClass(\'Scope__root\');');
         });
 
@@ -137,7 +142,8 @@ describe('fragments.CodeGenerator', function() {
         });
 
         it.skip('should define a method to set the className, when there is a template in attribute', function() {
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: ['{isMissing}']}, children: []});
+            const className = [{type: 'variable', content: 'isMissing'}];
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: className}, children: []});
             assert.equal(result[1], 'function setIsMissing(isMissing) { if (isMissing) { node1.addClass(\'Scope__isMissing\'); } else { node1.removeClass(\'Scope__isMissing\'); }; }');
         });
     });

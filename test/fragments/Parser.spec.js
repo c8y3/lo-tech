@@ -104,14 +104,19 @@ describe('fragments.Parser', function() {
             assert.equal(result.attributes.placeholder, 'Search...');
         });
 
-        it('should parse className as an array', function() {
+        it('should parse className as an array of nodes with type', function() {
             const result = subject.parse('<div className="name"/>');
-            assert.equal(result.attributes.className[0], 'name');
+            assert.equal(result.attributes.className[0].type, 'text');
+        });
+
+        it('should parse simple classes as text nodes with correct content', function() {
+            const result = subject.parse('<div className="name"/>');
+            assert.equal(result.attributes.className[0].content, 'name');
         });
 
         it('should parse className as an array with all elements', function() {
             const result = subject.parse('<div className="root selected"/>');
-            assert.equal(result.attributes.className[1], 'selected');
+            assert.equal(result.attributes.className[1].content, 'selected');
         });
     });
 });

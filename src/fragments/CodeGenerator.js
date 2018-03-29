@@ -49,7 +49,7 @@ export default function(scope) {
         const classNames = attributes.className;
         if (classNames !== undefined) {
             classNames.forEach(function(className) {
-                instructions.push(nodeName + '.addClass(\'' + scope + '__' + className + '\');');
+                instructions.push(nodeName + '.addClass(\'' + scope + '__' + className.content + '\');');
             });
         }
     }
