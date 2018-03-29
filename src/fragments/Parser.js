@@ -35,12 +35,28 @@ function parseText(text) {
     }
 }
 
+function parseAttribute(key, value) {
+    if (key === 'className') {
+        return value.split(' ');
+    }
+    return value;
+}
+
+function parseAttributes(attributes) {
+    const result = {};
+    Object.keys(attributes).forEach(function(key) {
+        const value = parseAttribute(key, attributes[key]);
+        result[key] = value;
+    });
+    return result;
+}
+
 const parser = new htmlparser.Parser({
     onopentag(name, attributes) {
         nodes.push({
             type: 'element',
             tagName: name,
-            attributes: attributes,
+            attributes: parseAttributes(attributes),
             children: []
         });
     },

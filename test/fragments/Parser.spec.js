@@ -100,8 +100,18 @@ describe('fragments.Parser', function() {
         });
 
         it('should preserve attributes upper case', function() {
-            const result = subject.parse('<div className="style"/>');
-            assert.equal(result.attributes['className'], 'style');
+            const result = subject.parse('<div placeholder="Search..."/>');
+            assert.equal(result.attributes.placeholder, 'Search...');
+        });
+
+        it('should parse className as an array', function() {
+            const result = subject.parse('<div className="name"/>');
+            assert.equal(result.attributes.className[0], 'name');
+        });
+
+        it('should parse className as an array with all elements', function() {
+            const result = subject.parse('<div className="root selected"/>');
+            assert.equal(result.attributes.className[1], 'selected');
         });
     });
 });

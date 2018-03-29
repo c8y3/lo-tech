@@ -46,8 +46,8 @@ export default function(scope) {
     }
 
     function generateClassName(nodeName, attributes) {
-        if (attributes.className !== undefined) {
-            const classNames = attributes.className.split(' ');
+        const classNames = attributes.className;
+        if (classNames !== undefined) {
             classNames.forEach(function(className) {
                 instructions.push(nodeName + '.addClass(\'' + scope + '__' + className + '\');');
             });
