@@ -118,5 +118,10 @@ describe('fragments.Parser', function() {
             const result = subject.parse('<div className="root selected"/>');
             assert.equal(result.attributes.className[1].content, 'selected');
         });
+
+        it('should parse className as an array with a variable when there is a template', function() {
+            const result = subject.parse('<div className="{isMissing}"/>');
+            assert.equal(result.attributes.className[0].type, 'variable');
+        });
     });
 });

@@ -7,6 +7,13 @@ function TextNode(content) {
     }
 }
 
+function VariableNode(text) {
+    return {
+        type: 'variable',
+        name: text.substring(1, text.length-1)
+    };
+}
+
 let nodes;
 
 function reset() {
@@ -24,17 +31,18 @@ function appendChild(node) {
     father.children.push(node);
 }
 
+function isVariable(text) {
+    return (text[0] === '{') && (text[text.length-1] === '}');
+}
+
 function parseText(text) {
     text = text.replace(/\n/g, ' ');
     text = text.trim();
     if (text === '') {
         return undefined;
     }
-    if (text[0] === '{' && text[text.length-1] === '}') {
-        return {
-            type: 'variable',
-            name: text.substring(1, text.length-1)
-        };
+    if (isVariable(text)) {
+        return VariableNode(text);
     }
     return TextNode(text);
 }
@@ -43,6 +51,9 @@ function parseAttribute(key, value) {
     if (key === 'className') {
         const classNames = value.split(' ');
         return classNames.map(function(className) {
+            if (isVariable(className)) {
+                return VariableNode(className);
+            }
             return TextNode(className);
         });
     }
