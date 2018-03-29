@@ -59,12 +59,6 @@ describe('fragments.CodeGenerator', function() {
             assert.equal(result[2], 'node1.addClass(\'Scope__selected\');');
         });
 
-// TODO rethink and do (with several instructions)
-        it.skip('should separate attributes with semicolon', function() {
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {scope: 'Row', style: 'root'}, children: []});
-            assert.equal(result[0], 'const component = lotech.Component(lotech.Div({\'scope\': "Row", \'style\': ["root"]}, []));');            
-        });
-
         it('should return the text as a lotech.String node', function() {
             const child = {type: 'text', content: 'Hello'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
