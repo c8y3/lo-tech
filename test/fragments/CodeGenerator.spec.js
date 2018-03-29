@@ -135,5 +135,10 @@ describe('fragments.CodeGenerator', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: children});
             assert.equal(result[2], 'const node3 = lotech.Div([node1, node2]);');
         });
+
+        it.skip('should define a method to set the className, when there is a template in attribute', function() {
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: '{isMissing}'}, children: []});
+            assert.equal(result[1], 'function setIsMissing(isMissing) { if (isMissing) { node1.addClass(\'Scope__isMissing\'); } else { node1.removeClass(\'Scope__isMissing\'); }; }');
+        });
     });
 });
