@@ -36,16 +36,6 @@ function productCategoryRow(category) {
     return headerRow([lotech.String(category)]);
 }
 
-function productRow(product) {
-    const name = nameCell(product.name);
-// this one would be done after in code (not in the templates) => no do the injection in the template {isMissing}
-    if (!product.stocked) {
-        name.addClass(style('isMissing'));
-    }
-    const price = cell(product.price);
-    return Row([name, price]);
-}
-
 export default function() {
     const headers = mainHeadersRow();
 
@@ -58,6 +48,7 @@ export default function() {
                 const row = ProductRow();
                 row.setName(product.name);
                 row.setPrice(product.price);
+                row.setIsMissing(!product.stocked);
                 rows.push(row);
             });
         });
