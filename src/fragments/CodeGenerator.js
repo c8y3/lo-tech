@@ -47,7 +47,7 @@ export default function(scope) {
 
     function generateClassName(nodeName, attributes) {
         if (attributes.className !== undefined) {
-            instructions.push(nodeName + '.addClass(\'' + scope + '__root\');');
+            instructions.push(nodeName + '.addClass(\'' + scope + '__' + attributes.className + '\');');
         }
     }
 

@@ -35,7 +35,7 @@ describe('fragments.CodeGenerator', function() {
             assert.equal(result[0], 'const node1 = Row([]);');
         });
 
-        it('should set style as an array', function() {
+        it('should set style when the className attributes is present', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: 'root'}, children: []});
 // TODO use addStyle rather than addClass
             assert.equal(result[1], 'node1.addClass(\'Scope__root\');');
@@ -48,10 +48,15 @@ describe('fragments.CodeGenerator', function() {
             assert.equal(result[1], 'node1.addClass(\'AnotherScope__root\');');
         });
 
-// TODO rethink and do (with several instructions)
-        it.skip('should set style as an array of several elements when there is a spec', function() {
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {style: 'root selected'}, children: []});
-            assert.equal(result[0], 'const component = lotech.Component(lotech.Div({\'style\': ["root","selected"]}, []));');
+        it('should set class name correctly', function() {
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: 'selected'}, children: []});
+// TODO use addStyle rather than addClass
+            assert.equal(result[1], 'node1.addClass(\'Scope__selected\');');
+        });
+
+        it.skip('should set style the several styles alternatively when there are several classes', function() {
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: 'root selected'}, children: []});
+            assert.equal(result[2], 'node1.addClass(\'Scope__selected\');');
         });
 
 // TODO rethink and do (with several instructions)
