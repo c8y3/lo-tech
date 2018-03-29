@@ -45,12 +45,32 @@ export default function(scope) {
         return nodeName;
     }
 
-    function generateClassName(nodeName, attributes) {
+    function generateCall(nodeName, methodName, className) {
+        return nodeName + '.' + methodName + '(\'' + className + '\');';
+    }
+
+    function generateClassNames(nodeName, classNames) {
+        classNames.forEach(function(className) {
+            if (className.type === 'text') {
+                const style = scope + '__' + className.content;
+                const addClass = generateCall(nodeName, 'addClass', style);
+                instructions.push(addClass);
+            } else {
+                const style = scope + '__' + className.name;
+                const addClass = generateCall(nodeName, 'addClass', style);
+                const removeClass = generateCall(nodeName, 'removeClass', style);
+                const instruction = 'function setIsMissing(isMissing) {'
+                                  + ' if (isMissing) { ' + addClass + ' } else { ' + removeClass + ' } '
+                                  + '}';
+                functionDefinitions.push(instruction);
+            }
+        });
+    }
+
+    function generateAttributes(nodeName, attributes) {
         const classNames = attributes.className;
         if (classNames !== undefined) {
-            classNames.forEach(function(className) {
-                instructions.push(nodeName + '.addClass(\'' + scope + '__' + className.content + '\');');
-            });
+            generateClassNames(nodeName, classNames);
         }
     }
 
@@ -63,7 +83,7 @@ export default function(scope) {
             const children = generateChildren(htpl.children);
             const node = generator.generateElement(htpl.tagName, children);
             const nodeName = declareNode(node);
-            generateClassName(nodeName, htpl.attributes);
+            generateAttributes(nodeName, htpl.attributes);
             return nodeName;
         }
         if (htpl.type === 'variable') {
