@@ -17,6 +17,16 @@ export default function(scope) {
     const instructions = [];
     const methods = [];
 
+    function generateSetterName(variableName) {
+        return 'set' + letterCase.capitalize(variableName);
+    }
+
+    function addSetter(name, body) {
+        const setterName = generateSetterName(name);
+        functionDefinitions.push('function ' + setterName + '(' + name + ') { ' + body + ' }');
+        methods.push(setterName);
+    }
+
     function generateNodeName() {
         variableCount++;
         return 'node' + variableCount;
@@ -28,10 +38,6 @@ export default function(scope) {
         return nodeName;
     }
 
-    function generateSetterName(variableName) {
-        return 'set' + letterCase.capitalize(variableName);
-    }
-
     function generateVariable(name) {
         if (name === 'children') {
             return generator.generateVariableChildren();
@@ -39,9 +45,7 @@ export default function(scope) {
         const node = generator.generateVariable(name);
         const nodeName = declareNode(node);
 
-        const setterName = generateSetterName(name);
-        functionDefinitions.push('function ' + setterName + '(' + name + ') { ' + nodeName + '.setData(' + name + '); }');
-        methods.push(setterName);
+        addSetter(name, nodeName + '.setData(' + name + ');');
         return nodeName;
     }
 
@@ -59,10 +63,7 @@ export default function(scope) {
                 const style = scope + '__' + className.name;
                 const addClass = generateCall(nodeName, 'addClass', style);
                 const removeClass = generateCall(nodeName, 'removeClass', style);
-                const instruction = 'function setIsMissing(isMissing) {'
-                                  + ' if (isMissing) { ' + addClass + ' } else { ' + removeClass + ' } '
-                                  + '}';
-                functionDefinitions.push(instruction);
+                addSetter('isMissing', 'if (isMissing) { ' + addClass + ' } else { ' + removeClass + ' }');
             }
         });
     }

@@ -146,5 +146,11 @@ describe('fragments.CodeGenerator', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: className}, children: []});
             assert.equal(result[1], 'function setIsMissing(isMissing) { if (isMissing) { node1.addClass(\'Scope__isMissing\'); } else { node1.removeClass(\'Scope__isMissing\'); } }');
         });
+
+        it('should export a method to set the className, when there is a template in attribute', function() {
+            const className = [{type: 'variable', name: 'isMissing'}];
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: className}, children: []});
+            assert.equal(result[3], 'return {...component, setIsMissing};');
+        });
     });
 });
