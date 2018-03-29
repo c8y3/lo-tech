@@ -54,7 +54,7 @@ describe('fragments.CodeGenerator', function() {
             assert.equal(result[1], 'node1.addClass(\'Scope__selected\');');
         });
 
-        it.skip('should set style the several styles alternatively when there are several classes', function() {
+        it('should set style the several styles alternatively when there are several classes', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: 'root selected'}, children: []});
             assert.equal(result[2], 'node1.addClass(\'Scope__selected\');');
         });
