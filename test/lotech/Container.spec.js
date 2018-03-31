@@ -56,5 +56,13 @@ describe('lotech.Container', function() {
                 assert.equal(1, node.childElementCount);                
             });
         });
+
+        describe('remove', function() {
+            it('should remove child', function() {
+                const node = draw();
+                subject.removeChildren(1);
+                assert.equal(1, node.childElementCount);
+            });
+        });
     });
 });
