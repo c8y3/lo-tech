@@ -68,6 +68,8 @@ export default function(scope) {
         });
     }
 
+    // TODO remove ScopedStyle and go back to addStyle/removeStyle
+    // TODO rename className into class and have a special field (instead of mixing with other attributes) Do this in the parser
     function generateAttributes(nodeName, attributes) {
         const classNames = attributes.className;
         if (classNames !== undefined) {
