@@ -38,9 +38,15 @@ export default function(scope) {
         return nodeName;
     }
 
+    function generateVariableChildren(name) {
+        const nodeName = generator.generateVariableChildren();
+        addSetter(name, 'node1.replaceChildren(0, ' + name + ');');
+        return generator.generateVariableChildren();
+    }
+
     function generateVariable(name) {
         if (name === 'children') {
-            return generator.generateVariableChildren();
+            return generateVariableChildren(name);
         }
         const node = generator.generateVariable(name);
         const nodeName = declareNode(node);

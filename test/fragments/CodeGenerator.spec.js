@@ -152,5 +152,11 @@ describe('fragments.CodeGenerator', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: className}, children: []});
             assert.equal(result[3], 'return {...component, setIsMissing};');
         });
+
+        it('should provide a method to set the children', function() {
+            const child = {type: 'variable', name: 'children'};
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
+            assert.equal(result[1], 'function setChildren(children) { node1.replaceChildren(0, children); }');
+        });
     });
 });
