@@ -1,35 +1,18 @@
 import lotech from '/lotech';
-import Row from '/Row.htpl';
-import HeaderRow from '/HeaderRow.htpl'
+import MainHeaderRow from '/MainHeaderRow.htpl'
 import ProductCategoryRow from '/ProductCategoryRow.htpl'
 import ProductRow from '/ProductRow.htpl'
 
+// TODO add this in design explanations
 // templates should be simple and follow html
 // accept attributes
 // and a list of children
 
 // can do injection of attributes (because attributes are either a template or a string with some templates) and of children
-// getElementByKey does not work in sub-trees (just one level)
 // start with some simple examples and increase complexity progressively
 
-const style = lotech.ScopedStyle('ProductTable');
-
-function cell(content) {
-    return lotech.Span([lotech.String(content)]);
-}
-
-function nameCell(name) {
-    const result = cell(name);
-    result.addClass(style('name'));
-    return result;
-};
-
-function mainHeadersRow() {
-    return HeaderRow([nameCell('Name'), cell('Price')]);
-}
-
 export default function() {
-    const headers = mainHeadersRow();
+    const headers = MainHeaderRow();
 
     function buildRows(productsByCategory) {
         const rows = [headers];
