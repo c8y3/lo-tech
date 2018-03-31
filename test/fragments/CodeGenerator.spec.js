@@ -82,32 +82,32 @@ describe('fragments.CodeGenerator', function() {
         it('should create a String node for variables which are not children', function() {
             const child = {type: 'variable', name: 'price'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
-            assert.equal(result[0], 'const node1 = lotech.String(\'\');');
+            assert.equal(result[0], 'const node2 = lotech.String(\'\');');
         });
 
         it('should define a setter for variables which are not children', function() {
             const child = {type: 'variable', name: 'price'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
-            assert.equal(result[2], 'function setPrice(price) { node1.setData(price); }');
+            assert.equal(result[2], 'function setPrice(price) { node2.setData(price); }');
         });
 
         it('should define a setter with corresponding name for variables which are not children', function() {
             const child = {type: 'variable', name: 'name'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
-            assert.equal(result[2], 'function setName(name) { node1.setData(name); }');
+            assert.equal(result[2], 'function setName(name) { node2.setData(name); }');
         });
 
         it('should use the variable name for variables which are not children', function() {
             const child = {type: 'variable', name: 'price'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
-            assert.equal(result[1], 'const node2 = lotech.Div([node1]);');
+            assert.equal(result[1], 'const node1 = lotech.Div([node2]);');
         });
 
         it('should use the correct variable name to set the class name', function() {
             const child = {type: 'variable', name: 'price'};
             const className = [{type: 'text', content: 'root'}];
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: className}, children: [child]});
-            assert.equal(result[2], 'node2.addClass(\'Scope__root\');');
+            assert.equal(result[2], 'node1.addClass(\'Scope__root\');');
         });
 
         it('should return a setter for variables which are not children', function() {
@@ -120,7 +120,7 @@ describe('fragments.CodeGenerator', function() {
         it('should use a different variable name when there are several variables', function() {
             const children = [{type: 'variable', name: 'name'}, {type: 'variable', name: 'price'}];
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: children});
-            assert.equal(result[1], 'const node2 = lotech.String(\'\');');
+            assert.equal(result[1], 'const node3 = lotech.String(\'\');');
         });
 
         it('should separate setters with commas when there are several variables', function() {
@@ -132,13 +132,13 @@ describe('fragments.CodeGenerator', function() {
         it('should set value to the correct node when there are several variables', function() {
             const children = [{type: 'variable', name: 'name'}, {type: 'variable', name: 'price'}];
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: children});
-            assert.equal(result[4], 'function setPrice(price) { node2.setData(price); }');
+            assert.equal(result[4], 'function setPrice(price) { node3.setData(price); }');
         });
 
         it('should insert the correct node when there are several variables', function() {
             const children = [{type: 'variable', name: 'name'}, {type: 'variable', name: 'price'}];
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: children});
-            assert.equal(result[2], 'const node3 = lotech.Div([node1, node2]);');
+            assert.equal(result[2], 'const node1 = lotech.Div([node2, node3]);');
         });
 
         it('should define a method to set the className, when there is a template in attribute', function() {
@@ -157,6 +157,13 @@ describe('fragments.CodeGenerator', function() {
             const child = {type: 'variable', name: 'children'};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
             assert.equal(result[1], 'function setChildren(children) { node1.replaceChildren(0, children); }');
+        });
+
+        it('should replace the children of the correct node', function() {
+            const child = {type: 'variable', name: 'children'};
+            const div = {type: 'element', tagName: 'div', attributes: {}, children: [child]};
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [div]});
+            assert.equal(result[2], 'function setChildren(children) { node2.replaceChildren(0, children); }');
         });
     });
 });

@@ -32,24 +32,23 @@ export default function(scope) {
         return 'node' + variableCount;
     }
 
-    function declareNode(node) {
-        const nodeName = generateNodeName();
+    function declareNode(nodeName, node) {
         nodeDeclarations.push('const ' + nodeName + ' = ' + node + ';');
-        return nodeName;
     }
 
-    function generateVariableChildren(name) {
+    function generateVariableChildren(parentNode, name) {
         const nodeName = generator.generateVariableChildren();
-        addSetter(name, 'node1.replaceChildren(0, ' + name + ');');
+        addSetter(name, parentNode + '.replaceChildren(0, ' + name + ');');
         return generator.generateVariableChildren();
     }
 
-    function generateVariable(name) {
+    function generateVariable(parentNode, name) {
         if (name === 'children') {
-            return generateVariableChildren(name);
+            return generateVariableChildren(parentNode, name);
         }
         const node = generator.generateVariable(name);
-        const nodeName = declareNode(node);
+        const nodeName = generateNodeName();
+        declareNode(nodeName, node);
 
         addSetter(name, nodeName + '.setData(' + name + ');');
         return nodeName;
@@ -83,20 +82,23 @@ export default function(scope) {
         }
     }
 
-    function generateChildren(children) {
-        return children.map(generateNode);
+    function generateChildren(parentNode, children) {
+        return children.map(function(child) {
+            return generateNode(parentNode, child);
+        });
     }
 
-    function generateNode(htpl) {
+    function generateNode(parentNode, htpl) {
         if (htpl.type === 'element') {
-            const children = generateChildren(htpl.children);
+            const nodeName = generateNodeName();
+            const children = generateChildren(nodeName, htpl.children);
             const node = generator.generateElement(htpl.tagName, children);
-            const nodeName = declareNode(node);
+            declareNode(nodeName, node);
             generateAttributes(nodeName, htpl.attributes);
             return nodeName;
         }
         if (htpl.type === 'variable') {
-            return generateVariable(htpl.name);
+            return generateVariable(parentNode, htpl.name);
         }
         if (htpl.type === 'text') {
             return generator.generateText(htpl.content);
@@ -111,7 +113,7 @@ export default function(scope) {
     }
     
     function generate(htpl) {
-        const root = generateNode(htpl);
+        const root = generateNode(undefined, htpl);
         let resultObject = generateResultObject();
         return [
             ...nodeDeclarations,
