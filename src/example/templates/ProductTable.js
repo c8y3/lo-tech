@@ -13,12 +13,6 @@ import ProductRow from '/ProductRow.htpl'
 
 const style = lotech.ScopedStyle('ProductTable');
 
-function headerRow(children) {
-    const root = Row(children);
-    root.addClass(style('headers'));
-    return root;
-};
-
 function cell(content) {
     return lotech.Span([lotech.String(content)]);
 }
@@ -30,7 +24,7 @@ function nameCell(name) {
 };
 
 function mainHeadersRow() {
-    return headerRow([nameCell('Name'), cell('Price')]);
+    return HeaderRow([nameCell('Name'), cell('Price')]);
 }
 
 function productCategoryRow(category) {
