@@ -1,5 +1,6 @@
 import lotech from '/lotech';
 import Row from '/Row.htpl';
+import HeaderRow from '/HeaderRow.htpl'
 import ProductRow from '/ProductRow.htpl'
 
 // templates should be simple and follow html
@@ -33,7 +34,7 @@ function mainHeadersRow() {
 }
 
 function productCategoryRow(category) {
-    return headerRow([lotech.String(category)]);
+    return HeaderRow([lotech.String(category)]);
 }
 
 export default function() {
