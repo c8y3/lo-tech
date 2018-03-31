@@ -1,0 +1,5 @@
+import HeaderRow from '/HeaderRow.htpl';
+
+<HeaderRow>
+    {category}
+</HeaderRow>

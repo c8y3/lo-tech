@@ -1,6 +1,7 @@
 import lotech from '/lotech';
 import Row from '/Row.htpl';
 import HeaderRow from '/HeaderRow.htpl'
+import ProductCategoryRow from '/ProductCategoryRow.htpl'
 import ProductRow from '/ProductRow.htpl'
 
 // templates should be simple and follow html
@@ -27,17 +28,15 @@ function mainHeadersRow() {
     return HeaderRow([nameCell('Name'), cell('Price')]);
 }
 
-function productCategoryRow(category) {
-    return HeaderRow([lotech.String(category)]);
-}
-
 export default function() {
     const headers = mainHeadersRow();
 
     function buildRows(productsByCategory) {
         const rows = [headers];
         Object.keys(productsByCategory).forEach(function(category) {
-            rows.push(productCategoryRow(category));
+            const categoryRow = ProductCategoryRow();
+            categoryRow.setCategory(category);
+            rows.push(categoryRow);
             const products = productsByCategory[category];
             products.forEach(function(product) {
                 const row = ProductRow();
