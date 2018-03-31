@@ -1,7 +1,9 @@
 import lotech from '/lotech';
-import MainHeaderRow from '/MainHeaderRow.htpl'
-import ProductCategoryRow from '/ProductCategoryRow.htpl'
-import ProductRow from '/ProductRow.htpl'
+// TODO most probably remove the MainHeaderRow.htpl
+import MainHeaderRow from '/MainHeaderRow.htpl';
+import ProductCategoryRow from '/ProductCategoryRow.htpl';
+import ProductRow from '/ProductRow.htpl';
+import ProductTable from '/ProductTable.htpl'
 
 // TODO add this in design explanations
 // templates should be simple and follow html
@@ -32,12 +34,13 @@ export default function() {
         return rows;
     }
 
-    const root = lotech.Div([headers]);
+    const root = ProductTable();
     return {
         ...lotech.Component(root),
         setProducts(products) {
             const rows = buildRows(products);
-            root.replaceChildren(1, rows);
+            root.setChildren(rows);
+//            root.replaceChildren(1, rows);
         }
     };
 };

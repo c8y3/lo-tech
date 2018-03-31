@@ -1,0 +1,9 @@
+import HeaderRow from '/HeaderRow.htpl';
+
+<div>
+    <HeaderRow>
+        <span className="name">Name</span>
+        <span>Price</span>
+    </HeaderRow>
+    {children}
+</div>
