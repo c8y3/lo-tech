@@ -165,5 +165,12 @@ describe('fragments.CodeGenerator', function() {
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [div]});
             assert.equal(result[2], 'function setChildren(children) { node2.replaceChildren(0, children); }');
         });
+
+        it('should replace the children from the correct index', function() {
+            const child = {type: 'variable', name: 'children'};
+            const div = {type: 'element', tagName: 'div', attributes: {}, children: []};
+            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [div, child]});
+            assert.equal(result[2], 'function setChildren(children) { node1.replaceChildren(1, children); }');
+        });
     });
 });

@@ -36,15 +36,15 @@ export default function(scope) {
         nodeDeclarations.push('const ' + nodeName + ' = ' + node + ';');
     }
 
-    function generateVariableChildren(parentNode, name) {
+    function generateVariableChildren(parentNode, position, name) {
         const nodeName = generator.generateVariableChildren();
-        addSetter(name, parentNode + '.replaceChildren(0, ' + name + ');');
+        addSetter(name, parentNode + '.replaceChildren(' + position + ', ' + name + ');');
         return generator.generateVariableChildren();
     }
 
-    function generateVariable(parentNode, name) {
+    function generateVariable(parentNode, position, name) {
         if (name === 'children') {
-            return generateVariableChildren(parentNode, name);
+            return generateVariableChildren(parentNode, position, name);
         }
         const node = generator.generateVariable(name);
         const nodeName = generateNodeName();
@@ -83,12 +83,12 @@ export default function(scope) {
     }
 
     function generateChildren(parentNode, children) {
-        return children.map(function(child) {
-            return generateNode(parentNode, child);
+        return children.map(function(child, position) {
+            return generateNode(parentNode, position, child);
         });
     }
 
-    function generateNode(parentNode, htpl) {
+    function generateNode(parentNode, position, htpl) {
         if (htpl.type === 'element') {
             const nodeName = generateNodeName();
             const children = generateChildren(nodeName, htpl.children);
@@ -98,7 +98,7 @@ export default function(scope) {
             return nodeName;
         }
         if (htpl.type === 'variable') {
-            return generateVariable(parentNode, htpl.name);
+            return generateVariable(parentNode, position, htpl.name);
         }
         if (htpl.type === 'text') {
             return generator.generateText(htpl.content);
@@ -113,7 +113,7 @@ export default function(scope) {
     }
     
     function generate(htpl) {
-        const root = generateNode(undefined, htpl);
+        const root = generateNode(undefined, 0, htpl);
         let resultObject = generateResultObject();
         return [
             ...nodeDeclarations,
