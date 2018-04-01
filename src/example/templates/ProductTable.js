@@ -17,7 +17,7 @@ export default function() {
     const headers = MainHeaderRow();
 
     function buildRows(productsByCategory) {
-        const rows = [headers];
+        const rows = [];
         Object.keys(productsByCategory).forEach(function(category) {
             const categoryRow = ProductCategoryRow();
             categoryRow.setCategory(category);
@@ -40,7 +40,6 @@ export default function() {
         setProducts(products) {
             const rows = buildRows(products);
             root.setChildren(rows);
-//            root.replaceChildren(1, rows);
         }
     };
 };
