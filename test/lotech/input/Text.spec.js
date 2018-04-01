@@ -30,6 +30,20 @@ describe('lotech.input.Text', function() {
         });
     });
 
+    describe('getValue', function() {
+        it('should return the value of the input', function() {
+            assert.equal('', subject.getValue());
+        });
+    });
+
+    describe('setValue', function() {
+        it('should set the value of the input', function() {
+            const value = 'some value';
+            subject.setValue(value);
+            assert.equal(value, subject.getValue());
+        });
+    });
+
     describe('addListenerOnInput', function() {
         it('should text inputs', function() {
             let input;

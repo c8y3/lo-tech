@@ -20,6 +20,19 @@ describe('lotech.input.Checkbox', function() {
         });
     });
 
+    describe('getValue', function() {
+        it('should return the value of the input', function() {
+            assert.equal(false, subject.getValue());
+        });
+    });
+
+    describe('setValue', function() {
+        it('should set the value of the input', function() {
+            subject.setValue(true);
+            assert.equal(true, subject.getValue());
+        });
+    });
+
     describe('addListenerOnChanged', function() {
         it('should fire when the checkbox is changed', function() {
             let called;
