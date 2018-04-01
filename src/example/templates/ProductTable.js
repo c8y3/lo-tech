@@ -1,6 +1,4 @@
 import lotech from '/lotech';
-// TODO most probably remove the MainHeaderRow.htpl
-import MainHeaderRow from '/MainHeaderRow.htpl';
 import ProductCategoryRow from '/ProductCategoryRow.htpl';
 import ProductRow from '/ProductRow.htpl';
 import ProductTable from '/ProductTable.htpl'
@@ -14,8 +12,6 @@ import ProductTable from '/ProductTable.htpl'
 // start with some simple examples and increase complexity progressively
 
 export default function() {
-    const headers = MainHeaderRow();
-
     function buildRows(productsByCategory) {
         const rows = [];
         Object.keys(productsByCategory).forEach(function(category) {

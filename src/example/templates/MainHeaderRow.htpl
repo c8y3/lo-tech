@@ -1,6 +1,0 @@
-import HeaderRow from '/HeaderRow.htpl';
-
-<HeaderRow>
-    <span className="name">Name</span>
-    <span>Price</span>
-</HeaderRow>
