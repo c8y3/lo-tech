@@ -1,0 +1,7 @@
+import ProductTable from '/ProductTable';
+import SearchBar from '/SearchBar';
+
+<lotech.Div>
+    <SearchBar onFilterChanged={onFilterChanged} />
+    <ProductTable products={products} />
+</lotech.Div>

@@ -30,9 +30,9 @@ export default function() {
         return rows;
     }
 
-    const root = ProductTable();
+    const view = ProductTable();
     return {
-        ...lotech.Component(root),
+        ...lotech.Component(view),
         setProducts(products) {
             const rows = buildRows(products);
             root.setChildren(rows);
