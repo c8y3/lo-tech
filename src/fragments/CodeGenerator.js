@@ -85,7 +85,7 @@ export default function(scope) {
             return;
         }
         const methodName = generateMethodName('addListenerOn', value.name);
-        addMethod(methodName, 'listener', nodeName + '.addListenerOnChanged(listener};');
+        addMethod(methodName, 'listener', nodeName + '.addListenerOnChanged(listener);');
     }
 
     function generateAttributes(nodeName, attributes) {

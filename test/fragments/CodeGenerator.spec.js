@@ -179,7 +179,7 @@ describe('fragments.CodeGenerator', function() {
             const result = subject.generate({type: 'element', tagName: 'Checkbox', attributes: attributes, children: []});
 // TODO would be more efficient this way
 //            assert.equal(result[1], 'const addListenerOnStockFilterChanged = node1.addListenerOnChanged;');
-            assert.equal(result[1], 'function addListenerOnStockFilterChanged(listener) { node1.addListenerOnChanged(listener}; }');
+            assert.equal(result[1], 'function addListenerOnStockFilterChanged(listener) { node1.addListenerOnChanged(listener); }');
         });
     });
 });
