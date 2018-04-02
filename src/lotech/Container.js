@@ -9,10 +9,11 @@ export default function(tagName, initialChildren) {
     const element = Element(node);
 
     function removeChildren(start) {
+        children.splice(start, children.length - start);
+        // TODO should not do this if called before it is drawn
         while (node.children[start]) {
             node.removeChild(node.children[start]);
         }
-        children.splice(start, children.length - start);
     }
 
     function drawChildren() {
@@ -24,6 +25,7 @@ export default function(tagName, initialChildren) {
     function replaceChildren(start, newChildren) {
         removeChildren(start);
         children.splice(start, 0, ...newChildren);
+        // TODO should not do this if called before it is drawn a first time
         drawChildren();
     }
 
