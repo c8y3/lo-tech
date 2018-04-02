@@ -17,14 +17,18 @@ export default function(scope) {
     const instructions = [];
     const methods = [];
 
-    function generateSetterName(variableName) {
-        return 'set' + letterCase.capitalize(variableName);
+    function generateMethodName(prefix, variableName) {
+        return prefix + letterCase.capitalize(variableName);
+    }
+
+    function addMethod(methodName, parameterName, body) {
+        functionDefinitions.push('function ' + methodName + '(' + parameterName + ') { ' + body + ' }');
+        methods.push(methodName);
     }
 
     function addSetter(name, body) {
-        const setterName = generateSetterName(name);
-        functionDefinitions.push('function ' + setterName + '(' + name + ') { ' + body + ' }');
-        methods.push(setterName);
+        const methodName = generateMethodName('set', name);
+        addMethod(methodName, name, body);
     }
 
     function generateNodeName() {
@@ -58,6 +62,8 @@ export default function(scope) {
         return nodeName + '.' + methodName + '(\'' + className + '\');';
     }
 
+    // TODO remove ScopedStyle and go back to addStyle/removeStyle
+    // TODO rename className into class and have a special field (instead of mixing with other attributes) Do this in the parser
     function generateClassNames(nodeName, classNames) {
         classNames.forEach(function(className) {
             if (className.type === 'text') {
@@ -73,13 +79,20 @@ export default function(scope) {
         });
     }
 
-    // TODO remove ScopedStyle and go back to addStyle/removeStyle
-    // TODO rename className into class and have a special field (instead of mixing with other attributes) Do this in the parser
-    function generateAttributes(nodeName, attributes) {
-        const classNames = attributes.className;
-        if (classNames !== undefined) {
-            generateClassNames(nodeName, classNames);
+    function generateAttribute(nodeName, key, value) {
+        if (key === 'className') {
+            generateClassNames(nodeName, value);
+            return;
         }
+        const methodName = generateMethodName('addListenerOn', value.name);
+        addMethod(methodName, 'listener', nodeName + '.addListenerOnChanged(listener};');
+    }
+
+    function generateAttributes(nodeName, attributes) {
+        Object.keys(attributes).forEach(function(key) {
+            const value = attributes[key];
+            generateAttribute(nodeName, key, value);
+        });
     }
 
     function generateChildren(parentNode, children) {

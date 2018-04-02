@@ -174,12 +174,12 @@ describe('fragments.CodeGenerator', function() {
             assert.equal(result[2], 'function setChildren(children) { node1.replaceChildren(1, children); }');
         });
 
-        it.skip('should define a method to add a listener with attributes starting by on', function() {
+        it('should define a method to add a listener with attributes starting by on', function() {
             const attributes = { onChanged: {type: 'variable', name: 'stockFilterChanged'} };
             const result = subject.generate({type: 'element', tagName: 'Checkbox', attributes: attributes, children: []});
 // TODO would be more efficient this way
-//            assert.equal(result[2], 'const addListenerOnStockFilterChanged = node1.addListenerOnChanged;');
-            assert.equal(result[2], 'function addListenerOnStockFilterChanged(listener) { node1.addListenerOnChanged(listener}; }');
+//            assert.equal(result[1], 'const addListenerOnStockFilterChanged = node1.addListenerOnChanged;');
+            assert.equal(result[1], 'function addListenerOnStockFilterChanged(listener) { node1.addListenerOnChanged(listener}; }');
         });
     });
 });
