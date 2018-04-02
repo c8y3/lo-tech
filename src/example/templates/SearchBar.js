@@ -1,4 +1,5 @@
 import lotech from '/lotech';
+import SearchBar from '/SearchBar.htpl';
 
 /* TODO: could go further if the template language is extended... */
 
@@ -26,6 +27,7 @@ export default function() {
 */
 
 export default function() {
+    const searchBar = SearchBar();
     const inStockFilter = lotech.input.Checkbox();
     const nameFilter = lotech.input.Text('Search...');
     const root = lotech.Form([
@@ -36,9 +38,12 @@ export default function() {
         ])
     ]);
 
+    return searchBar;
+/*
     return {
         ...lotech.Component(root),
         addListenerOnStockFilterChanged: inStockFilter.addListenerOnChanged,
         addListenerOnNameFilterChanged: nameFilter.addListenerOnInput
     };
+*/
 };

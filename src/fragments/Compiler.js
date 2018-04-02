@@ -1,6 +1,8 @@
 import Parser from '/fragments/Parser';
 import CodeGenerator from '/fragments/CodeGenerator';
 
+// TODO remove the automatic conversion of nodes which start with lower case and correspond to lotech elements? Think about it...
+
 const parser = Parser();
 
 // note, a node will have a constructor with its children

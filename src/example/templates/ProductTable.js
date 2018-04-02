@@ -35,7 +35,7 @@ export default function() {
         ...lotech.Component(view),
         setProducts(products) {
             const rows = buildRows(products);
-            root.setChildren(rows);
+            view.setChildren(rows);
         }
     };
 };
