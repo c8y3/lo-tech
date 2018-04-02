@@ -1,7 +1,7 @@
-export default function(element) {
+export default function(rootElement) {
     return {
-        draw: element.draw,
-        addClass: element.addClass,
-        removeClass: element.removeClass
+        draw: rootElement.draw,
+        addClass: rootElement.addClass,
+        removeClass: rootElement.removeClass
     };
 };
