@@ -132,6 +132,7 @@ describe('fragments.CodeGenerator', function() {
         it('should set value to the correct node when there are several variables', function() {
             const children = [{type: 'variable', name: 'name'}, {type: 'variable', name: 'price'}];
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: children});
+// TODO would be more efficient to do this as const setPrice = node3.setData;
             assert.equal(result[4], 'function setPrice(price) { node3.setData(price); }');
         });
 
@@ -171,6 +172,14 @@ describe('fragments.CodeGenerator', function() {
             const div = {type: 'element', tagName: 'div', attributes: {}, children: []};
             const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [div, child]});
             assert.equal(result[2], 'function setChildren(children) { node1.replaceChildren(1, children); }');
+        });
+
+        it.skip('should define a method to add a listener with attributes starting by on', function() {
+            const attributes = { onChanged: {type: 'variable', name: 'stockFilterChanged'} };
+            const result = subject.generate({type: 'element', tagName: 'Checkbox', attributes: attributes, children: []});
+// TODO would be more efficient this way
+//            assert.equal(result[2], 'const addListenerOnStockFilterChanged = node1.addListenerOnChanged;');
+            assert.equal(result[2], 'function addListenerOnStockFilterChanged(listener) { node1.addListenerOnChanged(listener}; }');
         });
     });
 });

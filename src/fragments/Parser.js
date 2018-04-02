@@ -57,6 +57,9 @@ function parseAttribute(key, value) {
             return TextNode(className);
         });
     }
+    if (isVariable(value)) {
+        return VariableNode(value);
+    }
     return value;
 }
 

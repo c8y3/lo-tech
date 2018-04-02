@@ -123,5 +123,10 @@ describe('fragments.Parser', function() {
             const result = subject.parse('<div className="{isMissing}"/>');
             assert.equal(result.attributes.className[0].type, 'variable');
         });
+
+        it('should parse attributes with a variable when there is a template', function() {
+            const result = subject.parse('<Checkbox onChanged="{stockFilterChanged}"/>');
+            assert.equal(result.attributes.onChanged.type, 'variable');
+        });
     });
 });
