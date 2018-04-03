@@ -181,5 +181,13 @@ describe('fragments.CodeGenerator', function() {
 //            assert.equal(result[1], 'const addListenerOnStockFilterChanged = node1.addListenerOnChanged;');
             assert.equal(result[1], 'function addListenerOnStockFilterChanged(listener) { node1.addListenerOnChanged(listener); }');
         });
+
+        it('should define a method to add a listener which calls the correct event listener', function() {
+            const attributes = { onInput: {type: 'variable', name: 'nameFilterChanged'} };
+            const result = subject.generate({type: 'element', tagName: 'Text', attributes: attributes, children: []});
+// TODO would be more efficient this way
+//            assert.equal(result[1], 'const addListenerOnStockFilterChanged = node1.addListenerOnChanged;');
+            assert.equal(result[1], 'function addListenerOnNameFilterChanged(listener) { node1.addListenerOnInput(listener); }');
+        });
     });
 });
