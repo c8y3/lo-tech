@@ -128,5 +128,10 @@ describe('fragments.Parser', function() {
             const result = subject.parse('<Checkbox onChanged="{stockFilterChanged}"/>');
             assert.equal(result.attributes.onChanged.type, 'variable');
         });
+
+        it('should recognize self closing tags', function() {
+            const result = subject.parse('<div><div/><p/></div>');
+            assert.equal(2, result.children.length);
+        });
     });
 });

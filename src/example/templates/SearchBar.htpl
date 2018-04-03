@@ -6,6 +6,6 @@ const Text = lotech.input.Text;
     <p>
         <Text placeholder="Search..." onInput="{nameFilterChanged}" />
         &nbsp;Only show products in stock
-    <p/>
+    </p>
 </form>
 

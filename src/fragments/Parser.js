@@ -94,7 +94,8 @@ const parser = new htmlparser.Parser({
     }
 }, {
     lowerCaseTags: false,
-    lowerCaseAttributeNames: false
+    lowerCaseAttributeNames: false,
+    recognizeSelfClosing: true
 });
 
 export default function() {
