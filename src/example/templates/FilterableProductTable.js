@@ -1,8 +1,10 @@
 import lotech from '/lotech';
 import ProductTable from '/ProductTable';
 import SearchBar from '/SearchBar.htpl';
+import View from '/FilterableProductTable.htpl';
 
 export default function(products) {
+    const view = View();
     const searchBar = SearchBar();
     const productTable = ProductTable();
 
@@ -29,17 +31,17 @@ export default function(products) {
 
     function updateTable() {
         const filteredProducts = filterProducts();
-        productTable.setProducts(filteredProducts);
+        view.setProducts(filteredProducts);
     }
 
     updateTable();
 
-    searchBar.addListenerOnStockFilterChanged(function(value) {
+    view.addListenerOnStockFilterChanged(function(value) {
         inStockOnly = value;
         updateTable();
     });
 
-    searchBar.addListenerOnNameFilterChanged(function(value) {
+    view.addListenerOnNameFilterChanged(function(value) {
         productNameFilter = value;
         updateTable();
     });
@@ -48,5 +50,5 @@ export default function(products) {
         searchBar,
         productTable
     ]);
-    return lotech.Component(root);
+    return lotech.Component(view);
 };

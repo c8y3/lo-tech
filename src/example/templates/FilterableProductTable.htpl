@@ -1,7 +1,7 @@
 import ProductTable from '/ProductTable';
-import SearchBar from '/SearchBar';
+import SearchBar from '/SearchBar.htpl';
 
-<lotech.Div>
-    <SearchBar onFilterChanged={onFilterChanged} />
-    <ProductTable products={products} />
-</lotech.Div>
+<div>
+    <SearchBar onNameFilterChanged="{nameFilterChanged}" onStockFilterChanged="{stockFilterChanged}" />
+    <ProductTable products="{products}" />
+</div>

@@ -195,5 +195,11 @@ describe('fragments.CodeGenerator', function() {
             const result = subject.generate({type: 'element', tagName: 'Text', attributes: attributes, children: []});
             assert.equal(result[1], 'node1.setPlaceholder(\'Search...\');');
         });
+
+        it('should define a setter for attributes with a variable as value', function() {
+            const attributes = { names: {type: 'variable', name: 'products'} };
+            const result = subject.generate({type: 'element', tagName: 'ProductTable', attributes: attributes, children: []});
+            assert.equal(result[1], 'function setProducts(products) { node1.setNames(products); }');
+        });
     });
 });

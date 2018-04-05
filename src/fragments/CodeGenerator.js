@@ -89,7 +89,13 @@ export default function(scope) {
             addMethod(methodName, 'listener', nodeName + '.addListener' + letterCase.capitalize(key) + '(listener);');
             return;
         }
-        const setAttribute = generateCall(nodeName, 'set' + letterCase.capitalize(key), value);
+        // TODO there is probably room to clean up the code...
+        const setterName = generateMethodName('set', key);
+        if (value.type === 'variable') {
+            addSetter(value.name, nodeName + '.' + setterName + '(' + value.name + ');');
+            return;
+        }
+        const setAttribute = generateCall(nodeName, setterName, value);
         instructions.push(setAttribute);
     }
 
