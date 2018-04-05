@@ -1,6 +1,6 @@
 import lotech from '/lotech';
 import ProductTable from '/ProductTable';
-import SearchBar from '/SearchBar';
+import SearchBar from '/SearchBar.htpl';
 
 export default function(products) {
     const searchBar = SearchBar();
