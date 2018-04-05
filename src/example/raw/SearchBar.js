@@ -7,7 +7,7 @@ export default function() {
         nameFilter,
         lotech.P([
             inStockFilter,
-            lotech.String(' Only show products in stock')
+            lotech.String('Only show products in stock')
         ])
     ]);
 
