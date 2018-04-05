@@ -58,8 +58,8 @@ export default function(scope) {
         return nodeName;
     }
 
-    function generateCall(nodeName, methodName, className) {
-        return nodeName + '.' + methodName + '(\'' + className + '\');';
+    function generateCall(nodeName, methodName, value) {
+        return nodeName + '.' + methodName + '(\'' + value + '\');';
     }
 
     // TODO remove ScopedStyle and go back to addStyle/removeStyle
@@ -84,8 +84,13 @@ export default function(scope) {
             generateClassNames(nodeName, value);
             return;
         }
-        const methodName = generateMethodName('addListenerOn', value.name);
-        addMethod(methodName, 'listener', nodeName + '.addListener' + letterCase.capitalize(key) + '(listener);');
+        if (key.startsWith('on')) {
+            const methodName = generateMethodName('addListenerOn', value.name);
+            addMethod(methodName, 'listener', nodeName + '.addListener' + letterCase.capitalize(key) + '(listener);');
+            return;
+        }
+        const setAttribute = generateCall(nodeName, 'set' + letterCase.capitalize(key), value);
+        instructions.push(setAttribute);
     }
 
     function generateAttributes(nodeName, attributes) {

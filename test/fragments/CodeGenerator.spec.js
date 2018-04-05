@@ -189,5 +189,11 @@ describe('fragments.CodeGenerator', function() {
 //            assert.equal(result[1], 'const addListenerOnStockFilterChanged = node1.addListenerOnChanged;');
             assert.equal(result[1], 'function addListenerOnNameFilterChanged(listener) { node1.addListenerOnInput(listener); }');
         });
+
+        it('should set the value of regular attributes', function() {
+            const attributes = { placeholder: 'Search...' };
+            const result = subject.generate({type: 'element', tagName: 'Text', attributes: attributes, children: []});
+            assert.equal(result[1], 'node1.setPlaceholder(\'Search...\');');
+        });
     });
 });
