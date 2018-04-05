@@ -1,15 +1,16 @@
 import Element from '/lotech/Element';
 
 describe('lotech.Element', function() {
+    let parentNode;
     let subject;
 
     beforeEach(function() {
+        parentNode = document.createElement('div');
         const node = document.createElement('span');
         subject = Element(node);
     });
 
     function draw() {
-        const parentNode = document.createElement('div');
         subject.draw(parentNode);
         return parentNode.firstChild;
     };
@@ -22,6 +23,13 @@ describe('lotech.Element', function() {
         it('should append the element node to the parent node', function() {
             const node = draw();
             assert.equal('SPAN', node.tagName);
+        });
+
+        it('should insert the element before the next node', function() {
+            const nextNode = document.createElement('p');
+            parentNode.appendChild(nextNode);
+            subject.draw(parentNode, nextNode);
+            assert.equal('SPAN', parentNode.firstChild.tagName);
         });
     });
 

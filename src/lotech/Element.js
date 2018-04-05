@@ -1,7 +1,7 @@
 export default function(node) {
     return {
-        draw(parentNode) {
-            parentNode.appendChild(node);
+        draw(parentNode, nextNode) {
+            parentNode.insertBefore(node, nextNode);
         },
         addClass(name) {
             node.classList.add(name);
