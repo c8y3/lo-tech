@@ -1,7 +1,7 @@
 import lotech from '/lotech';
 import ProductCategoryRow from '/ProductCategoryRow.htpl';
 import ProductRow from '/ProductRow.htpl';
-import ProductTable from '/ProductTable.htpl'
+import View from '/ProductTable.htpl'
 
 // TODO add this in design explanations
 // templates should be simple and follow html
@@ -27,7 +27,7 @@ export default function() {
         return rows;
     }
 
-    const view = ProductTable();
+    const view = View();
     return {
         ...lotech.Component(view),
         setProducts(products) {

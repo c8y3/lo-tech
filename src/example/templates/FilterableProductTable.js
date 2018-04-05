@@ -1,12 +1,8 @@
 import lotech from '/lotech';
-import ProductTable from '/ProductTable';
-import SearchBar from '/SearchBar.htpl';
 import View from '/FilterableProductTable.htpl';
 
 export default function(products) {
     const view = View();
-    const searchBar = SearchBar();
-    const productTable = ProductTable();
 
     let productNameFilter = '';
     let inStockOnly = false;
@@ -46,9 +42,5 @@ export default function(products) {
         updateTable();
     });
 
-    const root = lotech.Div([
-        searchBar,
-        productTable
-    ]);
     return lotech.Component(view);
 };
