@@ -8,9 +8,6 @@ import ProductTable from '/ProductTable.htpl'
 // accept attributes
 // and a list of children
 
-// can do injection of attributes (because attributes are either a template or a string with some templates) and of children
-// start with some simple examples and increase complexity progressively
-
 export default function() {
     function buildRows(productsByCategory) {
         const rows = [];
