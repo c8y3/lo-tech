@@ -24,7 +24,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
         'src/lotech/**/*.js',
-        'test/lotech/*.spec.js'
+        'test/lotech/**/*.spec.js'
     ],
 
 

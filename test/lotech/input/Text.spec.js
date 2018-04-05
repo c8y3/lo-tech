@@ -30,6 +30,15 @@ describe('lotech.input.Text', function() {
         });
     });
 
+    describe('setPlaceholder', function() {
+        it('should set the placeholder of the input', function() {
+            const text = 'Hello';
+            subject.setPlaceholder(text);
+            const node = draw();
+            assert.equal(text, node.placeholder);
+        });
+    });
+
     describe('getValue', function() {
         it('should return the value of the input', function() {
             assert.equal('', subject.getValue());

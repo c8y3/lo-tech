@@ -4,13 +4,7 @@ export default function() {
     const node = document.createElement('input');
     node.type = 'checkbox';
 
-    function getValue() {
-        return node.value;
-    }
-
-    function setValue(value) {
-        node.value = value;
-    }
+    // note the value of checkbox is found and set in the checked property
 
     return {
         ...Element(node),
@@ -18,8 +12,6 @@ export default function() {
             node.addEventListener('change', function() {
                 listener(node.checked);
             });
-        },
-        setValue,
-        getValue
+        }
     };
 };

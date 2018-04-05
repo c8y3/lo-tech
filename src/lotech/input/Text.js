@@ -1,5 +1,6 @@
 import Element from '/lotech/Element';
 
+// TODO remove argument of constructor (unused)
 export default function(placeholder) {
     const node = document.createElement('input');
     node.type = 'text';
@@ -13,6 +14,10 @@ export default function(placeholder) {
         node.value = value;
     }
 
+    function setPlaceholder(placeholder) {
+        node.placeholder = placeholder;
+    }
+
     return {
         ...Element(node),
         addListenerOnInput(listener) {
@@ -21,6 +26,7 @@ export default function(placeholder) {
             });
         },
         setValue,
-        getValue
+        getValue,
+        setPlaceholder
     };
 };
