@@ -2,7 +2,8 @@ import lotech from '/lotech';
 
 export default function() {
     const inStockFilter = lotech.input.Checkbox();
-    const nameFilter = lotech.input.Text('Search...');
+    const nameFilter = lotech.input.Text();
+    nameFilter.setPlaceholder('Search...');
     const root = lotech.Form([
         nameFilter,
         lotech.P([

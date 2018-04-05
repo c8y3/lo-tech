@@ -1,10 +1,9 @@
 import Element from '/lotech/Element';
 
 // TODO remove argument of constructor (unused)
-export default function(placeholder) {
+export default function() {
     const node = document.createElement('input');
     node.type = 'text';
-    node.placeholder = placeholder;
 
     function getValue() {
         return node.value;
@@ -18,13 +17,15 @@ export default function(placeholder) {
         node.placeholder = placeholder;
     }
 
+    function addListenerOnInput(listener) {
+        node.addEventListener('input', function() {
+            listener(node.value);
+        });
+    }
+
     return {
         ...Element(node),
-        addListenerOnInput(listener) {
-            node.addEventListener('input', function() {
-                listener(node.value);
-            });
-        },
+        addListenerOnInput,
         setValue,
         getValue,
         setPlaceholder

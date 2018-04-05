@@ -4,7 +4,7 @@ describe('lotech.input.Text', function() {
     let subject;
 
     beforeEach(function() {
-        subject = Text('Search...');
+        subject = Text();
     });
 
     function draw() {
@@ -22,11 +22,6 @@ describe('lotech.input.Text', function() {
         it('should draw an element with type text', function() {
             const node = draw();
             assert.equal('text', node.type);
-        });
-
-        it('should set the placeholder of the input', function() {
-            const node = draw();
-            assert.equal('Search...', node.placeholder);
         });
     });
 
