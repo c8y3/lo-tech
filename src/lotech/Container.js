@@ -11,6 +11,7 @@ export default function(tagName, initialChildren) {
     function removeChildren(start) {
         children.splice(start, children.length - start);
         // TODO should not do this if called before it is drawn
+        // FIXME should use childNodes, there is probably a bug here because text nodes are not in the children property => add a test
         while (node.children[start]) {
             node.removeChild(node.children[start]);
         }
