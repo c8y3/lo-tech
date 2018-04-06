@@ -1,11 +1,11 @@
 import lotech from '/lotech';
 import Row from '/Row';
 
-const style = lotech.ScopedStyle('ProductTable');
+const scope = 'ProductTable';
 
 function headerRow(content) {
     const row = Row(content);
-    row.addClass(style('headers'));
+    row.addStyle(scope, 'headers');
     return row;
 };
 
@@ -15,7 +15,7 @@ function cell(content) {
 
 function nameCell(name) {
     const result = cell(name);
-    result.addClass(style('name'));
+    result.addStyle(scope, 'name');
     return result;
 };
 
@@ -30,7 +30,7 @@ function productCategoryRow(category) {
 function productRow(product) {
     const name = nameCell(product.name);
     if (!product.stocked) {
-        name.addClass(style('isMissing'));
+        name.addStyle(scope, 'isMissing');
     }
     const price = cell(product.price);
     return Row([name, price]);

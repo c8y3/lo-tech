@@ -58,8 +58,9 @@ export default function(scope) {
         return nodeName;
     }
 
-    function generateCall(nodeName, methodName, value) {
-        return nodeName + '.' + methodName + '(\'' + value + '\');';
+    function generateCall(nodeName, methodName, values) {
+        const parameters = values.join('\', \'');
+        return nodeName + '.' + methodName + '(\'' + parameters + '\');';
     }
 
     // TODO remove ScopedStyle and go back to addStyle/removeStyle
@@ -67,14 +68,14 @@ export default function(scope) {
     function generateClassNames(nodeName, classNames) {
         classNames.forEach(function(className) {
             if (className.type === 'text') {
-                const style = scope + '__' + className.content;
-                const addClass = generateCall(nodeName, 'addClass', style);
-                instructions.push(addClass);
+                const style = [scope, className.content];
+                const addStyle = generateCall(nodeName, 'addStyle', style);
+                instructions.push(addStyle);
             } else {
-                const style = scope + '__' + className.name;
-                const addClass = generateCall(nodeName, 'addClass', style);
-                const removeClass = generateCall(nodeName, 'removeClass', style);
-                addSetter('isMissing', 'if (isMissing) { ' + addClass + ' } else { ' + removeClass + ' }');
+                const style = [scope, className.name];
+                const addStyle = generateCall(nodeName, 'addStyle', style);
+                const removeStyle = generateCall(nodeName, 'removeStyle', style);
+                addSetter('isMissing', 'if (isMissing) { ' + addStyle + ' } else { ' + removeStyle + ' }');
             }
         });
     }
@@ -95,7 +96,7 @@ export default function(scope) {
             addSetter(value.name, nodeName + '.' + setterName + '(' + value.name + ');');
             return;
         }
-        const setAttribute = generateCall(nodeName, setterName, value);
+        const setAttribute = generateCall(nodeName, setterName, [value]);
         instructions.push(setAttribute);
     }
 
