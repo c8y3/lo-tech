@@ -33,6 +33,14 @@ describe('lotech.Element', function() {
         });
     });
 
+    describe('addStyle', function() {
+        it('should add class to the className of the drawn node', function() {
+            const node = draw();
+            subject.addStyle('scope', 'name');
+            assert.equal('scope__name', node.className);
+        });
+    });
+
     describe('addClass', function() {
         it('should add class to the className of the drawn node', function() {
             const node = draw();
