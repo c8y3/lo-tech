@@ -1,15 +1,24 @@
 export default function(node) {
+    function buildClassName(scope, name) {
+        return scope + '__' + name;
+    }
+
     function draw(parentNode, nextNode) {
         parentNode.insertBefore(node, nextNode);
     }
 
     function addStyle(scope, name) {
-        node.classList.add(scope + '__' + name);
+        node.classList.add(buildClassName(scope, name));
+    }
+
+    function removeStyle(scope, name) {
+        node.classList.remove(buildClassName(scope, name));
     }
 
     return {
         draw,
         addStyle,
+        removeStyle,
         addClass(name) {
             node.classList.add(name);
         },

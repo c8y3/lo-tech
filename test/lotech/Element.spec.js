@@ -41,19 +41,11 @@ describe('lotech.Element', function() {
         });
     });
 
-    describe('addClass', function() {
-        it('should add class to the className of the drawn node', function() {
+    describe('removeStyle', function() {
+        it('should remove a class to the className of the drawn node', function() {
             const node = draw();
-            subject.addClass('some__class');
-            assert.equal('some__class', node.className);
-        });
-    });
-
-    describe('removeClass', function() {
-        it('should remove class to the className of the drawn node', function() {
-            const node = draw();
-            subject.addClass('some__class');
-            subject.removeClass('some__class');
+            subject.addStyle('scope', 'name');
+            subject.removeStyle('scope', 'name');
             assert.equal('', node.className);
         });
     });
