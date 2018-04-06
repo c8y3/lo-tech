@@ -26,9 +26,9 @@ describe('lotech.Span', function() {
         });
     });
 
-    describe('addClass', function() {
+    describe('addStyle', function() {
         it('should add class name to the node', function() {
-            subject.addClass('scope__name');
+            subject.addStyle('scope', 'name');
             const node = draw();
             assert.equal('scope__name', node.className);
         });
