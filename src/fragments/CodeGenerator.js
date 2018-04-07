@@ -65,7 +65,6 @@ export default function(scope) {
         return nodeName + '.' + methodName + '(\'' + parameters + '\');';
     }
 
-    // TODO remove ScopedStyle and go back to addStyle/removeStyle
     // TODO rename className into class and have a special field (instead of mixing with other attributes) Do this in the parser
     function generateClassNames(nodeName, classNames) {
         classNames.forEach(function(className) {
