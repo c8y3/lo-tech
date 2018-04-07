@@ -1,9 +1,9 @@
-export default function(tagName, style, attributes) {
+export default function(tagName) {
     return {
         type: 'element',
         tagName,
-        style,
-        attributes,
+        style: [],
+        attributes: {},
         children: []
     }
 }

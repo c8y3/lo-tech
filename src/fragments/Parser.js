@@ -59,20 +59,26 @@ function parseAttribute(key, value) {
     return Text(value);
 }
 
-function parseAttributes(attributes) {
-    const result = {};
-    Object.keys(attributes).forEach(function(key) {
-        const value = parseAttribute(key, attributes[key]);
-        result[key] = value;
+function parseAttributes(htmlAttributes) {
+    const style = parseClassNames(htmlAttributes.className);
+    const attributes = {};
+    Object.keys(htmlAttributes).forEach(function(key) {
+        const value = parseAttribute(key, htmlAttributes[key]);
+        attributes[key] = value;
     });
-    return result;
+    return {
+        style,
+        attributes
+    };
 }
 
 const parser = new htmlparser.Parser({
-    onopentag(name, attributes) {
-        const style = parseClassNames(attributes.className);
-        const properties = parseAttributes(attributes);
-        const node = Element(name, style, properties);
+    onopentag(name, htmlAttributes) {
+        const attributes = parseAttributes(htmlAttributes);
+        const node = {
+            ...Element(name),
+            ...attributes
+        }
         nodeStack.push(node);
     },
     ontext(text) {

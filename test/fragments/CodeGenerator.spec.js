@@ -11,7 +11,7 @@ describe('fragments.CodeGenerator', function() {
 
     describe('generate', function() {
         it('should create a variable for each node', function() {
-            const element = Element('div', [], {});
+            const element = Element('div');
             const result = subject.generate(element);
             assert.equal(result[0], 'const node1 = lotech.Div([]);');
         });
@@ -168,9 +168,9 @@ describe('fragments.CodeGenerator', function() {
 
         it('should replace the children of the correct node', function() {
             const child = {type: 'variable', name: 'children'};
-            const div = Element('div', [], {});
+            const div = Element('div');
             div.children = [child];
-            const element = Element('div', [], {});
+            const element = Element('div');
             element.children = [div];
             const result = subject.generate(element);
             assert.equal(result[2], 'function setChildren(children) { node1.replaceChildren(0, children); }');
@@ -178,16 +178,16 @@ describe('fragments.CodeGenerator', function() {
 
         it('should replace the children from the correct index', function() {
             const child = {type: 'variable', name: 'children'};
-            const div = Element('div', [], {});
-            const element = Element('div', [], {});
+            const div = Element('div');
+            const element = Element('div');
             element.children = [div, child];
             const result = subject.generate(element);
             assert.equal(result[2], 'function setChildren(children) { node2.replaceChildren(1, children); }');
         });
 
         it('should define a method to add a listener with attributes starting by on', function() {
-            const attributes = { onChanged: {type: 'variable', name: 'stockFilterChanged'} };
-            const element = Element('Checkbox', [], attributes);
+            const element = Element('Checkbox');
+            element.attributes = { onChanged: {type: 'variable', name: 'stockFilterChanged'} };
             const result = subject.generate(element);
 // TODO would be more efficient this way
 //            assert.equal(result[1], 'const addListenerOnStockFilterChanged = node1.addListenerOnChanged;');
@@ -195,8 +195,8 @@ describe('fragments.CodeGenerator', function() {
         });
 
         it('should define a method to add a listener which calls the correct event listener', function() {
-            const attributes = { onInput: {type: 'variable', name: 'nameFilterChanged'} };
-            const element = Element('Text', [], attributes);
+            const element = Element('Text');
+            element.attributes = { onInput: {type: 'variable', name: 'nameFilterChanged'} };
             const result = subject.generate(element);
 // TODO would be more efficient this way
 //            assert.equal(result[1], 'const addListenerOnStockFilterChanged = node1.addListenerOnChanged;');
@@ -204,15 +204,15 @@ describe('fragments.CodeGenerator', function() {
         });
 
         it('should set the value of regular attributes', function() {
-            const attributes = { placeholder: { type: 'text', content: 'Search...' } };
-            const element = Element('Text', [], attributes);
+            const element = Element('Text');
+            element.attributes = { placeholder: { type: 'text', content: 'Search...' } };
             const result = subject.generate(element);
             assert.equal(result[1], 'node1.setPlaceholder(\'Search...\');');
         });
 
         it('should define a setter for attributes with a variable as value', function() {
-            const attributes = { names: {type: 'variable', name: 'products'} };
-            const element = Element('ProductTable', [], attributes);
+            const element = Element('ProductTable');
+            element.attributes = { names: {type: 'variable', name: 'products'} };
             const result = subject.generate(element);
             assert.equal(result[1], 'function setProducts(products) { node1.setNames(products); }');
         });
