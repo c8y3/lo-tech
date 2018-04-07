@@ -110,7 +110,7 @@ export default function(scope) {
 
     function generateAttribute(nodeName, key, value) {
         if (key === 'className') {
-            generateStyle(nodeName, value);
+//            generateStyle(nodeName, value);
             return;
         }
         if (key.startsWith('on')) {
@@ -148,7 +148,7 @@ export default function(scope) {
             const node = generator.generateElement(htpl.tagName, childNodes);
             const nodeName = declareNode(node);
             generateVariableChildrenSetter(nodeName, children);
-//            generateStyle(nodeName, htpl.style);
+            generateStyle(nodeName, htpl.style);
             generateAttributes(nodeName, htpl.attributes);
             return nodeName;
         }
