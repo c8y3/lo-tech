@@ -1,4 +1,5 @@
 import CodeGenerator from '/fragments/CodeGenerator';
+import Element from '/fragments/nodes/Element';
 
 // TODO should split the CodeGenerator class => the tests are becoming too cumbersome
 describe('fragments.CodeGenerator', function() {
@@ -10,17 +11,20 @@ describe('fragments.CodeGenerator', function() {
 
     describe('generate', function() {
         it('should create a variable for each node', function() {
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: []});
+            const element = Element('div', [], {});
+            const result = subject.generate(element);
             assert.equal(result[0], 'const node1 = lotech.Div([]);');
         });
 
         it('should use the node variable', function() {
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: []});
+            const element = {type: 'element', tagName: 'div', attributes: {}, children: []};
+            const result = subject.generate(element);
             assert.equal(result[1], 'const component = lotech.Component(node1);');
         });
 
         it('should return a constructor of the node', function() {
-            const result = subject.generate({type: 'element', tagName: 'p', attributes: {}, children: []});
+            const element = {type: 'element', tagName: 'p', attributes: {}, children: []};
+            const result = subject.generate(element);
             assert.equal(result[0], 'const node1 = lotech.P([]);');
         });
 
@@ -128,52 +132,63 @@ describe('fragments.CodeGenerator', function() {
 
         it('should set value to the correct node when there are several variables', function() {
             const children = [{type: 'variable', name: 'name'}, {type: 'variable', name: 'price'}];
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: children});
+            const element = {type: 'element', tagName: 'div', attributes: {}, children: children};
+            const result = subject.generate(element);
 // TODO would be more efficient to do this as const setPrice = node3.setData;
             assert.equal(result[4], 'function setPrice(price) { node2.setData(price); }');
         });
 
         it('should insert the correct node when there are several variables', function() {
             const children = [{type: 'variable', name: 'name'}, {type: 'variable', name: 'price'}];
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: children});
+            const element = {type: 'element', tagName: 'div', attributes: {}, children: children};
+            const result = subject.generate(element);
             assert.equal(result[2], 'const node3 = lotech.Div([node1, node2]);');
         });
 
         it('should define a method to set the className, when there is a template in attribute', function() {
             const className = [{type: 'variable', name: 'isMissing'}];
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: className}, children: []});
+            const element = {type: 'element', tagName: 'div', attributes: {className: className}, children: []};
+            const result = subject.generate(element);
             assert.equal(result[1], 'function setIsMissing(isMissing) { if (isMissing) { node1.addStyle(\'Scope\', \'isMissing\'); } else { node1.removeStyle(\'Scope\', \'isMissing\'); } }');
         });
 
         it('should export a method to set the className, when there is a template in attribute', function() {
             const className = [{type: 'variable', name: 'isMissing'}];
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {className: className}, children: []});
+            const element = {type: 'element', tagName: 'div', attributes: {className: className}, children: []};
+            const result = subject.generate(element);
             assert.equal(result[3], 'return {...component, setIsMissing};');
         });
 
         it('should provide a method to set the children', function() {
             const child = {type: 'variable', name: 'children'};
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [child]});
+            const element = {type: 'element', tagName: 'div', attributes: {}, children: [child]};
+            const result = subject.generate(element);
             assert.equal(result[1], 'function setChildren(children) { node1.replaceChildren(0, children); }');
         });
 
         it('should replace the children of the correct node', function() {
             const child = {type: 'variable', name: 'children'};
-            const div = {type: 'element', tagName: 'div', attributes: {}, children: [child]};
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [div]});
+            const div = Element('div', [], {});
+            div.children = [child];
+            const element = Element('div', [], {});
+            element.children = [div];
+            const result = subject.generate(element);
             assert.equal(result[2], 'function setChildren(children) { node1.replaceChildren(0, children); }');
         });
 
         it('should replace the children from the correct index', function() {
             const child = {type: 'variable', name: 'children'};
-            const div = {type: 'element', tagName: 'div', attributes: {}, children: []};
-            const result = subject.generate({type: 'element', tagName: 'div', attributes: {}, children: [div, child]});
+            const div = Element('div', [], {});
+            const element = Element('div', [], {});
+            element.children = [div, child];
+            const result = subject.generate(element);
             assert.equal(result[2], 'function setChildren(children) { node2.replaceChildren(1, children); }');
         });
 
         it('should define a method to add a listener with attributes starting by on', function() {
             const attributes = { onChanged: {type: 'variable', name: 'stockFilterChanged'} };
-            const result = subject.generate({type: 'element', tagName: 'Checkbox', attributes: attributes, children: []});
+            const element = Element('Checkbox', [], attributes);
+            const result = subject.generate(element);
 // TODO would be more efficient this way
 //            assert.equal(result[1], 'const addListenerOnStockFilterChanged = node1.addListenerOnChanged;');
             assert.equal(result[1], 'function addListenerOnStockFilterChanged(listener) { node1.addListenerOnChanged(listener); }');
@@ -181,7 +196,8 @@ describe('fragments.CodeGenerator', function() {
 
         it('should define a method to add a listener which calls the correct event listener', function() {
             const attributes = { onInput: {type: 'variable', name: 'nameFilterChanged'} };
-            const result = subject.generate({type: 'element', tagName: 'Text', attributes: attributes, children: []});
+            const element = Element('Text', [], attributes);
+            const result = subject.generate(element);
 // TODO would be more efficient this way
 //            assert.equal(result[1], 'const addListenerOnStockFilterChanged = node1.addListenerOnChanged;');
             assert.equal(result[1], 'function addListenerOnNameFilterChanged(listener) { node1.addListenerOnInput(listener); }');
@@ -189,13 +205,15 @@ describe('fragments.CodeGenerator', function() {
 
         it('should set the value of regular attributes', function() {
             const attributes = { placeholder: { type: 'text', content: 'Search...' } };
-            const result = subject.generate({type: 'element', tagName: 'Text', attributes: attributes, children: []});
+            const element = Element('Text', [], attributes);
+            const result = subject.generate(element);
             assert.equal(result[1], 'node1.setPlaceholder(\'Search...\');');
         });
 
         it('should define a setter for attributes with a variable as value', function() {
             const attributes = { names: {type: 'variable', name: 'products'} };
-            const result = subject.generate({type: 'element', tagName: 'ProductTable', attributes: attributes, children: []});
+            const element = Element('ProductTable', [], attributes);
+            const result = subject.generate(element);
             assert.equal(result[1], 'function setProducts(products) { node1.setNames(products); }');
         });
     });

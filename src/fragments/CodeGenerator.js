@@ -93,7 +93,7 @@ export default function(scope) {
     }
 
     // TODO rename className into class and have a special field (instead of mixing with other attributes) Do this in the parser
-    function generateClassNames(nodeName, classNames) {
+    function generateStyle(nodeName, classNames) {
         classNames.forEach(function(className) {
             if (className.type === 'text') {
                 const style = [scope, className.content];
@@ -110,7 +110,7 @@ export default function(scope) {
 
     function generateAttribute(nodeName, key, value) {
         if (key === 'className') {
-            generateClassNames(nodeName, value);
+            generateStyle(nodeName, value);
             return;
         }
         if (key.startsWith('on')) {
@@ -148,6 +148,7 @@ export default function(scope) {
             const node = generator.generateElement(htpl.tagName, childNodes);
             const nodeName = declareNode(node);
             generateVariableChildrenSetter(nodeName, children);
+//            generateStyle(nodeName, htpl.style);
             generateAttributes(nodeName, htpl.attributes);
             return nodeName;
         }
