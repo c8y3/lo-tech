@@ -3,12 +3,7 @@ import ProductCategoryRow from '/ProductCategoryRow.htpl';
 import ProductRow from '/ProductRow.htpl';
 import View from '/ProductTable.htpl'
 
-// TODO add this in design explanations
-// templates should be simple and follow html
-// accept attributes
-// and a list of children
-
-export default function() {
+function Model(view) {
     function buildRows(productsByCategory) {
         const rows = [];
         Object.keys(productsByCategory).forEach(function(category) {
@@ -27,12 +22,20 @@ export default function() {
         return rows;
     }
 
+    function setProducts(products) {
+        const rows = buildRows(products);
+        view.setChildren(rows);
+    }
+
+    return { setProducts };
+}
+
+export default function() {
     const view = View();
+    const model = Model(view);
+
     return {
         ...lotech.Component(view),
-        setProducts(products) {
-            const rows = buildRows(products);
-            view.setChildren(rows);
-        }
+        ...model
     };
 };

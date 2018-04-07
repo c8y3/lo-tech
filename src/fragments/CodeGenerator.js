@@ -6,6 +6,12 @@ const generator = NodeGenerator();
 
 const COMPONENT = 'component';
 const CHILDREN = 'children';
+
+// TODO add this in design explanations
+// templates should be simple and follow html
+// accept attributes
+// and a list of children
+
 // TODO should group
 //      node creation
 //      node attributes initialization
