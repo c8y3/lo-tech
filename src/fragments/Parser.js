@@ -3,7 +3,7 @@ import htmlparser from 'htmlparser2';
 function TextNode(content) {
     return {
         type: 'text',
-        content: content
+        content
     }
 }
 
@@ -12,6 +12,15 @@ function VariableNode(text) {
         type: 'variable',
         name: text.substring(1, text.length-1)
     };
+}
+
+function ElementNode(tagName, attributes) {
+    return {
+        type: 'element',
+        tagName,
+        attributes,
+        children: []
+    }
 }
 
 let nodes;
@@ -75,12 +84,8 @@ function parseAttributes(attributes) {
 
 const parser = new htmlparser.Parser({
     onopentag(name, attributes) {
-        nodes.push({
-            type: 'element',
-            tagName: name,
-            attributes: parseAttributes(attributes),
-            children: []
-        });
+        const node = ElementNode(name, parseAttributes(attributes));
+        nodes.push(node);
     },
     ontext(text) {
         const node = parseText(text);
