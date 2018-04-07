@@ -114,7 +114,7 @@ export default function(scope) {
             addSetter(value.name, nodeName + '.' + setterName + '(' + value.name + ');');
             return;
         }
-        const setAttribute = generateCall(nodeName, setterName, [value]);
+        const setAttribute = generateCall(nodeName, setterName, [value.content]);
         instructions.push(setAttribute);
     }
 

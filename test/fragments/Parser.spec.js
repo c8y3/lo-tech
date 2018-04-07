@@ -30,12 +30,12 @@ describe('fragments.Parser', function() {
 
         it('should parse attributes', function() {
             const result = subject.parse('<div class="root"/>');
-            assert.equal(result.attributes['class'], 'root');
+            assert.equal(result.attributes['class'].content, 'root');
         });
 
         it('should parse attributes key and value', function() {
             const result = subject.parse('<div placeholder="Search..."/>');
-            assert.equal(result.attributes['placeholder'], 'Search...');
+            assert.equal(result.attributes['placeholder'].content, 'Search...');
         });
 
         it('should parse children', function() {
@@ -101,7 +101,7 @@ describe('fragments.Parser', function() {
 
         it('should preserve attributes upper case', function() {
             const result = subject.parse('<div placeholder="Search..."/>');
-            assert.equal(result.attributes.placeholder, 'Search...');
+            assert.equal(result.attributes['placeholder'].content, 'Search...');
         });
 
         it('should parse className as an array of nodes with type', function() {
@@ -126,7 +126,7 @@ describe('fragments.Parser', function() {
 
         it('should parse attributes with a variable when there is a template', function() {
             const result = subject.parse('<Checkbox onChanged="{stockFilterChanged}"/>');
-            assert.equal(result.attributes.onChanged.type, 'variable');
+            assert.equal(result.attributes['onChanged'].type, 'variable');
         });
 
         it('should recognize self closing tags', function() {

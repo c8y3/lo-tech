@@ -188,7 +188,7 @@ describe('fragments.CodeGenerator', function() {
         });
 
         it('should set the value of regular attributes', function() {
-            const attributes = { placeholder: 'Search...' };
+            const attributes = { placeholder: { type: 'text', content: 'Search...' } };
             const result = subject.generate({type: 'element', tagName: 'Text', attributes: attributes, children: []});
             assert.equal(result[1], 'node1.setPlaceholder(\'Search...\');');
         });
