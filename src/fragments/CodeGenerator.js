@@ -43,8 +43,10 @@ export default function(scope) {
         return 'node' + variableCount;
     }
 
-    function declareNode(nodeName, node) {
+    function declareNode(node) {
+        const nodeName = generateNodeName();
         nodeDeclarations.push('const ' + nodeName + ' = ' + node + ';');
+        return nodeName;
     }
 
     function generateVariableChildrenSetter(parentNode, children) {
@@ -69,8 +71,7 @@ export default function(scope) {
             return generateVariableChildren();
         }
         const node = generator.generateVariable(name);
-        const nodeName = generateNodeName();
-        declareNode(nodeName, node);
+        const nodeName = declareNode(node);
 
         addSetter(name, nodeName + '.setData(' + name + ');');
         return nodeName;
@@ -132,12 +133,11 @@ export default function(scope) {
 
     function generateNode(htpl) {
         if (htpl.type === 'element') {
-            const nodeName = generateNodeName();
             const children = htpl.children;
             const childNodes = generateChildren(children);
             const node = generator.generateElement(htpl.tagName, childNodes);
+            const nodeName = declareNode(node);
             generateVariableChildrenSetter(nodeName, children);
-            declareNode(nodeName, node);
             generateAttributes(nodeName, htpl.attributes);
             return nodeName;
         }
