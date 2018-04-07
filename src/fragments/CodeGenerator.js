@@ -4,7 +4,8 @@ import LetterCase from '/fragments/LetterCase';
 const letterCase = LetterCase();
 const generator = NodeGenerator();
 
-const componentName = 'component';
+const COMPONENT = 'component';
+const CHILDREN = 'children';
 // TODO should group
 //      node creation
 //      node attributes initialization
@@ -40,15 +41,16 @@ export default function(scope) {
         nodeDeclarations.push('const ' + nodeName + ' = ' + node + ';');
     }
 
-    function generateVariableChildren(parentNode, position, name) {
-        const nodeName = generator.generateVariableChildren();
-        addSetter(name, parentNode + '.replaceChildren(' + position + ', ' + name + ');');
-        return generator.generateVariableChildren();
+    function generateVariableChildren(parentNode, position) {
+        addSetter(CHILDREN, parentNode + '.replaceChildren(' + position + ', ' + CHILDREN + ');');
+        // Template parameter {children} is necessarily an array.
+        // It is flattened to be inserted amoung the list of element children.
+        return '...' + CHILDREN;
     }
 
     function generateVariable(parentNode, position, name) {
-        if (name === 'children') {
-            return generateVariableChildren(parentNode, position, name);
+        if (name === CHILDREN) {
+            return generateVariableChildren(parentNode, position);
         }
         const node = generator.generateVariable(name);
         const nodeName = generateNodeName();
@@ -132,9 +134,9 @@ export default function(scope) {
 
     function generateResultObject() {
         if (methods.length === 0) {
-            return componentName;
+            return COMPONENT;
         }
-        return '{...' + componentName + ', ' + methods.join(', ') + '}';
+        return '{...' + COMPONENT + ', ' + methods.join(', ') + '}';
     }
     
     function generate(htpl) {
@@ -144,7 +146,7 @@ export default function(scope) {
             ...nodeDeclarations,
             ...instructions,
             ...functionDefinitions,
-            'const ' + componentName + ' = lotech.Component(' + root + ');',
+            'const ' + COMPONENT + ' = lotech.Component(' + root + ');',
             'return ' + resultObject + ';'
         ];
     }

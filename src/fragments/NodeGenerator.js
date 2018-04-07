@@ -25,12 +25,6 @@ function generateVariable(name) {
     return 'lotech.String(\'\')';
 }
 
-function generateVariableChildren() {
-    // Template parameter {children} is necessarily an array.
-    // It is flattened to be inserted amoung the list of element children.
-    return '...children';
-}
-
 function generateText(content) {
     return 'lotech.String(\'' + content + '\')';
 }
@@ -39,7 +33,6 @@ export default function() {
     return {
         generateElement,
         generateVariable,
-        generateVariableChildren,
         generateText
     };
 };
