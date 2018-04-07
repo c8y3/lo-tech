@@ -1,11 +1,5 @@
 import htmlparser from 'htmlparser2';
-
-function TextNode(content) {
-    return {
-        type: 'text',
-        content
-    }
-}
+import Text from '/fragments/nodes/Text'
 
 function VariableNode(text) {
     return {
@@ -23,20 +17,20 @@ function ElementNode(tagName, attributes) {
     }
 }
 
-let nodes;
+let nodeStack;
 
 function reset() {
-    nodes = [{
+    nodeStack = [{
         children: []
     }];
 }
 
 function getResult() {
-    return nodes[0].children[0];
+    return nodeStack[0].children[0];
 }
 
 function appendChild(node) {
-    const father = nodes[nodes.length-1];
+    const father = nodeStack[nodeStack.length-1];
     father.children.push(node);
 }
 
@@ -53,7 +47,7 @@ function parseText(text) {
     if (isVariable(text)) {
         return VariableNode(text);
     }
-    return TextNode(text);
+    return Text(text);
 }
 
 function parseAttribute(key, value) {
@@ -63,13 +57,13 @@ function parseAttribute(key, value) {
             if (isVariable(className)) {
                 return VariableNode(className);
             }
-            return TextNode(className);
+            return Text(className);
         });
     }
     if (isVariable(value)) {
         return VariableNode(value);
     }
-    return TextNode(value);
+    return Text(value);
 }
 
 function parseAttributes(attributes) {
@@ -84,7 +78,7 @@ function parseAttributes(attributes) {
 const parser = new htmlparser.Parser({
     onopentag(name, attributes) {
         const node = ElementNode(name, parseAttributes(attributes));
-        nodes.push(node);
+        nodeStack.push(node);
     },
     ontext(text) {
         const node = parseText(text);
@@ -94,7 +88,7 @@ const parser = new htmlparser.Parser({
         appendChild(node);
     },
     onclosetag(tagName) {
-        const node = nodes.pop();
+        const node = nodeStack.pop();
         appendChild(node);
     }
 }, {
