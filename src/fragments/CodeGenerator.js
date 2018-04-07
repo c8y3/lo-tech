@@ -47,15 +47,26 @@ export default function(scope) {
         nodeDeclarations.push('const ' + nodeName + ' = ' + node + ';');
     }
 
-    function generateVariableChildren(parentNode, position) {
+    function generateVariableChildrenSetter(parentNode, children) {
+        children.forEach(function(child, position) {
+            if (child.type !== 'variable') {
+                return;
+            }
+            if (child.name === CHILDREN) {
+                addSetter(CHILDREN, parentNode + '.replaceChildren(' + position + ', ' + CHILDREN + ');');
+            }
+        });
+    }
+
+    function generateVariableChildren() {
         // Template parameter {children} is necessarily an array.
         // It is flattened to be inserted amoung the list of element children.
         return '...' + CHILDREN;
     }
 
-    function generateVariable(parentNode, position, name) {
+    function generateVariable(name) {
         if (name === CHILDREN) {
-            return generateVariableChildren(parentNode, position);
+            return generateVariableChildren();
         }
         const node = generator.generateVariable(name);
         const nodeName = generateNodeName();
@@ -113,36 +124,25 @@ export default function(scope) {
         });
     }
 
-    function generateChildren(parentNode, children) {
-        return children.map(function(child, position) {
-            return generateNode(parentNode, position, child);
+    function generateChildren(children) {
+        return children.map(function(child) {
+            return generateNode(child);
         });
     }
 
-    function generateVariableChildrenSetter(parentNode, children) {
-        children.forEach(function(child, position) {
-            if (child.type !== 'variable') {
-                return;
-            }
-            if (child.name === CHILDREN) {
-                addSetter(CHILDREN, parentNode + '.replaceChildren(' + position + ', ' + CHILDREN + ');');
-            }
-        });
-    }
-
-    function generateNode(parentNode, position, htpl) {
+    function generateNode(htpl) {
         if (htpl.type === 'element') {
             const nodeName = generateNodeName();
             const children = htpl.children;
-            const childNodes = generateChildren(nodeName, children);
-            generateVariableChildrenSetter(nodeName, children);
+            const childNodes = generateChildren(children);
             const node = generator.generateElement(htpl.tagName, childNodes);
+            generateVariableChildrenSetter(nodeName, children);
             declareNode(nodeName, node);
             generateAttributes(nodeName, htpl.attributes);
             return nodeName;
         }
         if (htpl.type === 'variable') {
-            return generateVariable(parentNode, position, htpl.name);
+            return generateVariable(htpl.name);
         }
         if (htpl.type === 'text') {
             return generator.generateText(htpl.content);
@@ -157,7 +157,7 @@ export default function(scope) {
     }
     
     function generate(htpl) {
-        const root = generateNode(undefined, 0, htpl);
+        const root = generateNode(htpl);
         let resultObject = generateResultObject();
         return [
             ...nodeDeclarations,
