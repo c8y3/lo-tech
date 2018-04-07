@@ -48,7 +48,6 @@ export default function(scope) {
     }
 
     function generateVariableChildren(parentNode, position) {
-        addSetter(CHILDREN, parentNode + '.replaceChildren(' + position + ', ' + CHILDREN + ');');
         // Template parameter {children} is necessarily an array.
         // It is flattened to be inserted amoung the list of element children.
         return '...' + CHILDREN;
@@ -120,11 +119,24 @@ export default function(scope) {
         });
     }
 
+    function generateVariableChildrenSetter(parentNode, children) {
+        children.forEach(function(child, position) {
+            if (child.type !== 'variable') {
+                return;
+            }
+            if (child.name === CHILDREN) {
+                addSetter(CHILDREN, parentNode + '.replaceChildren(' + position + ', ' + CHILDREN + ');');
+            }
+        });
+    }
+
     function generateNode(parentNode, position, htpl) {
         if (htpl.type === 'element') {
             const nodeName = generateNodeName();
-            const children = generateChildren(nodeName, htpl.children);
-            const node = generator.generateElement(htpl.tagName, children);
+            const children = htpl.children;
+            const childNodes = generateChildren(nodeName, children);
+            generateVariableChildrenSetter(nodeName, children);
+            const node = generator.generateElement(htpl.tagName, childNodes);
             declareNode(nodeName, node);
             generateAttributes(nodeName, htpl.attributes);
             return nodeName;
