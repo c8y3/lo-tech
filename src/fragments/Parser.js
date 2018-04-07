@@ -69,7 +69,6 @@ function parseAttribute(key, value) {
     if (isVariable(value)) {
         return VariableNode(value);
     }
-// TODO should return a TextNode here
     return TextNode(value);
 }
 
