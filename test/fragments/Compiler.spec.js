@@ -12,9 +12,9 @@ describe('fragments.Compiler', function() {
             const result = subject.compile('<div/>');
             const expectedResult = 'import lotech from \'/lotech\';\n'
                                  + 'export default function(children) {\n'
-                                 + '  const node1 = lotech.Div([]);\n'
-                                 + '  const component = lotech.Component(node1);\n'
-                                 + '  return component;\n'
+                                 + '    const node1 = lotech.Div([]);\n'
+                                 + '    const component = lotech.Component(node1);\n'
+                                 + '    return component;\n'
                                  + '}';
             assert.equal(result, expectedResult);
         });
@@ -26,9 +26,9 @@ describe('fragments.Compiler', function() {
             const expectedResult = 'import lotech from \'/lotech\';\n'
                                  + 'import Row from \'Row\';\n'
                                  + 'export default function(children) {\n'
-                                 + '  const node1 = Row([]);\n'
-                                 + '  const component = lotech.Component(node1);\n'
-                                 + '  return component;\n'
+                                 + '    const node1 = Row([]);\n'
+                                 + '    const component = lotech.Component(node1);\n'
+                                 + '    return component;\n'
                                  + '}';
             assert.equal(result, expectedResult);
         });

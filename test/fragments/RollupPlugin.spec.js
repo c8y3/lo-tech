@@ -22,9 +22,9 @@ describe('fragments.RollupPlugin', function() {
             const result = subject.transform('<div/>', '.htpl');
             const expectedResult = 'import lotech from \'/lotech\';\n'
                                  + 'export default function(children) {\n'
-                                 + '  const node1 = lotech.Div([]);\n'
-                                 + '  const component = lotech.Component(node1);\n'
-                                 + '  return component;\n'
+                                 + '    const node1 = lotech.Div([]);\n'
+                                 + '    const component = lotech.Component(node1);\n'
+                                 + '    return component;\n'
                                  + '}';
             assert.equal(result, expectedResult);
         });
