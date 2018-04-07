@@ -7,6 +7,10 @@ const generator = NodeGenerator();
 const COMPONENT = 'component';
 const CHILDREN = 'children';
 
+// TODO should do in two steps (and split in two classes):
+//     1) collect everything
+//     2) generate code
+
 // TODO add this in design explanations
 // templates should be simple and follow html
 // accept attributes
@@ -36,6 +40,11 @@ export default function(scope) {
     function addSetter(name, body) {
         const methodName = generateMethodName('set', name);
         addMethod(methodName, name, body);
+    }
+
+    function addListener(variableName, nodeName, eventName) {
+        const methodName = generateMethodName('addListenerOn', variableName);
+        addMethod(methodName, 'listener', nodeName + '.addListener' + letterCase.capitalize(eventName) + '(listener);');
     }
 
     function generateNodeName() {
@@ -105,7 +114,7 @@ export default function(scope) {
         }
         if (key.startsWith('on')) {
             const methodName = generateMethodName('addListenerOn', value.name);
-            addMethod(methodName, 'listener', nodeName + '.addListener' + letterCase.capitalize(key) + '(listener);');
+            addListener(value.name, nodeName, key);
             return;
         }
         // TODO there is probably room to clean up the code...
