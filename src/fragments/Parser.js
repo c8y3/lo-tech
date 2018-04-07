@@ -36,15 +36,22 @@ function parseText(text) {
     return Text(text);
 }
 
+function parseClassNames(value) {
+    if (value === undefined) {
+        return [];
+    }
+    const classNames = value.split(' ');
+    return classNames.map(function(className) {
+        if (isVariable(className)) {
+            return Variable(className);
+        }
+        return Text(className);
+    });
+}
+
 function parseAttribute(key, value) {
     if (key === 'className') {
-        const classNames = value.split(' ');
-        return classNames.map(function(className) {
-            if (isVariable(className)) {
-                return Variable(className);
-            }
-            return Text(className);
-        });
+        return parseClassNames(value);
     }
     if (isVariable(value)) {
         return Variable(value);
@@ -63,7 +70,9 @@ function parseAttributes(attributes) {
 
 const parser = new htmlparser.Parser({
     onopentag(name, attributes) {
-        const node = Element(name, parseAttributes(attributes));
+        const style = parseClassNames(attributes.className);
+        const properties = parseAttributes(attributes);
+        const node = Element(name, style, properties);
         nodeStack.push(node);
     },
     ontext(text) {

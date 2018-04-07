@@ -10,6 +10,7 @@ const CHILDREN = 'children';
 // TODO should do in two steps (and split in two classes):
 //     1) collect everything
 //     2) generate code
+// compile/generate (or compile/emit)
 
 // TODO add this in design explanations
 // templates should be simple and follow html
