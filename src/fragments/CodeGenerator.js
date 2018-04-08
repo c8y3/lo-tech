@@ -10,7 +10,7 @@ const CHILDREN = 'children';
 // TODO should do in two steps (and split in two classes):
 //     1) collect everything
 //     2) generate code
-// compile/generate (or compile/emit)
+// compile/generate (or compile/emit) (CodeTransformation/transform)
 
 // TODO add this in design explanations
 // templates should be simple and follow html
@@ -55,7 +55,7 @@ export default function(scope) {
 
     function declareNode(node) {
         const nodeName = generateNodeName();
-        nodeDeclarations.push('const ' + nodeName + ' = ' + node + ';');
+        nodeDeclarations.push({ nodeName, node });
         return nodeName;
     }
 
@@ -173,8 +173,9 @@ export default function(scope) {
     function generate(htpl) {
         const root = generateNode(htpl);
         let resultObject = generateResultObject();
+        const declarations = generator.generateDeclarations(nodeDeclarations);
         return [
-            ...nodeDeclarations,
+            ...declarations,
             ...instructions,
             ...functionDefinitions,
             'const ' + COMPONENT + ' = lotech.Component(' + root + ');',

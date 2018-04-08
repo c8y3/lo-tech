@@ -29,10 +29,19 @@ function generateText(content) {
     return 'lotech.String(\'' + content + '\')';
 }
 
+function generateDeclaration(declaration) {
+    return 'const ' + declaration.nodeName + ' = ' + declaration.node + ';'
+}
+
+function generateDeclarations(declarations) {
+    return declarations.map(generateDeclaration);
+}
+
 export default function() {
     return {
         generateElement,
         generateVariable,
-        generateText
+        generateText,
+        generateDeclarations
     };
 };
