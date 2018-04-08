@@ -6,6 +6,6 @@ export default function(tagName) {
         attributes: {},
         events: {},
         children: []
-    }
+    };
 }
 

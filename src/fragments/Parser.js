@@ -2,7 +2,7 @@ import htmlparser from 'htmlparser2';
 import Text from '/fragments/nodes/Text';
 import Variable from '/fragments/nodes/Variable';
 import Element from '/fragments/nodes/Element';
-import NodeStack from '/fragments/NodeStack';
+import Stack from '/fragments/Stack';
 
 function isVariable(text) {
     return (text[0] === '{') && (text[text.length-1] === '}');
@@ -64,44 +64,58 @@ function parseAttributes(htmlAttributes) {
     };
 }
 
-let nodes;
-
-function onopentag(name, htmlAttributes) {
+function parseElement(name, htmlAttributes) {
     const attributes = parseAttributes(htmlAttributes);
-    const node = {
+    return {
         ...Element(name),
         ...attributes
-    }
-    nodes.push(node);
+    };
 }
-
-function onclosetag() {
-    const node = nodes.pop();
-    nodes.appendChild(node);
-}
-
-function ontext(text) {
-    const node = parseText(text);
-    if (node === undefined) {
-        return;
-    }
-    nodes.appendChild(node);
-}
-
-const parseOptions = {
-    lowerCaseTags: false,
-    lowerCaseAttributeNames: false,
-    recognizeSelfClosing: true
-};
-
-const parser = new htmlparser.Parser({ onopentag, ontext, onclosetag }, parseOptions);
 
 export default function() {
+    let nodes = Stack();
+    let tree;
+
+    function appendChild(node) {
+        const parent = nodes.peek();
+        if (parent === undefined) {
+            return;
+        }
+        parent.children.push(node);
+    }
+
+    function onopentag(name, attributes) {
+        const node = parseElement(name, attributes);
+        nodes.push(node);
+    }
+
+    function onclosetag() {
+        const node = nodes.pop();
+        appendChild(node);
+        tree = node;
+    }
+
+    function ontext(text) {
+        const node = parseText(text);
+        if (node === undefined) {
+            return;
+        }
+        appendChild(node);
+    }
+
+    const parseOptions = {
+        lowerCaseTags: false,
+        lowerCaseAttributeNames: false,
+        recognizeSelfClosing: true
+    };
+
+    const parser = new htmlparser.Parser({ onopentag, ontext, onclosetag }, parseOptions);
 
     function parse(input) {
-        nodes = NodeStack();
         parser.parseComplete(input);
-        return nodes.getResult();
+        const result = tree;
+        tree = undefined;
+        return result;
     }
 
     return {
