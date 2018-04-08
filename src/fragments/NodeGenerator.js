@@ -1,12 +1,22 @@
 import LetterCase from '/fragments/LetterCase';
 
+// TODO this object could be enriched in the configuration to set names to some elements... (it could also be a function, or just some convention. Think about it...)
+const PREDEFINED = {
+    div: 'lotech.Div',
+    span: 'lotech.Span',
+    p: 'lotech.P',
+    form: 'lotech.Form',
+    text: 'lotech.input.Text'
+};
+
 const letterCase = LetterCase();
 
 function generateType(tagName) {
-    if (letterCase.startsWithCapitalLetter(tagName[0])) {
-        return tagName;
+    const type = PREDEFINED[tagName];
+    if (type !== undefined) {
+        return type;
     }
-    return 'lotech.' + letterCase.capitalize(tagName);
+    return tagName;
 }
 
 function generateValue(key, value) {
@@ -56,6 +66,7 @@ function generateInitializations(initializations) {
 export default function() {
     return {
         generateText,
+        generateElement, // TODO should not be public, but easier for testing, think about how to split things up
         generateDeclarations,
         generateInitialization,
         generateInitializations

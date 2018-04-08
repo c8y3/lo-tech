@@ -8,6 +8,22 @@ describe('fragments.NodeGenerator', function() {
         subject = NodeGenerator();
     });
 
+    describe('generateElement', function() {
+        it('should generate text element as a lotech element', function() {
+            var result = subject.generateElement('text', []);
+            assert.equal(result, 'lotech.input.Text([])');
+        });
+
+        it('should have form in its predefined elements', function() {
+            var result = subject.generateElement('form', []);
+            assert.equal(result, 'lotech.Form([])');
+        });
+
+        it('should have span in its predefined elements', function() {
+            var result = subject.generateElement('span', []);
+            assert.equal(result, 'lotech.Span([])');
+        });
+    });
 
     describe('generateDeclarations', function() {
         it('should build the lotech element', function() {
