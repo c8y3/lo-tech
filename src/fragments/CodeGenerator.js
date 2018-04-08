@@ -121,7 +121,6 @@ export default function(scope) {
     }
 
     function generateEvent(nodeName, key, value) {
-        const methodName = generateMethodName('addListenerOn', value.name);
         addListener(value.name, nodeName, key);
     }
 
