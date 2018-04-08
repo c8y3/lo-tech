@@ -62,16 +62,21 @@ function parseAttribute(key, value) {
 function parseAttributes(htmlAttributes) {
     const style = parseClassNames(htmlAttributes.className);
     const attributes = {};
+    const events = {};
     Object.keys(htmlAttributes).forEach(function(key) {
         if (key === 'className') {
             return;
         }
         const value = parseAttribute(key, htmlAttributes[key]);
-        attributes[key] = value;
+        if (key.startsWith('on')) {
+            events[key] = value;
+        }
+            attributes[key] = value;
     });
     return {
         style,
-        attributes
+        attributes,
+        events
     };
 }
 

@@ -205,7 +205,7 @@ describe('fragments.CodeGenerator', function() {
 
         it('should define a method to add a listener with attributes starting by on', function() {
             const element = Element('Checkbox');
-            element.attributes = { onChanged: {type: 'variable', name: 'stockFilterChanged'} };
+            element.events = { onChanged: {type: 'variable', name: 'stockFilterChanged'} };
             const result = subject.generate(element);
 // TODO would be more efficient this way
 //            assert.equal(result[1], 'const addListenerOnStockFilterChanged = node1.addListenerOnChanged;');
@@ -214,7 +214,7 @@ describe('fragments.CodeGenerator', function() {
 
         it('should define a method to add a listener which calls the correct event listener', function() {
             const element = Element('Text');
-            element.attributes = { onInput: {type: 'variable', name: 'nameFilterChanged'} };
+            element.events = { onInput: {type: 'variable', name: 'nameFilterChanged'} };
             const result = subject.generate(element);
 // TODO would be more efficient this way
 //            assert.equal(result[1], 'const addListenerOnStockFilterChanged = node1.addListenerOnChanged;');

@@ -109,12 +109,6 @@ export default function(scope) {
     }
 
     function generateAttribute(nodeName, key, value) {
-        if (key.startsWith('on')) {
-            const methodName = generateMethodName('addListenerOn', value.name);
-            addListener(value.name, nodeName, key);
-            return;
-        }
-        // TODO there is probably room to clean up the code...
         const setterName = generateMethodName('set', key);
         if (value.type === 'variable') {
             addSetter(value.name, nodeName + '.' + setterName + '(' + value.name + ');');
@@ -129,6 +123,18 @@ export default function(scope) {
             const value = attributes[key];
             generateAttribute(nodeName, key, value);
         });
+    }
+
+    function generateEvent(nodeName, key, value) {
+        const methodName = generateMethodName('addListenerOn', value.name);
+        addListener(value.name, nodeName, key);
+    }
+
+    function generateEvents(nodeName, events) {
+        Object.keys(events).forEach(function(key) {
+            const value = events[key];
+            generateEvent(nodeName, key, value);
+        });        
     }
 
     function generateChildren(children) {
@@ -146,6 +152,7 @@ export default function(scope) {
             generateVariableChildrenSetter(nodeName, children);
             generateStyle(nodeName, htpl.style);
             generateAttributes(nodeName, htpl.attributes);
+            generateEvents(nodeName, htpl.events);
             return nodeName;
         }
         if (htpl.type === 'variable') {

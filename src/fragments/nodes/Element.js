@@ -4,6 +4,7 @@ export default function(tagName) {
         tagName,
         style: [],
         attributes: {},
+        events: {},
         children: []
     }
 }

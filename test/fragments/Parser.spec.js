@@ -133,5 +133,10 @@ describe('fragments.Parser', function() {
             const result = subject.parse('<div><div/><p/></div>');
             assert.equal(2, result.children.length);
         });
+
+        it('should return attributes starting with on as events', function() {
+            const result = subject.parse('<div onClicked="{onActivated}"/>');
+            assert.equal(result.events.onClicked.type, 'variable');
+        });
     });
 });
