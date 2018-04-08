@@ -4,8 +4,6 @@ import Variable from '/fragments/nodes/Variable';
 import Element from '/fragments/nodes/Element';
 import NodeStack from '/fragments/NodeStack';
 
-let nodes;
-
 function isVariable(text) {
     return (text[0] === '{') && (text[text.length-1] === '}');
 }
@@ -66,38 +64,47 @@ function parseAttributes(htmlAttributes) {
     };
 }
 
-const parser = new htmlparser.Parser({
-    onopentag(name, htmlAttributes) {
-        const attributes = parseAttributes(htmlAttributes);
-        const node = {
-            ...Element(name),
-            ...attributes
-        }
-        nodes.push(node);
-    },
-    ontext(text) {
-        const node = parseText(text);
-        if (node === undefined) {
-            return;
-        }
-        nodes.appendChild(node);
-    },
-    onclosetag(tagName) {
-        const node = nodes.pop();
-        nodes.appendChild(node);
+let nodes;
+
+function onopentag(name, htmlAttributes) {
+    const attributes = parseAttributes(htmlAttributes);
+    const node = {
+        ...Element(name),
+        ...attributes
     }
-}, {
+    nodes.push(node);
+}
+
+function onclosetag() {
+    const node = nodes.pop();
+    nodes.appendChild(node);
+}
+
+function ontext(text) {
+    const node = parseText(text);
+    if (node === undefined) {
+        return;
+    }
+    nodes.appendChild(node);
+}
+
+const parseOptions = {
     lowerCaseTags: false,
     lowerCaseAttributeNames: false,
     recognizeSelfClosing: true
-});
+};
+
+const parser = new htmlparser.Parser({ onopentag, ontext, onclosetag }, parseOptions);
 
 export default function() {
+
+    function parse(input) {
+        nodes = NodeStack();
+        parser.parseComplete(input);
+        return nodes.getResult();
+    }
+
     return {
-        parse(input) {
-            nodes = NodeStack();
-            parser.parseComplete(input);
-            return nodes.getResult();
-        }
+        parse
     };
 };
