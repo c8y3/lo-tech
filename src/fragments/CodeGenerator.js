@@ -26,7 +26,7 @@ export default function(scope) {
     let variableCount = 0;
     const nodeDeclarations = [];
     const functionDefinitions = [];
-    const instructions = [];
+    const initializations = [];
     const methods = [];
 
     function generateMethodName(prefix, variableName) {
@@ -89,22 +89,16 @@ export default function(scope) {
         return nodeName;
     }
 
-    function generateCall(nodeName, methodName, values) {
-        const parameters = values.join('\', \'');
-        return nodeName + '.' + methodName + '(\'' + parameters + '\');';
-    }
-
     // TODO rename className into class and have a special field (instead of mixing with other attributes) Do this in the parser
     function generateStyle(nodeName, classNames) {
         classNames.forEach(function(className) {
             if (className.type === 'text') {
                 const style = [scope, className.content];
-                const addStyle = generateCall(nodeName, 'addStyle', style);
-                instructions.push(addStyle);
+                initializations.push({node: nodeName, method: 'addStyle', parameters: style});
             } else {
                 const style = [scope, className.name];
-                const addStyle = generateCall(nodeName, 'addStyle', style);
-                const removeStyle = generateCall(nodeName, 'removeStyle', style);
+                const addStyle = generator.generateInitialization({node: nodeName, method: 'addStyle', parameters: style});
+                const removeStyle = generator.generateInitialization({node: nodeName, method: 'removeStyle', parameters: style});
                 addSetter('isMissing', 'if (isMissing) { ' + addStyle + ' } else { ' + removeStyle + ' }');
             }
         });
@@ -116,8 +110,7 @@ export default function(scope) {
             addSetter(value.name, nodeName + '.' + setterName + '(' + value.name + ');');
             return;
         }
-        const setAttribute = generateCall(nodeName, setterName, [value.content]);
-        instructions.push(setAttribute);
+        initializations.push({node: nodeName, method: setterName, parameters: [value.content]});
     }
 
     function generateAttributes(nodeName, attributes) {
@@ -179,6 +172,7 @@ export default function(scope) {
         const root = generateNode(htpl);
         let resultObject = generateResultObject();
         const declarations = generator.generateDeclarations(nodeDeclarations);
+        const instructions = generator.generateInitializations(initializations);
         return [
             ...declarations,
             ...instructions,

@@ -44,9 +44,20 @@ function generateDeclarations(declarations) {
     return declarations.map(generateDeclaration);
 }
 
+function generateInitialization(initialization) {
+    const parameters = initialization.parameters.join('\', \'');
+    return initialization.node + '.' + initialization.method + '(\'' + parameters + '\');';
+}
+
+function generateInitializations(initializations) {
+    return initializations.map(generateInitialization);
+}
+
 export default function() {
     return {
         generateText,
-        generateDeclarations
+        generateDeclarations,
+        generateInitialization,
+        generateInitializations
     };
 };
