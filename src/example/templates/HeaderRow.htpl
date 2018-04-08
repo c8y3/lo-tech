@@ -1,5 +1,5 @@
 import Row from '/Row.htpl';
 
-<Row className="root">
+<Row class="root">
   {children}
 </Row>

@@ -4,6 +4,8 @@ import Variable from '/fragments/nodes/Variable';
 import Element from '/fragments/nodes/Element';
 import Stack from '/fragments/Stack';
 
+const CLASS_ATTRIBUTE = 'class';
+
 function isVariable(text) {
     return (text[0] === '{') && (text[text.length-1] === '}');
 }
@@ -34,9 +36,6 @@ function parseClassNames(value) {
 }
 
 function parseAttribute(key, value) {
-    if (key === 'className') {
-        return parseClassNames(value);
-    }
     if (isVariable(value)) {
         return Variable(value);
     }
@@ -44,11 +43,11 @@ function parseAttribute(key, value) {
 }
 
 function parseAttributes(htmlAttributes) {
-    const style = parseClassNames(htmlAttributes.className);
+    const style = parseClassNames(htmlAttributes[CLASS_ATTRIBUTE]);
     const attributes = {};
     const events = {};
     Object.keys(htmlAttributes).forEach(function(key) {
-        if (key === 'className') {
+        if (key === CLASS_ATTRIBUTE) {
             return;
         }
         const value = parseAttribute(key, htmlAttributes[key]);

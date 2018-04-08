@@ -29,8 +29,8 @@ describe('fragments.Parser', function() {
         });
 
         it('should parse attributes', function() {
-            const result = subject.parse('<div class="root"/>');
-            assert.equal(result.attributes['class'].content, 'root');
+            const result = subject.parse('<div value="bike"/>');
+            assert.equal(result.attributes['value'].content, 'bike');
         });
 
         it('should parse attributes key and value', function() {
@@ -104,23 +104,23 @@ describe('fragments.Parser', function() {
             assert.equal(result.attributes['placeholder'].content, 'Search...');
         });
 
-        it('should parse className as an array of nodes with type', function() {
-            const result = subject.parse('<div className="name"/>');
+        it('should parse attribute class as an array of nodes with type', function() {
+            const result = subject.parse('<div class="name"/>');
             assert.equal(result.style[0].type, 'text');
         });
 
         it('should parse simple classes as text nodes with correct content', function() {
-            const result = subject.parse('<div className="name"/>');
+            const result = subject.parse('<div class="name"/>');
             assert.equal(result.style[0].content, 'name');
         });
 
-        it('should parse className as an array with all elements', function() {
-            const result = subject.parse('<div className="root selected"/>');
+        it('should parse attribute class as an array with all elements', function() {
+            const result = subject.parse('<div class="root selected"/>');
             assert.equal(result.style[1].content, 'selected');
         });
 
-        it('should parse className as an array with a variable when there is a template', function() {
-            const result = subject.parse('<div className="{isMissing}"/>');
+        it('should parse attribute class as an array with a variable when there is a template', function() {
+            const result = subject.parse('<div class="{isMissing}"/>');
             assert.equal(result.style[0].type, 'variable');
         });
 
