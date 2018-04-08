@@ -1,10 +1,10 @@
 import Row from '/Row.htpl';
 
 <Row>
-    <span className="name {isMissing}">
+    <lotech.Span className="name {isMissing}">
         {name}
-    </span>
-    <span>
+    </lotech.Span>
+    <lotech.Span>
         {price}
-    </span>
+    </lotech.Span>
 </Row>

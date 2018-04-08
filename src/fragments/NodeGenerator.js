@@ -1,14 +1,3 @@
-import LetterCase from '/fragments/LetterCase';
-
-const letterCase = LetterCase();
-
-function generateType(tagName) {
-    if (letterCase.startsWithCapitalLetter(tagName[0])) {
-        return tagName;
-    }
-    return 'lotech.' + letterCase.capitalize(tagName);
-}
-
 function generateValue(key, value) {
     if (key === 'style') {
         value = value.split(' ');
@@ -16,8 +5,7 @@ function generateValue(key, value) {
     return JSON.stringify(value);
 }
 
-function generateElement(tagName, children) {
-    const type = generateType(tagName);
+function generateElement(type, children) {
     return type + '([' + children.join(', ') + '])';
 }
 

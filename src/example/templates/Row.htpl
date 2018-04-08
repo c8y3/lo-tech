@@ -1,3 +1,3 @@
-<div className="root">
+<lotech.Div className="root">
     {children}
-</div>
+</lotech.Div>
