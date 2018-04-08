@@ -19,7 +19,7 @@ describe('fragments.RollupPlugin', function() {
         });
 
         it('should compile the input code', function() {
-            const result = subject.transform('<lotech.Div/>', '.htpl');
+            const result = subject.transform('<div/>', '.htpl');
             const expectedResult = 'import lotech from \'/lotech\';\n'
                                  + 'export default function(children) {\n'
                                  + '    const node1 = lotech.Div([]);\n'

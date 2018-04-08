@@ -1,8 +1,5 @@
 import CodeGenerator from '/fragments/CodeGenerator';
 import Element from '/fragments/nodes/Element';
-// TODO we could register all the different Nodes in the generator, then it wouldn't be necessary to import them
-//      and we could give them a name div => lotech.Div
-//      Not so simple (because htpl use js elements and vice versa), think about it...
 
 // TODO should split the CodeGenerator class => the tests are becoming too cumbersome
 describe('fragments.CodeGenerator', function() {
@@ -14,7 +11,7 @@ describe('fragments.CodeGenerator', function() {
 
     describe('generate', function() {
         it('should create a variable for each node', function() {
-            const element = Element('lotech.Div');
+            const element = Element('div');
             const result = subject.generate(element);
             assert.equal(result[0], 'const node1 = lotech.Div([]);');
         });
@@ -26,13 +23,13 @@ describe('fragments.CodeGenerator', function() {
         });
 
         it('should return a constructor of the node', function() {
-            const element = Element('lotech.P');
+            const element = Element('p');
             const result = subject.generate(element);
             assert.equal(result[0], 'const node1 = lotech.P([]);');
         });
 
         it('should append children', function() {
-            const element = Element('lotech.Div');
+            const element = Element('div');
             element.children = [{type: 'variable', name: 'children'}];
             const result = subject.generate(element);
             assert.equal(result[0], 'const node1 = lotech.Div([...children]);');
@@ -74,7 +71,7 @@ describe('fragments.CodeGenerator', function() {
         });
 
         it('should return the text as a lotech.String node', function() {
-            const element = Element('lotech.Div');
+            const element = Element('div');
             element.children = [{type: 'text', content: 'Hello'}];
             const result = subject.generate(element);
             assert.equal(result[0], 'const node1 = lotech.Div([lotech.String(\'Hello\')]);');
@@ -114,7 +111,7 @@ describe('fragments.CodeGenerator', function() {
         });
 
         it('should use the variable name for variables which are not children', function() {
-            const element = Element('lotech.Div');
+            const element = Element('div');
             element.children = [{type: 'variable', name: 'price'}];
             const result = subject.generate(element);
             assert.equal(result[1], 'const node2 = lotech.Div([node1]);');
@@ -159,7 +156,7 @@ describe('fragments.CodeGenerator', function() {
         });
 
         it('should insert the correct node when there are several variables', function() {
-            const element = Element('lotech.Div');
+            const element = Element('div');
             element.children = [{type: 'variable', name: 'name'}, {type: 'variable', name: 'price'}];
             const result = subject.generate(element);
             assert.equal(result[2], 'const node3 = lotech.Div([node1, node2]);');

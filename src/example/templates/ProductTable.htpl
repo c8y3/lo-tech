@@ -1,9 +1,9 @@
 import HeaderRow from '/HeaderRow.htpl';
 
-<lotech.Div>
+<div>
     <HeaderRow>
-        <lotech.Span className="name">Name</lotech.Span>
-        <lotech.Span>Price</lotech.Span>
+        <span className="name">Name</span>
+        <span>Price</span>
     </HeaderRow>
     {children}
-</lotech.Div>
+</div>

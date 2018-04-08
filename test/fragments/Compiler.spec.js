@@ -9,7 +9,7 @@ describe('fragments.Compiler', function() {
 
     describe('compile', function() {
         it('should not fail', function() {
-            const result = subject.compile('<lotech.Div/>');
+            const result = subject.compile('<div/>');
             const expectedResult = 'import lotech from \'/lotech\';\n'
                                  + 'export default function(children) {\n'
                                  + '    const node1 = lotech.Div([]);\n'
