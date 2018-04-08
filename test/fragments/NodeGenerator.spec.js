@@ -10,7 +10,7 @@ describe('fragments.NodeGenerator', function() {
 
     describe('generateElement', function() {
         it('should generate text element as a lotech element', function() {
-            var result = subject.generateElement('text', []);
+            var result = subject.generateElement('inputText', []);
             assert.equal(result, 'lotech.input.Text([])');
         });
 
@@ -25,7 +25,7 @@ describe('fragments.NodeGenerator', function() {
         });
 
         it('should generate checkbox element as a lotech element', function() {
-            var result = subject.generateElement('checkbox', []);
+            var result = subject.generateElement('inputCheckbox', []);
             assert.equal(result, 'lotech.input.Checkbox([])');
         });
     });

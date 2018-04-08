@@ -6,8 +6,8 @@ const PREDEFINED = {
     span: 'lotech.Span',
     p: 'lotech.P',
     form: 'lotech.Form',
-    text: 'lotech.input.Text',
-    checkbox: 'lotech.input.Checkbox'
+    inputText: 'lotech.input.Text',
+    inputCheckbox: 'lotech.input.Checkbox'
 };
 
 const letterCase = LetterCase();

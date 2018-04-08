@@ -1,7 +1,7 @@
 <form>
-    <text placeholder="Search..." onInput="{nameFilterChanged}" />
+    <inputText placeholder="Search..." onInput="{nameFilterChanged}" />
     <p>
-        <checkbox onChanged="{stockFilterChanged}" />
+        <inputCheckbox onChanged="{stockFilterChanged}" />
         Only show products in stock
     </p>
 </form>
