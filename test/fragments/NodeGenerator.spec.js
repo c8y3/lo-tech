@@ -23,6 +23,11 @@ describe('fragments.NodeGenerator', function() {
             var result = subject.generateElement('span', []);
             assert.equal(result, 'lotech.Span([])');
         });
+
+        it('should generate checkbox element as a lotech element', function() {
+            var result = subject.generateElement('checkbox', []);
+            assert.equal(result, 'lotech.input.Checkbox([])');
+        });
     });
 
     describe('generateDeclarations', function() {

@@ -1,12 +1,13 @@
 import LetterCase from '/fragments/LetterCase';
 
-// TODO this object could be enriched in the configuration to set names to some elements... (it could also be a function, or just some convention. Think about it...)
+// TODO this object could be enriched in the configuration to set names to some elements... (it could also be a function, or just some convention. Think about it...) => would avoid the import section (but be global, ask advice...?)
 const PREDEFINED = {
     div: 'lotech.Div',
     span: 'lotech.Span',
     p: 'lotech.P',
     form: 'lotech.Form',
-    text: 'lotech.input.Text'
+    text: 'lotech.input.Text',
+    checkbox: 'lotech.input.Checkbox'
 };
 
 const letterCase = LetterCase();

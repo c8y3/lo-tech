@@ -1,10 +1,7 @@
-const Checkbox = lotech.input.Checkbox;
-const Text = lotech.input.Text;
-
 <form>
-    <Text placeholder="Search..." onInput="{nameFilterChanged}" />
+    <text placeholder="Search..." onInput="{nameFilterChanged}" />
     <p>
-        <Checkbox onChanged="{stockFilterChanged}" />
+        <checkbox onChanged="{stockFilterChanged}" />
         Only show products in stock
     </p>
 </form>
