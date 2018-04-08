@@ -2,23 +2,9 @@ import htmlparser from 'htmlparser2';
 import Text from '/fragments/nodes/Text';
 import Variable from '/fragments/nodes/Variable';
 import Element from '/fragments/nodes/Element';
+import NodeStack from '/fragments/NodeStack';
 
-let nodeStack;
-
-function reset() {
-    nodeStack = [{
-        children: []
-    }];
-}
-
-function getResult() {
-    return nodeStack[0].children[0];
-}
-
-function appendChild(node) {
-    const father = nodeStack[nodeStack.length-1];
-    father.children.push(node);
-}
+let nodes;
 
 function isVariable(text) {
     return (text[0] === '{') && (text[text.length-1] === '}');
@@ -87,18 +73,18 @@ const parser = new htmlparser.Parser({
             ...Element(name),
             ...attributes
         }
-        nodeStack.push(node);
+        nodes.push(node);
     },
     ontext(text) {
         const node = parseText(text);
         if (node === undefined) {
             return;
         }
-        appendChild(node);
+        nodes.appendChild(node);
     },
     onclosetag(tagName) {
-        const node = nodeStack.pop();
-        appendChild(node);
+        const node = nodes.pop();
+        nodes.appendChild(node);
     }
 }, {
     lowerCaseTags: false,
@@ -109,9 +95,9 @@ const parser = new htmlparser.Parser({
 export default function() {
     return {
         parse(input) {
-            reset();
+            nodes = NodeStack();
             parser.parseComplete(input);
-            return getResult();
+            return nodes.getResult();
         }
     };
 };
