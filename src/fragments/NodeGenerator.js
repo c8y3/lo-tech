@@ -46,7 +46,6 @@ function generateDeclarations(declarations) {
 
 export default function() {
     return {
-        generateElement,
         generateText,
         generateDeclarations
     };

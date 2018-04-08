@@ -9,15 +9,15 @@ describe('fragments.NodeGenerator', function() {
     });
 
 
-    describe('generateElement', function() {
+    describe('generateDeclarations', function() {
         it('should build the lotech element', function() {
-            var result = subject.generateElement('div', []);
-            assert.equal(result, 'lotech.Div([])');
+            var result = subject.generateDeclarations([{nodeName: 'x', node: {type: 'element', tagName: 'div', children: []}}]);
+            assert.equal(result[0], 'const x = lotech.Div([]);');
         });
 
         it('should build the custom element', function() {
-            var result = subject.generateElement('Row', []);
-            assert.equal(result, 'Row([])');
+            var result = subject.generateDeclarations([{nodeName: 'x', node: {type: 'element', tagName: 'Row', children: []}}]);
+            assert.equal(result[0], 'const x = Row([]);');
         });
     });
 });
