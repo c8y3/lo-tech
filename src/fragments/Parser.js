@@ -51,6 +51,7 @@ function parseAttributes(htmlAttributes) {
             return;
         }
         const value = parseAttribute(key, htmlAttributes[key]);
+// TODO maybe the next character after on should be lower case and converted to uppercase (as in html)? Not sure that would be nice though...
         if (key.startsWith('on')) {
             events[key] = value;
         }
