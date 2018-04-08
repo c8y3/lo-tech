@@ -21,16 +21,23 @@ function generateElement(tagName, children) {
     return type + '([' + children.join(', ') + '])';
 }
 
-function generateVariable(name) {
-    return 'lotech.String(\'\')';
-}
-
 function generateText(content) {
     return 'lotech.String(\'' + content + '\')';
 }
 
+function generateNode(node) {
+// TODO use a switch here
+    if (node.type === 'element') {
+        return generateElement(node.tagName, node.children);
+    }
+    if (node.type === 'text') {
+        return generateText(node.content);
+    }
+}
+
 function generateDeclaration(declaration) {
-    return 'const ' + declaration.nodeName + ' = ' + declaration.node + ';'
+    const node = generateNode(declaration.node);
+    return 'const ' + declaration.nodeName + ' = ' + node + ';'
 }
 
 function generateDeclarations(declarations) {
@@ -40,7 +47,6 @@ function generateDeclarations(declarations) {
 export default function() {
     return {
         generateElement,
-        generateVariable,
         generateText,
         generateDeclarations
     };

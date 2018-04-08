@@ -80,8 +80,10 @@ export default function(scope) {
         if (name === CHILDREN) {
             return generateVariableChildren();
         }
-        const node = generator.generateVariable(name);
-        const nodeName = declareNode(node);
+        const nodeName = declareNode({ 
+            type: 'text',
+            content: ''
+        });
 
         addSetter(name, nodeName + '.setData(' + name + ');');
         return nodeName;
@@ -147,8 +149,11 @@ export default function(scope) {
         if (htpl.type === 'element') {
             const children = htpl.children;
             const childNodes = generateChildren(children);
-            const node = generator.generateElement(htpl.tagName, childNodes);
-            const nodeName = declareNode(node);
+            const nodeName = declareNode({
+                type: 'element',
+                tagName: htpl.tagName,
+                children: childNodes
+            });
             generateVariableChildrenSetter(nodeName, children);
             generateStyle(nodeName, htpl.style);
             generateAttributes(nodeName, htpl.attributes);
