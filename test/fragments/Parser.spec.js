@@ -106,22 +106,22 @@ describe('fragments.Parser', function() {
 
         it('should parse className as an array of nodes with type', function() {
             const result = subject.parse('<div className="name"/>');
-            assert.equal(result.attributes.className[0].type, 'text');
+            assert.equal(result.style[0].type, 'text');
         });
 
         it('should parse simple classes as text nodes with correct content', function() {
             const result = subject.parse('<div className="name"/>');
-            assert.equal(result.attributes.className[0].content, 'name');
+            assert.equal(result.style[0].content, 'name');
         });
 
         it('should parse className as an array with all elements', function() {
             const result = subject.parse('<div className="root selected"/>');
-            assert.equal(result.attributes.className[1].content, 'selected');
+            assert.equal(result.style[1].content, 'selected');
         });
 
         it('should parse className as an array with a variable when there is a template', function() {
             const result = subject.parse('<div className="{isMissing}"/>');
-            assert.equal(result.attributes.className[0].type, 'variable');
+            assert.equal(result.style[0].type, 'variable');
         });
 
         it('should parse attributes with a variable when there is a template', function() {

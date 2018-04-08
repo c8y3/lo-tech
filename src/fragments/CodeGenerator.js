@@ -109,10 +109,6 @@ export default function(scope) {
     }
 
     function generateAttribute(nodeName, key, value) {
-        if (key === 'className') {
-//            generateStyle(nodeName, value);
-            return;
-        }
         if (key.startsWith('on')) {
             const methodName = generateMethodName('addListenerOn', value.name);
             addListener(value.name, nodeName, key);

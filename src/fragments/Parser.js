@@ -63,6 +63,9 @@ function parseAttributes(htmlAttributes) {
     const style = parseClassNames(htmlAttributes.className);
     const attributes = {};
     Object.keys(htmlAttributes).forEach(function(key) {
+        if (key === 'className') {
+            return;
+        }
         const value = parseAttribute(key, htmlAttributes[key]);
         attributes[key] = value;
     });
