@@ -64,12 +64,21 @@ function generateInitializations(initializations) {
     return initializations.map(generateInitialization);
 }
 
+function generateMethod(method) {
+    return 'function ' + method.name + '(' + method.parameter + ') { ' + method.body + ' }';
+}
+
+function generateMethods(methods) {
+    return methods.map(generateMethod);
+}
+
 export default function() {
     return {
         generateText,
         generateElement, // TODO should not be public, but easier for testing, think about how to split things up
         generateDeclarations,
         generateInitialization,
-        generateInitializations
+        generateInitializations,
+        generateMethods
     };
 };

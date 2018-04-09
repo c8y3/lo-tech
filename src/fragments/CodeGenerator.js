@@ -25,7 +25,6 @@ export default function(scope) {
 
     let variableCount = 0;
     const nodeDeclarations = [];
-    const functionDefinitions = [];
     const initializations = [];
     const methods = [];
 
@@ -34,8 +33,11 @@ export default function(scope) {
     }
 
     function addMethod(methodName, parameterName, body) {
-        functionDefinitions.push('function ' + methodName + '(' + parameterName + ') { ' + body + ' }');
-        methods.push(methodName);
+        methods.push({
+            name: methodName,
+            parameter: parameterName,
+            body: body
+        });
     }
 
     function addSetter(name, body) {
@@ -164,7 +166,10 @@ export default function(scope) {
         if (methods.length === 0) {
             return COMPONENT;
         }
-        return '{...' + COMPONENT + ', ' + methods.join(', ') + '}';
+        const methodNames = methods.map(function(method) {
+            return method.name;
+        });
+        return '{...' + COMPONENT + ', ' + methodNames.join(', ') + '}';
     }
     
     function generate(htpl) {
@@ -172,6 +177,7 @@ export default function(scope) {
         let resultObject = generateResultObject();
         const declarations = generator.generateDeclarations(nodeDeclarations);
         const instructions = generator.generateInitializations(initializations);
+        const functionDefinitions = generator.generateMethods(methods);
         return [
             ...declarations,
             ...instructions,
