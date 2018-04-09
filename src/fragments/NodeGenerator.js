@@ -14,6 +14,10 @@ const COMPONENT = 'component';
 
 const letterCase = LetterCase();
 
+function generateMethodName(prefix, variableName) {
+    return prefix + letterCase.capitalize(variableName);
+}
+
 function generateType(tagName) {
     const type = PREDEFINED[tagName];
     if (type !== undefined) {
@@ -57,9 +61,43 @@ function generateDeclarations(declarations) {
     return declarations.map(generateDeclaration);
 }
 
+function generateValue(value) {
+    let method;
+    let parameters;
+    if (value.type === 'style') {
+        method = 'addStyle';
+        parameters = value.scope + '\', \'' + value.className;
+    }
+    if (value.type === 'attribute') {
+        method = generateMethodName('set', value.key);
+        parameters = value.value;
+    }
+    method + '(\'' + parameters + '\')';
+}
+
+function generateMethodCall(node, method, parameters) {
+    return node + '.' + method + '(\'' + parameters.join('\', \'') + '\');';    
+}
+
 function generateInitialization(initialization) {
-    const parameters = initialization.parameters.join('\', \'');
-    return initialization.node + '.' + initialization.method + '(\'' + parameters + '\');';
+    let method;
+    let parameters;
+    if (initialization.type === 'style') {
+        method = 'addStyle';
+        parameters = [initialization.scope, initialization.className];
+    }
+    if (initialization.type === 'attribute') {
+        method = generateMethodName('set', initialization.key);
+        parameters = [initialization.value];
+    }
+    return generateMethodCall(initialization.node, method, parameters);
+}
+
+function generateStyleToggle(nodeName, scope, className) {
+    const addStyle = generateMethodCall(nodeName, 'addStyle', [scope, className]);
+    const removeStyle = generateMethodCall(nodeName, 'removeStyle', [scope, className]);
+    // FIXME should not be isMissing here
+    return 'if (isMissing) { ' + addStyle + ' } else { ' + removeStyle + ' }';
 }
 
 function generateInitializations(initializations) {
@@ -92,6 +130,7 @@ export default function() {
         generateInitialization,
         generateInitializations,
         generateMethods,
-        generateResultObject
+        generateResultObject,
+        generateStyleToggle
     };
 };

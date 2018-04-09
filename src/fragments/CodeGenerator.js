@@ -95,24 +95,23 @@ export default function(scope) {
     function generateStyle(nodeName, classNames) {
         classNames.forEach(function(className) {
             if (className.type === 'text') {
-                const style = [scope, className.content];
-                initializations.push({node: nodeName, method: 'addStyle', parameters: style});
+                initializations.push({node: nodeName, type: 'style', scope: scope, className: className.content});
             } else {
-                const style = [scope, className.name];
-                const addStyle = generator.generateInitialization({node: nodeName, method: 'addStyle', parameters: style});
-                const removeStyle = generator.generateInitialization({node: nodeName, method: 'removeStyle', parameters: style});
-                addSetter('isMissing', 'if (isMissing) { ' + addStyle + ' } else { ' + removeStyle + ' }');
+                const body = generator.generateStyleToggle(nodeName, scope, className.name);
+                // TODO should rather be toggleStyle(scope, className, status:on/off)
+                // FIXME should not be isMissing, should vary...
+                addSetter('isMissing', body);
             }
         });
     }
 
     function generateAttribute(nodeName, key, value) {
-        const setterName = generateMethodName('set', key);
         if (value.type === 'variable') {
+            const setterName = generateMethodName('set', key);
             addSetter(value.name, nodeName + '.' + setterName + '(' + value.name + ');');
             return;
         }
-        initializations.push({node: nodeName, method: setterName, parameters: [value.content]});
+        initializations.push({node: nodeName, type: 'attribute', key: key, value: value.content});
     }
 
     function generateAttributes(nodeName, attributes) {
