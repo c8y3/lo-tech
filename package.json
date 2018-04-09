@@ -13,7 +13,7 @@
     "test": "npm run test:lotech && npm run test:fragments",
     "test:lotech": "karma start",
     "test:fragments": "rollup -c fragments.test.rollup.config.js && mocha --require chai/register-assert results/fragments.test.js",
-    "check": "npm run lint && npm test",
+    "check": "npm test",
     "clean": "rm -rf results/ && rm -rf bin/"
   },
   "repository": {
