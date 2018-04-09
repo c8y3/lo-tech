@@ -161,20 +161,10 @@ export default function(scope) {
             return generator.generateText(htpl.content);
         }
     }
-
-    function generateResultObject() {
-        if (methods.length === 0) {
-            return COMPONENT;
-        }
-        const methodNames = methods.map(function(method) {
-            return method.name;
-        });
-        return '{...' + COMPONENT + ', ' + methodNames.join(', ') + '}';
-    }
     
     function generate(htpl) {
         const root = generateNode(htpl);
-        let resultObject = generateResultObject();
+        let resultObject = generator.generateResultObject(methods);
         const declarations = generator.generateDeclarations(nodeDeclarations);
         const instructions = generator.generateInitializations(initializations);
         const functionDefinitions = generator.generateMethods(methods);

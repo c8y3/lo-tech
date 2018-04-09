@@ -10,6 +10,8 @@ const PREDEFINED = {
     inputCheckbox: 'lotech.input.Checkbox'
 };
 
+const COMPONENT = 'component';
+
 const letterCase = LetterCase();
 
 function generateType(tagName) {
@@ -72,6 +74,16 @@ function generateMethods(methods) {
     return methods.map(generateMethod);
 }
 
+function generateResultObject(methods) {
+    if (methods.length === 0) {
+        return COMPONENT;
+    }
+    const methodNames = methods.map(function(method) {
+        return method.name;
+    });
+    return '{...' + COMPONENT + ', ' + methodNames.join(', ') + '}';
+}
+
 export default function() {
     return {
         generateText,
@@ -79,6 +91,7 @@ export default function() {
         generateDeclarations,
         generateInitialization,
         generateInitializations,
-        generateMethods
+        generateMethods,
+        generateResultObject
     };
 };
