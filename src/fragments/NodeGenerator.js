@@ -96,8 +96,7 @@ function generateInitialization(initialization) {
 function generateStyleToggle(nodeName, scope, className) {
     const addStyle = generateMethodCall(nodeName, 'addStyle', [scope, className]);
     const removeStyle = generateMethodCall(nodeName, 'removeStyle', [scope, className]);
-    // FIXME should not be isMissing here
-    return 'if (isMissing) { ' + addStyle + ' } else { ' + removeStyle + ' }';
+    return 'if (' + className + ') { ' + addStyle + ' } else { ' + removeStyle + ' }';
 }
 
 function generateInitializations(initializations) {

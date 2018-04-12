@@ -97,10 +97,9 @@ export default function(scope) {
             if (className.type === 'text') {
                 initializations.push({node: nodeName, type: 'style', scope: scope, className: className.content});
             } else {
-                const body = generator.generateStyleToggle(nodeName, scope, className.name);
-                // TODO should rather be toggleStyle(scope, className, status:on/off)
-                // FIXME should not be isMissing, should vary...
-                addSetter('isMissing', body);
+                const name = className.name;
+                const body = generator.generateStyleToggle(nodeName, scope, name);
+                addSetter(name, body);
             }
         });
     }

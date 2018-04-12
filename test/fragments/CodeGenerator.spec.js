@@ -169,6 +169,13 @@ describe('fragments.CodeGenerator', function() {
             assert.equal(result[1], 'function setIsMissing(isMissing) { if (isMissing) { node1.addStyle(\'Scope\', \'isMissing\'); } else { node1.removeStyle(\'Scope\', \'isMissing\'); } }');
         });
 
+        it('should define a method with the correct name to set class name', function() {
+            const element = Element('div');
+            element.style = [{type: 'variable', name: 'isSelected'}];
+            const result = subject.generate(element);
+            assert.equal(result[1], 'function setIsSelected(isSelected) { if (isSelected) { node1.addStyle(\'Scope\', \'isSelected\'); } else { node1.removeStyle(\'Scope\', \'isSelected\'); } }');
+        });
+
         it('should export a method to set the className, when there is a template in attribute', function() {
             const element = Element('div');
             element.style = [{type: 'variable', name: 'isMissing'}];
