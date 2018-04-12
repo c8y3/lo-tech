@@ -36,6 +36,14 @@ describe('lotech.Container', function() {
                 assert.equal('P', node.firstChild.tagName);
             });
         });
+
+        describe('appendChild', function() {
+            it('should add the child in the last position', function() {
+                const node = draw();
+                subject.appendChild(P([]));
+                assert.equal('P', node.lastChild.tagName);
+            });
+        });
     });
 
     describe('whith 2 children', function() {

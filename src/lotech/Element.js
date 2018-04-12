@@ -4,6 +4,9 @@ export default function(node) {
     }
 
     function draw(parentNode, nextNode) {
+        if (nextNode === undefined) {
+            nextNode = null;
+        }
         parentNode.insertBefore(node, nextNode);
     }
 

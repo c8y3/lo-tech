@@ -30,12 +30,21 @@ export default function(tagName, initialChildren) {
         drawChildren();
     }
 
+    function draw(parentNode) {
+        element.draw(parentNode);
+        drawChildren();
+    }
+
+    function appendChild(child) {
+        children.push(child);
+// TODO
+//        node.appendChild(child._DOMNode);
+        child.draw(node);
+    }
+
     return {
         ...element,
-        draw(parentNode) {
-            element.draw(parentNode);
-            drawChildren();
-        },
+        draw,
         // TODO think about this, but maybe should find a way not to redraw all children
         // => may be not efficient in the case of a Div which contains several Divs, and only one changed at the top level...
         setChildren(newChildren) {
@@ -43,9 +52,14 @@ export default function(tagName, initialChildren) {
         },
 
         replaceChildren,
-
-        removeChildren
+        removeChildren,
+        appendChild
 
 // TODO should have method insertBefore (more general), but would require method draw to have 2 arguments (before), to return the node and to keep track to the correspondance between lotech nodes and DOM nodes
+/* TODO
+removeChild
+replaceChild
+insertBefore
+*/
     };
 };
