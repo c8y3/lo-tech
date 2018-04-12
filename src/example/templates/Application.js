@@ -10,10 +10,6 @@ const PRODUCTS = [
 ];
 
 export default function() {
-    return {
-        start() {
-            const mainComponent = FilterableProductTable(PRODUCTS);
-            mainComponent.draw(document.body);
-        }
-    };
+    const mainComponent = FilterableProductTable(PRODUCTS);
+    mainComponent.draw(document.body);
 };

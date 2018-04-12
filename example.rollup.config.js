@@ -16,7 +16,8 @@ export default [{
     output: {
         file: 'results/example/raw/Application.js',
         format: 'iife',
-        name: 'Application'
+        name: 'main',
+        footer: 'main();'
     }
 }, {
     input: 'src/example/templates/Application.js',
@@ -33,6 +34,7 @@ export default [{
     output: {
         file: 'results/example/templates/Application.js',
         format: 'iife',
-        name: 'Application'
+        name: 'main',
+        footer: 'main();'
     }
 }];
