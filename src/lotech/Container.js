@@ -4,18 +4,10 @@ import Element from '/lotech/Element';
  * A container is an Element with children
  */
 export default function(tagName, initialChildren) {
+// TODO maybe if we have _DOMNode, no need to keep the list of children
     const children = initialChildren.slice();
     const node = document.createElement(tagName);
     const element = Element(node);
-
-    function removeChildren(start) {
-        children.splice(start, children.length - start);
-        // TODO should not do this if called before it is drawn
-        // FIXME should use childNodes, there is probably a bug here because text nodes are not in the children property => add a test
-        while (node.children[start]) {
-            node.removeChild(node.children[start]);
-        }
-    }
 
     function drawChildren() {
         children.forEach(function(child) {
@@ -24,13 +16,6 @@ export default function(tagName, initialChildren) {
     }
 
     drawChildren();
-
-    function replaceChildren(start, newChildren) {
-        removeChildren(start);
-        children.splice(start, 0, ...newChildren);
-        // TODO should not do this if called before it is drawn a first time
-        drawChildren();
-    }
 
     function appendChild(child) {
         children.push(child);
@@ -46,13 +31,31 @@ export default function(tagName, initialChildren) {
         node.removeChild(node.childNodes[index]);
     }
 
+    function removeChildren(start) {
+        children.splice(start, children.length - start);
+        // TODO should not do this if called before it is drawn
+        // FIXME should use childNodes, there is probably a bug here because text nodes are not in the children property => add a test
+        while (node.children[start]) {
+            node.removeChild(node.children[start]);
+        }
+    }
+
+    function replaceChildren(start, newChildren) {
+        removeChildren(start);
+        children.splice(start, 0, ...newChildren);
+        // TODO should not do this if called before it is drawn a first time
+        drawChildren();
+    }
+
+    function setChildren(newChildren) {
+        replaceChildren(0, newChildren);
+    }
+
     return {
         ...element,
         // TODO think about this, but maybe should find a way not to redraw all children
         // => may be not efficient in the case of a Div which contains several Divs, and only one changed at the top level...
-        setChildren(newChildren) {
-            replaceChildren(0, newChildren);
-        },
+        setChildren,
 
         replaceChildren,
         removeChildren,
