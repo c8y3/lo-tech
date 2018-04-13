@@ -23,15 +23,12 @@ export default function(tagName, initialChildren) {
         });
     }
 
+    drawChildren();
+
     function replaceChildren(start, newChildren) {
         removeChildren(start);
         children.splice(start, 0, ...newChildren);
         // TODO should not do this if called before it is drawn a first time
-        drawChildren();
-    }
-
-    function draw(parentNode) {
-        element.draw(parentNode);
         drawChildren();
     }
 
@@ -51,7 +48,6 @@ export default function(tagName, initialChildren) {
 
     return {
         ...element,
-        draw,
         // TODO think about this, but maybe should find a way not to redraw all children
         // => may be not efficient in the case of a Div which contains several Divs, and only one changed at the top level...
         setChildren(newChildren) {
