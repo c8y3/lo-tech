@@ -42,6 +42,13 @@ export default function(tagName, initialChildren) {
         child.draw(node);
     }
 
+    function removeChild(child) {
+        // TODO should have a map from child to their index, because this is O(N)
+        const index = children.indexOf(child);
+        children.splice(index, 1);
+        node.removeChild(node.childNodes[index]);
+    }
+
     return {
         ...element,
         draw,
@@ -53,11 +60,11 @@ export default function(tagName, initialChildren) {
 
         replaceChildren,
         removeChildren,
-        appendChild
+        appendChild,
+        removeChild
 
 // TODO should have method insertBefore (more general), but would require method draw to have 2 arguments (before), to return the node and to keep track to the correspondance between lotech nodes and DOM nodes
 /* TODO
-removeChild
 replaceChild
 insertBefore
 */

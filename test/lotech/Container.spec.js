@@ -12,8 +12,11 @@ describe('lotech.Container', function() {
     }
 
     describe('with 1 children', function() {
+        let child;
+
         beforeEach(function() {
-            subject = Container('div', [Div([])]);
+            child = Div([]);
+            subject = Container('div', [child]);
         });
 
         describe('setChildren', function() {
@@ -42,6 +45,14 @@ describe('lotech.Container', function() {
                 const node = draw();
                 subject.appendChild(P([]));
                 assert.equal('P', node.lastChild.tagName);
+            });
+        });
+
+        describe('removeChild', function() {
+            it('should remove this child', function() {
+                const node = draw();
+                subject.removeChild(child);
+                assert.equal(0, node.childElementCount);
             });
         });
     });
