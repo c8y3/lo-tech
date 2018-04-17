@@ -1,5 +1,6 @@
 import Div from '/lotech/Div';
 import P from '/lotech/P';
+import String from '/lotech/String';
 import Container from '/lotech/Container';
 
 describe('lotech.Container', function() {
@@ -10,6 +11,22 @@ describe('lotech.Container', function() {
         subject.draw(parentNode);
         return parentNode.firstChild;
     }
+
+    describe('with no child', function() {
+        beforeEach(function() {
+            subject = Container('div', []);
+        });
+    
+        describe('removeChild', function() {
+            it('should remove text children too', function() {
+                const node = draw();
+                const child = String('Hello');
+                subject.appendChild(child);
+                subject.removeChild(child);
+                assert.equal(0, node.childNodes.length);
+            });
+        });
+    });
 
     describe('with 1 children', function() {
         let child;
@@ -30,7 +47,7 @@ describe('lotech.Container', function() {
             it('should remove previous children', function() {
                 const node = draw();
                 subject.replaceChildren(0, []);
-                assert.equal(0, node.childElementCount);
+                assert.equal(0, node.childNodes.length);
             });
 
             it('should replace children', function() {
@@ -52,7 +69,7 @@ describe('lotech.Container', function() {
             it('should remove this child', function() {
                 const node = draw();
                 subject.removeChild(child);
-                assert.equal(0, node.childElementCount);
+                assert.equal(0, node.childNodes.length);
             });
         });
     });
@@ -66,13 +83,13 @@ describe('lotech.Container', function() {
             it('should remove children from the offset', function() {
                 const node = draw();
                 subject.replaceChildren(1, []);
-                assert.equal(1, node.childElementCount);
+                assert.equal(1, node.childNodes.length);
             });
 
             it('should work the same when drawing later', function() {
                 subject.replaceChildren(1, []);
                 const node = draw();
-                assert.equal(1, node.childElementCount);                
+                assert.equal(1, node.childNodes.length);                
             });
         });
 
@@ -80,7 +97,7 @@ describe('lotech.Container', function() {
             it('should remove child', function() {
                 const node = draw();
                 subject.removeChildren(1);
-                assert.equal(1, node.childElementCount);
+                assert.equal(1, node.childNodes.length);
             });
         });
     });
