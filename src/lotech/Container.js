@@ -51,6 +51,16 @@ export default function(tagName, initialChildren) {
         replaceChildren(0, newChildren);
     }
 
+    function replaceChild(newChild, oldChild) {
+        const index = children.indexOf(oldChild);
+        children.splice(index, 1, newChild);
+// TODO
+//        node.replaceChild(newChild._DOMNode, oldChild._DOMNode);
+        const oldChildNode = node.childNodes[index];
+        newChild.draw(node, oldChildNode);
+        node.removeChild(oldChildNode);
+    }
+
     return {
         ...element,
         // TODO think about this, but maybe should find a way not to redraw all children
@@ -60,11 +70,11 @@ export default function(tagName, initialChildren) {
         replaceChildren,
         removeChildren,
         appendChild,
-        removeChild
+        removeChild,
+        replaceChild
 
 // TODO should have method insertBefore (more general), but would require method draw to have 2 arguments (before), to return the node and to keep track to the correspondance between lotech nodes and DOM nodes
 /* TODO
-replaceChild
 insertBefore
 */
     };
